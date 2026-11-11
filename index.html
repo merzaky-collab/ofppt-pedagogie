@@ -243,6 +243,141 @@ textarea { font: inherit; color: var(--ink); background: var(--surface); border:
 .as b { font: 500 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; }
 select { font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; min-height: 50px; padding: 10px 14px; width: 100%; }
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+/* ===== Thème vif et responsive ===== */
+:root {
+  --bg: #F5F2FF; --surface: #FFFFFF; --ink: #1B1740; --muted: #5A5683; --line: #DCD5F7;
+  --accent: #5B3DF5; --accent-ink: #FFFFFF; --accent-soft: #E8E2FF;
+  --ok: #0A8F5B; --ok-soft: #D8F5E8; --bad: #D4143F; --bad-soft: #FFE0E8;
+  --p0: #5B3DF5; --p1: #E5195E; --p2: #F26B00; --p3: #0891B2; --p4: #12A150; --p5: #C026D3;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #130F2B; --surface: #1D1842; --ink: #F1EEFF; --muted: #A9A3D6; --line: #352F66;
+    --accent: #9B8CFF; --accent-ink: #130F2B; --accent-soft: #2A2360;
+    --ok: #4ADE9A; --ok-soft: #123A2C; --bad: #FF7A98; --bad-soft: #4A1A2B;
+    --p0: #9B8CFF; --p1: #FF6B9A; --p2: #FFA040; --p3: #3CCBE8; --p4: #4ADE80; --p5: #E879F9;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #130F2B; --surface: #1D1842; --ink: #F1EEFF; --muted: #A9A3D6; --line: #352F66;
+  --accent: #9B8CFF; --accent-ink: #130F2B; --accent-soft: #2A2360;
+  --ok: #4ADE9A; --ok-soft: #123A2C; --bad: #FF7A98; --bad-soft: #4A1A2B;
+  --p0: #9B8CFF; --p1: #FF6B9A; --p2: #FFA040; --p3: #3CCBE8; --p4: #4ADE80; --p5: #E879F9;
+}
+body { background: radial-gradient(1200px 500px at 85% -10%, color-mix(in srgb, var(--p1) 14%, transparent), transparent 70%), radial-gradient(900px 500px at -10% 0%, color-mix(in srgb, var(--p0) 16%, transparent), transparent 70%), var(--bg); background-attachment: fixed; }
+#app { max-width: 1040px; }
+.c0 { --c: var(--p0); } .c1 { --c: var(--p1); } .c2 { --c: var(--p2); } .c3 { --c: var(--p3); } .c4 { --c: var(--p4); } .c5 { --c: var(--p5); }
+.btn { background: linear-gradient(135deg, var(--p0), var(--p5)); color: #fff; border-radius: 14px; box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--p0) 70%, transparent); }
+:root[data-theme="dark"] .btn { color: #130F2B; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #130F2B; } }
+.btn.alt { background: var(--surface); color: var(--ink); border: 2px solid var(--p0); box-shadow: none; }
+.ghost { color: var(--accent); font-weight: 700; }
+.chip { background: color-mix(in srgb, var(--c, var(--p0)) 18%, var(--surface)); color: var(--ink); font-weight: 700; }
+.chip.ok { background: var(--ok-soft); }
+h1, h2, h3 { letter-spacing: -.01em; }
+.bar { background: color-mix(in srgb, var(--c, var(--p0)) 16%, var(--line)); height: 8px; border-radius: 4px; }
+.bar i { background: linear-gradient(90deg, var(--c, var(--p0)), var(--p1)); }
+.eyebrow { color: var(--p1); font-weight: 700; }
+
+/* Accueil */
+.hero { background: linear-gradient(135deg, #4B2FE0 0%, #C026D3 55%, #FF5C7A 100%); color: #fff; border-radius: 24px; padding: 26px 22px; box-shadow: 0 18px 40px -18px rgba(91, 61, 245, .7); }
+.hero .eyebrow, .hero p.lead, .hero .stats { color: rgba(255, 255, 255, .92); }
+.hero h1 { color: #fff; }
+.hero .btn { background: #fff; color: #3A22B8; box-shadow: none; }
+.hero .ghost { color: #fff; text-decoration: underline; }
+.hero .alt { background: rgba(255, 255, 255, .16); color: #fff; border-color: rgba(255, 255, 255, .7); }
+.list { border-top: 0; gap: 10px; }
+.row, .th { background: var(--surface); border: 1.5px solid var(--line); border-left: 7px solid var(--c, var(--p0)); border-radius: 14px; padding: 12px 14px; transition: transform .12s, box-shadow .12s; }
+.th { padding: 0 14px; }
+.th summary { min-height: 68px; }
+.row:hover, .th:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -14px color-mix(in srgb, var(--c, var(--p0)) 80%, transparent); }
+.row .n, .th .n { color: #fff; background: var(--c, var(--p0)); border-radius: 10px; width: 2.1rem; height: 2.1rem; display: grid; place-items: center; font-weight: 700; }
+.row:hover strong { color: var(--c, var(--accent)); }
+.sec { margin-top: 10px; color: var(--p5); }
+@media (min-width: 720px) {
+  .list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .list > .sec { grid-column: 1 / -1; }
+}
+@media (min-width: 1040px) { .list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.fiche, .stack > .block, .stack > .fig { }
+.fiche { max-width: 820px; margin-inline: auto; width: 100%; }
+
+/* Fiche : concepts en couleurs */
+.block h3 { color: var(--c, var(--p0)); border-left: 5px solid var(--c, var(--p0)); padding-left: 9px; font-weight: 700; }
+.def { background: color-mix(in srgb, var(--p0) 9%, var(--surface)); border-radius: 14px; padding: 14px 16px; border: 1.5px solid color-mix(in srgb, var(--p0) 30%, var(--line)); }
+.pts { list-style: none; padding-left: 0; }
+.pts li { position: relative; padding: 10px 12px 10px 16px; border-radius: 12px; background: var(--surface); border: 1.5px solid var(--line); border-left: 6px solid var(--c, var(--p1)); }
+.pts li:nth-child(6n+1) { --c: var(--p0); } .pts li:nth-child(6n+2) { --c: var(--p1); } .pts li:nth-child(6n+3) { --c: var(--p2); }
+.pts li:nth-child(6n+4) { --c: var(--p3); } .pts li:nth-child(6n+5) { --c: var(--p4); } .pts li:nth-child(6n+6) { --c: var(--p5); }
+.kws span { color: var(--ink); font-weight: 700; border-width: 2px; border-color: var(--c); background: color-mix(in srgb, var(--c) 14%, var(--surface)); }
+.kws span:nth-child(6n+1) { --c: var(--p0); } .kws span:nth-child(6n+2) { --c: var(--p1); } .kws span:nth-child(6n+3) { --c: var(--p2); }
+.kws span:nth-child(6n+4) { --c: var(--p3); } .kws span:nth-child(6n+5) { --c: var(--p4); } .kws span:nth-child(6n+6) { --c: var(--p5); }
+mark.k { background: color-mix(in srgb, var(--c) 20%, transparent); color: inherit; font-weight: 700; padding: 0 4px; border-radius: 5px; border-bottom: 2.5px solid var(--c); }
+.k0 { --c: var(--p0); } .k1 { --c: var(--p1); } .k2 { --c: var(--p2); } .k3 { --c: var(--p3); } .k4 { --c: var(--p4); } .k5 { --c: var(--p5); }
+.reseau { background: color-mix(in srgb, var(--p3) 14%, var(--surface)); border: 1.5px solid var(--p3); border-radius: 14px; }
+.reseau b { color: var(--p3); }
+.tip { background: color-mix(in srgb, var(--p2) 16%, var(--surface)); border: 1.5px solid var(--p2); border-radius: 14px; }
+.tip b { color: var(--p2); }
+.mn { border: 2px dashed var(--p5); background: color-mix(in srgb, var(--p5) 10%, var(--surface)); border-radius: 14px; }
+.mn b { color: var(--p5); }
+.piege { background: var(--bad-soft); border: 1.5px solid var(--bad); border-radius: 14px; }
+.piege b { color: var(--bad); }
+.rep { background: var(--ok-soft); border: 1.5px solid var(--ok); border-radius: 14px; }
+.rep b { color: var(--ok); }
+.conf li { border-left: 5px solid var(--c, var(--p0)); background: var(--surface); border-radius: 0 12px 12px 0; padding: 8px 12px; }
+.conf li:nth-child(3n+1) { --c: var(--p0); } .conf li:nth-child(3n+2) { --c: var(--p2); } .conf li:nth-child(3n+3) { --c: var(--p4); }
+.conf strong { color: var(--c); }
+.fig { border-radius: 16px; border-width: 2px; border-color: color-mix(in srgb, var(--p0) 35%, var(--line)); }
+.fig figcaption { color: var(--p0); font-weight: 700; }
+.sv .acc { fill: color-mix(in srgb, var(--p0) 18%, var(--surface)); stroke: var(--p0); }
+.sv .ok { fill: color-mix(in srgb, var(--p4) 20%, var(--surface)); stroke: var(--p4); }
+.sv .bad { fill: color-mix(in srgb, var(--p1) 18%, var(--surface)); stroke: var(--p1); }
+.sv line { stroke: var(--p0); }
+.sv .da { fill: var(--p0); } .sv .hd { fill: var(--p0); }
+.ar { color: var(--ink); }
+[tabindex="-1"]:focus { outline: none; }
+.fiche h2 + .ar { color: var(--p5); font-weight: 700; }
+dt { color: var(--c, var(--p0)); }
+.gl-i:nth-child(6n+1) { --c: var(--p0); } .gl-i:nth-child(6n+2) { --c: var(--p1); } .gl-i:nth-child(6n+3) { --c: var(--p2); }
+.gl-i:nth-child(6n+4) { --c: var(--p3); } .gl-i:nth-child(6n+5) { --c: var(--p4); } .gl-i:nth-child(6n+6) { --c: var(--p5); }
+.gl-i { border-left: 4px solid var(--c, var(--p0)); padding-left: 10px; }
+details.gls summary { color: var(--p0); font-weight: 700; }
+
+/* Quiz */
+.opt { border-radius: 14px; border-width: 2px; }
+.opt .l { color: #fff; background: var(--c, var(--p0)); border-radius: 8px; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; font-weight: 700; }
+.opts .opt:nth-child(4n+1) { --c: var(--p0); } .opts .opt:nth-child(4n+2) { --c: var(--p1); } .opts .opt:nth-child(4n+3) { --c: var(--p2); } .opts .opt:nth-child(4n+4) { --c: var(--p3); }
+.opt:hover:not(:disabled) { border-color: var(--c, var(--accent)); transform: translateX(3px); }
+.opt.ok { border-color: var(--ok); } .opt.bad { border-color: var(--bad); }
+.opts { max-width: 760px; }
+.fb { border-radius: 14px; border-width: 2px; }
+.q { max-width: 60ch; }
+.score { background: linear-gradient(135deg, var(--p0), var(--p1)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.score small { -webkit-text-fill-color: var(--muted); }
+.sgrid .done { background: color-mix(in srgb, var(--p4) 25%, var(--surface)); border-color: var(--p4); }
+.opt.sel { border-color: var(--p0); background: color-mix(in srgb, var(--p0) 14%, var(--surface)); }
+
+/* Tableau de bord */
+.kpis { gap: 10px; }
+.kpi { border: 0; color: #fff; border-radius: 16px; box-shadow: 0 10px 22px -14px rgba(0, 0, 0, .5); }
+.kpi:nth-child(1) { background: linear-gradient(135deg, var(--p0), var(--p5)); } .kpi:nth-child(2) { background: linear-gradient(135deg, #0E8F4A, #0891B2); } .kpi:nth-child(3) { background: linear-gradient(135deg, var(--p2), var(--p1)); }
+.kpi b, .kpi span { color: #fff; opacity: 1; }
+.kpi span { font-weight: 600; }
+.rings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.ring { margin: 0; text-align: center; background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 10px 4px 8px; }
+.ring svg { width: 100%; max-width: 120px; height: auto; display: block; margin: 0 auto; }
+.ring .rn { font: 700 22px var(--f-display); fill: var(--ink); }
+.ring figcaption { font: 700 12px var(--f-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; margin-right: 2px; }
+.coach { background: var(--surface); border: 2px solid var(--p0); border-radius: 18px; padding: 16px; }
+.cl { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.cl li { border-left: 6px solid var(--c); border-radius: 10px; padding: 8px 12px; background: color-mix(in srgb, var(--c) 10%, var(--surface)); }
+.cl b { color: var(--c); margin-right: 4px; }
+@media (min-width: 900px) {
+  #app > .stack > .rings { max-width: 560px; }
+}
+@media (max-width: 380px) { .kpi b { font-size: 1.15rem; } .hero { padding: 20px 16px; } }
+@media (prefers-reduced-motion: reduce) { .row, .th, .opt { transition: none; } }
 </style>
 
 <main id="app"></main>
@@ -2023,6 +2158,134 @@ var _da = dashAct;
 dashAct = function (act, b) {
   if (act === "terr") { startThemeErrors(parseInt(b.getAttribute("data-id"), 10)); return true; }
   return _da(act);
+};
+
+/* ===== Tableau de bord intelligent : graphiques et conseils du coach ===== */
+var _an3 = answer;
+answer = function (idx) {
+  var fresh = S.picked === null, cur = S.qs && S.qs[S.i];
+  _an3(idx);
+  if (fresh && cur) { qdAdd(1, cur.opts[idx].ok ? 1 : 0); }
+};
+function qdAdd(n, c) {
+  prog.qd = prog.qd || {};
+  var d = dayKey(), e = prog.qd[d] = prog.qd[d] || { n: 0, c: 0 };
+  e.n += n; e.c += c; save();
+}
+var _sf3 = simFinish;
+simFinish = function (exp) {
+  var sm = prog.sim, n = 0, c = 0;
+  if (sm) { sm.qs.forEach(function (e, i) { if (sm.ans[i] !== undefined) { n++; if (sm.ans[i] === 0) c++; } }); }
+  _sf3(exp);
+  if (n) qdAdd(n, c);
+};
+
+function lvCol(p) { return p >= 75 ? "var(--p4)" : p >= 50 ? "var(--p3)" : p >= 25 ? "var(--p2)" : "var(--p1)"; }
+function ring(pct, label, col) {
+  var C = 2 * Math.PI * 44, v = Math.max(0, Math.min(100, pct));
+  return '<figure class="ring"><svg viewBox="0 0 110 110" role="img" aria-label="' + label + ' : ' + pct + ' %"><circle cx="55" cy="55" r="44" fill="none" stroke="var(--line)" stroke-width="11"/>' +
+    '<circle cx="55" cy="55" r="44" fill="none" stroke="' + col + '" stroke-width="11" stroke-linecap="round" stroke-dasharray="' + (C * v / 100).toFixed(1) + ' ' + C.toFixed(1) + '" transform="rotate(-90 55 55)"/>' +
+    '<text x="55" y="62" text-anchor="middle" class="rn">' + pct + ' %</text></svg><figcaption>' + label + '</figcaption></figure>';
+}
+function themeBars(st) {
+  var rows = st.slice().sort(function (a, b) { return a.t.id - b.t.id; }), h = rows.length * 22 + 8, s = "";
+  rows.forEach(function (x, i) {
+    var y = 6 + i * 22, w = Math.max(2, 360 * x.pct / 100);
+    s += '<text class="sm" x="30" y="' + (y + 11) + '" text-anchor="end">' + pad(x.t.id) + '</text><rect x="40" y="' + y + '" width="360" height="14" rx="7" fill="var(--line)"/>' +
+      '<rect x="40" y="' + y + '" width="' + w.toFixed(1) + '" height="14" rx="7" fill="' + lvCol(x.pct) + '"/><text class="sm" x="410" y="' + (y + 11) + '">' + x.pct + ' %</text>';
+  });
+  return '<figure class="fig"><figcaption>Avancement de chaque thème</figcaption><svg class="sv" viewBox="0 0 480 ' + h + '" role="img" aria-label="Avancement des ' + rows.length + ' thèmes en pourcentage">' + s + '</svg>' +
+    '<p class="vm"><span class="dot" style="background:var(--p1)"></span> moins de 25 % · <span class="dot" style="background:var(--p2)"></span> 25 à 49 % · <span class="dot" style="background:var(--p3)"></span> 50 à 74 % · <span class="dot" style="background:var(--p4)"></span> 75 % et plus</p></figure>';
+}
+function stackBar(mast, err, rest) {
+  var tot = mast + err + rest || 1, w1 = 440 * mast / tot, w2 = 440 * err / tot, w3 = 440 - w1 - w2;
+  return '<figure class="fig"><figcaption>État de mes questions</figcaption><svg class="sv" viewBox="0 0 480 40" role="img" aria-label="' + mast + ' maîtrisées, ' + err + ' à revoir, ' + rest + ' à découvrir">' +
+    '<rect x="20" y="8" width="' + w1.toFixed(1) + '" height="24" fill="var(--p4)"/><rect x="' + (20 + w1).toFixed(1) + '" y="8" width="' + w2.toFixed(1) + '" height="24" fill="var(--p1)"/><rect x="' + (20 + w1 + w2).toFixed(1) + '" y="8" width="' + w3.toFixed(1) + '" height="24" fill="var(--line)"/></svg>' +
+    '<p class="vm"><span class="dot" style="background:var(--p4)"></span> ' + mast + ' maîtrisées · <span class="dot" style="background:var(--p1)"></span> ' + err + ' à revoir · <span class="dot" style="background:var(--line)"></span> ' + rest + ' à découvrir</p></figure>';
+}
+function activityChart(pace) {
+  var DN = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"], days = [], i, mx = Math.max(10, pace || 0), qd = prog.qd || {};
+  for (i = 6; i >= 0; i--) { var k = dayKey(i); days.push({ k: k, e: qd[k] || { n: 0, c: 0 }, w: new Date(k + "T12:00:00Z").getUTCDay() }); }
+  days.forEach(function (d) { if (d.e.n > mx) mx = d.e.n; });
+  var s = "", tot = 0, base = 118, hh = 90;
+  days.forEach(function (d, j) {
+    var x = 16 + j * 66, bh = d.e.n ? Math.max(4, hh * d.e.n / mx) : 0, ac = d.e.n ? d.e.c / d.e.n : 0;
+    tot += d.e.n;
+    s += '<rect x="' + x + '" y="' + (base - bh) + '" width="40" height="' + bh + '" rx="6" fill="' + (ac >= .8 ? "var(--p4)" : ac >= .5 ? "var(--p2)" : "var(--p1)") + '"/>' +
+      (d.e.n ? '<text class="sm" x="' + (x + 20) + '" y="' + (base - bh - 6) + '" text-anchor="middle">' + d.e.n + '</text>' : '') +
+      '<text class="sm" x="' + (x + 20) + '" y="136" text-anchor="middle">' + DN[d.w] + '</text>';
+  });
+  if (pace) { var py = base - hh * pace / mx; s += '<line class="dash" x1="8" y1="' + py.toFixed(1) + '" x2="472" y2="' + py.toFixed(1) + '"/><text class="sm" x="472" y="' + (py - 5).toFixed(1) + '" text-anchor="end">objectif ' + pace + '/jour</text>'; }
+  return '<figure class="fig"><figcaption>Activité · 7 derniers jours</figcaption><svg class="sv" viewBox="0 0 480 144" role="img" aria-label="Questions répondues par jour sur 7 jours, total ' + tot + '">' + s + '</svg>' +
+    '<p class="vm">' + tot + ' question' + (tot > 1 ? "s" : "") + ' cette semaine. Couleur : <span class="dot" style="background:var(--p4)"></span> 80 % et plus de réussite · <span class="dot" style="background:var(--p2)"></span> 50 à 79 % · <span class="dot" style="background:var(--p1)"></span> moins de 50 %.</p></figure>';
+}
+function coachInfo(st) {
+  var tot = 0, mast = 0, errs = 0;
+  st.forEach(function (x) { tot += x.total; mast += x.mastered; errs += x.errs; });
+  var left = tot - mast, dd = daysTo(2026, 11, 22), lab = "session 2024";
+  if (dd < 0) { dd = daysTo(2026, 12, 27); lab = "session 2025"; }
+  var pace = dd > 0 && left > 0 ? Math.ceil(left / dd) : 0;
+  return { tot: tot, mast: mast, errs: errs, left: left, dd: dd, lab: lab, pace: pace };
+}
+function coachHtml(st, ci) {
+  var m = [], weak = st.slice().sort(function (a, b) { return a.pct - b.pct || a.t.id - b.t.id; })[0];
+  var acc = prog.cT ? Math.round((prog.cA || 0) * 100 / prog.cT) : null;
+  var h = (prog.hist || []).slice(-5), est = h.length ? h.reduce(function (s, x) { return s + x.n; }, 0) / h.length : null;
+  var today = ((prog.qd || {})[dayKey()] || { n: 0 }).n;
+  if (ci.dd > 0 && ci.left > 0) m.push(["p0", "Objectif", jLabel(ci.dd) + " (" + ci.lab + ") : il reste " + ci.left + " questions à maîtriser, soit environ " + ci.pace + " par jour. Aujourd’hui : " + today + " / " + ci.pace + "."]);
+  if (!prog.cT) m.push(["p3", "Démarrage", "Commence par la fiche et le QCM du thème " + pad(weak.t.id) + ", puis reviens ici pour voir ta progression."]);
+  else m.push(["p1", "Priorité", "Ton point faible est le thème " + pad(weak.t.id) + " « " + weak.t.short + " » à " + weak.pct + " %. Relis la fiche, puis refais le QCM."]);
+  if (acc !== null) m.push([acc >= 80 ? "p4" : acc >= 60 ? "p2" : "p1", "Précision", acc + " % de bonnes réponses. " + (acc >= 80 ? "Très bien : passe à la simulation de 120 minutes." : acc >= 60 ? "Correct : relis les corrigés de tes erreurs." : "Relis les fiches avant de refaire des QCM.")]);
+  if (ci.errs > 8) m.push(["p5", "Erreurs", ci.errs + " questions à revoir : le quiz ciblé les reprend en priorité."]);
+  if (est !== null) m.push(["p3", "Niveau estimé", "Environ " + fmtNote((est / 5).toFixed(1)) + " / 20 d’après tes " + h.length + " derniers tests. Estimation indicative, pas une note d’examen."]);
+  if (!prog.simTries) m.push(["p2", "Simulation", "Tu n’as pas encore fait la simulation de 120 minutes : programme-la quand ta moyenne dépasse 60 %."]);
+  var btn = prog.cT ? '<button class="btn alt" data-act="theme" data-id="' + weak.t.id + '">Ouvrir le thème ' + pad(weak.t.id) + '</button>' : '';
+  return '<div class="block coach"><h3>Conseils du coach</h3><ul class="cl">' + m.map(function (x) {
+    return '<li style="--c:var(--' + x[0] + ')"><b>' + x[1] + '</b> ' + x[2] + '</li>';
+  }).join("") + '</ul>' + btn + '</div>';
+}
+var _vd3 = viewDash;
+viewDash = function () {
+  var h = _vd3(), st = allStats(), ci = coachInfo(st);
+  var overall = Math.round(st.reduce(function (s, x) { return s + x.pct; }, 0) / st.length);
+  var macc = Math.round(ci.mast * 100 / ci.tot), acc = prog.cT ? Math.round((prog.cA || 0) * 100 / prog.cT) : 0;
+  var extra = coachHtml(st, ci) +
+    '<div class="rings">' + ring(overall, "Avancement", "var(--p0)") + ring(macc, "Maîtrise", "var(--p4)") + ring(acc, "Précision", "var(--p2)") + '</div>' +
+    stackBar(ci.mast - 0, ci.errs, Math.max(0, ci.tot - ci.mast - ci.errs)) + activityChart(ci.pace) + themeBars(st);
+  var key = '<div class="block"><h3>Plan du jour';
+  var i = h.indexOf(key);
+  return i < 0 ? h : h.slice(0, i) + extra + h.slice(i);
+};
+
+/* ===== Couleurs par thème et surlignage des concepts clés ===== */
+function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+function hiliteKw(el, kws) {
+  if (!el || !kws.length || el.querySelector("mark")) return;
+  var order = kws.map(function (k, i) { return { k: k, i: i }; }).sort(function (a, b) { return b.k.length - a.k.length; });
+  var re = new RegExp("(^|[^A-Za-zÀ-ÿ])(" + order.map(function (o) { return escRe(o.k); }).join("|") + ")(?=$|[^A-Za-zÀ-ÿ])", "gi");
+  el.innerHTML = el.innerHTML.replace(re, function (m, pre, w) {
+    var lw = w.toLowerCase(), idx = 0;
+    order.some(function (o) { if (o.k.toLowerCase() === lw) { idx = o.i; return true; } return false; });
+    return pre + '<mark class="k k' + (idx % 6) + '">' + w + "</mark>";
+  });
+}
+var _ad4 = afterDraw;
+afterDraw = function () {
+  _ad4();
+  var app = document.getElementById("app");
+  if (!app || !app.querySelectorAll) return;
+  Array.prototype.forEach.call(app.querySelectorAll(".row .n, .th .n"), function (n) {
+    var id = parseInt(n.textContent, 10), p = n.parentNode;
+    if (isNaN(id)) return;
+    while (p && !(p.classList && (p.classList.contains("row") || p.classList.contains("th")))) p = p.parentNode;
+    if (p) p.classList.add("c" + (id % 6));
+  });
+  if (S.view === "theme") {
+    var t = themeById(S.themeId);
+    Array.prototype.forEach.call(app.querySelectorAll(".fiche .block h3"), function (h, i) { h.parentNode.className += " c" + (i % 6); });
+    hiliteKw(app.querySelector(".def"), t.kw);
+    Array.prototype.forEach.call(app.querySelectorAll(".pts li"), function (li) { hiliteKw(li, t.kw); });
+  }
 };
 
 /* ===== Bilingue, astuces de réponse, situations à rédiger ===== */
