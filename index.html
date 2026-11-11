@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Prépa QCM Pédagogie OFPPT : 312 QCM, glossaire bilingue de 168 mots-clés, simulation de 120 minutes, 42 vidéos YouTube.">
+<meta name="description" content="Prépa QCM Pédagogie OFPPT : 19 thèmes, 424 QCM, glossaire bilingue de 266 mots-clés, simulation de 120 minutes, tableau de bord, 49 vidéos YouTube.">
 <title>QCM Pédagogie OFPPT</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=JetBrains+Mono:wght@500&family=Source+Sans+3:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap">
 <style>
@@ -177,7 +177,62 @@ textarea { font: inherit; color: var(--ink); background: var(--surface); border:
 .tk.on { border-color: var(--ok); background: var(--ok-soft); }
 .tk .l { font-weight: 700; color: var(--ok); }
 .mytext { white-space: pre-wrap; background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 12px; }
-.row .bar { margin-top: 6px; }
+.row .bar, .th .bar { display: block; margin-top: 6px; }
+.th summary strong { display: block; }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.kpi { border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px; text-align: center; background: var(--surface); }
+.kpi b { display: block; font-size: 1.35rem; line-height: 1.2; }
+.kpi b small { font-size: .8rem; font-weight: 500; opacity: .7; }
+.kpi span { font-size: .78rem; opacity: .75; }
+.th { border-bottom: 1px solid var(--line); }
+.th summary { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) auto; gap: 10px; align-items: center; list-style: none; min-height: 64px; cursor: pointer; }
+.th summary::-webkit-details-marker { display: none; }
+.th .in { padding: 4px 0 14px; display: flex; flex-direction: column; gap: 10px; }
+@keyframes sv-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+.sv > * { animation: sv-in .45s ease both; }
+.sv > *:nth-child(1) { animation-delay: 0.05s; }
+.sv > *:nth-child(2) { animation-delay: 0.10s; }
+.sv > *:nth-child(3) { animation-delay: 0.15s; }
+.sv > *:nth-child(4) { animation-delay: 0.20s; }
+.sv > *:nth-child(5) { animation-delay: 0.25s; }
+.sv > *:nth-child(6) { animation-delay: 0.30s; }
+.sv > *:nth-child(7) { animation-delay: 0.35s; }
+.sv > *:nth-child(8) { animation-delay: 0.40s; }
+.sv > *:nth-child(9) { animation-delay: 0.45s; }
+.sv > *:nth-child(10) { animation-delay: 0.50s; }
+.sv > *:nth-child(11) { animation-delay: 0.55s; }
+.sv > *:nth-child(12) { animation-delay: 0.60s; }
+.sv > *:nth-child(13) { animation-delay: 0.65s; }
+.sv > *:nth-child(14) { animation-delay: 0.70s; }
+.sv > *:nth-child(15) { animation-delay: 0.75s; }
+.sv > *:nth-child(16) { animation-delay: 0.80s; }
+.sv > *:nth-child(17) { animation-delay: 0.85s; }
+.sv > *:nth-child(18) { animation-delay: 0.90s; }
+.sv > *:nth-child(19) { animation-delay: 0.95s; }
+.sv > *:nth-child(20) { animation-delay: 1.00s; }
+.sv > *:nth-child(21) { animation-delay: 1.05s; }
+.sv > *:nth-child(22) { animation-delay: 1.10s; }
+.sv > *:nth-child(23) { animation-delay: 1.15s; }
+.sv > *:nth-child(24) { animation-delay: 1.20s; }
+.sv > *:nth-child(25) { animation-delay: 1.25s; }
+.sv > *:nth-child(26) { animation-delay: 1.30s; }
+.sv > *:nth-child(27) { animation-delay: 1.35s; }
+.sv > *:nth-child(28) { animation-delay: 1.40s; }
+.sv > *:nth-child(29) { animation-delay: 1.45s; }
+.sv > *:nth-child(30) { animation-delay: 1.50s; }
+.sv > *:nth-child(31) { animation-delay: 1.55s; }
+.sv > *:nth-child(32) { animation-delay: 1.60s; }
+.sv > *:nth-child(33) { animation-delay: 1.65s; }
+.sv > *:nth-child(34) { animation-delay: 1.70s; }
+.sv > *:nth-child(35) { animation-delay: 1.75s; }
+.sv > *:nth-child(36) { animation-delay: 1.80s; }
+.sv > *:nth-child(37) { animation-delay: 1.85s; }
+.sv > *:nth-child(38) { animation-delay: 1.90s; }
+.sv > *:nth-child(39) { animation-delay: 1.95s; }
+.sv > *:nth-child(40) { animation-delay: 2.00s; }
+}
+.sec { padding: 18px 2px 8px; border-bottom: 1px solid var(--line); }
 .vlist { display: flex; flex-direction: column; gap: 18px; }
 .vid { border-top: 1.5px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
 .vp iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; background: #000; }
@@ -190,9 +245,6 @@ select { font: inherit; color: var(--ink); background: var(--surface); border: 1
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
 </style>
 
-<style>body{margin:0}</style>
-</head>
-<body>
 <main id="app"></main>
 
 <script>
@@ -1234,8 +1286,744 @@ function todayTheme() {
 function countdownHtml() {
   var t = todayTheme();
   return '<p class="stats">Examens : session 2024 le 22 nov. 2026 (' + jLabel(daysTo(2026, 11, 22)) + ') · session 2025 le 27 déc. 2026 (' + jLabel(daysTo(2026, 12, 27)) + ') · dates à confirmer avec la note officielle</p>' +
-    '<button class="ghost" data-act="theme" data-id="' + t.id + '">À travailler aujourd’hui : thème ' + pad(t.id) + ' · ' + t.short + ' →</button>';
+    '<button class="ghost" data-act="dash">Ma préparation : plan du jour, progrès, sauvegarde →</button>';
 }
+
+/* ===== Thèmes d'enrichissement 13 et 14 (fondamentaux) ===== */
+DIAG[13] = function () {
+  var bx = [[10, 10, "Béhaviorisme", ["Stimulus, réponse,", "renforcement"]], [244, 10, "Cognitivisme", ["Traiter l'information", "en mémoire"]], [10, 100, "Constructivisme", ["Construire ses", "connaissances"]], [244, 100, "Socioconstructivisme", ["Apprendre avec", "les autres"]]], s = "", i;
+  for (i = 0; i < 4; i++) s += sR(bx[i][0], bx[i][1], 226, 78, "", 8) + sT(bx[i][0] + 113, bx[i][1] + 22, bx[i][2], "bs") + sT(bx[i][0] + 113, bx[i][1] + 54, bx[i][3], "sm");
+  return sW(236, "Quatre grands courants : béhaviorisme, cognitivisme, constructivisme, socioconstructivisme, et le connectivisme",
+    s + sR(10, 190, 460, 34, "acc", 8) + sT(240, 207, "Connectivisme : apprendre en réseau", "bs"));
+};
+DIAG[14] = function () {
+  return sW(214, "Chaîne objectif, activité, évaluation, avec boucle de feedback",
+    sB(10, 30, 130, 70, ["Objectif", "opérationnel"], "acc", "bs") + sB(175, 30, 130, 70, ["Activité", "d'entraînement"], "", "bs") + sB(340, 30, 130, 70, ["Évaluation", "alignée"], "ok", "bs") +
+    sA(140, 65, 175, 65) + sA(305, 65, 340, 65) +
+    sB(130, 150, 340, 44, "Feedback et ajustement", "", "bs") + sA(405, 100, 405, 150) + sA(130, 172, 75, 172) + sA(75, 172, 75, 100));
+};
+
+var T13 = {
+  id: 13, enr: true,
+  t: "Fondamentaux : théories de l'apprentissage", short: "Comment apprend-on ? Les grandes théories",
+  def: "Une théorie de l'apprentissage explique comment une personne acquiert des connaissances et des compétences. Les principales sont le béhaviorisme (apprendre par conditionnement), le cognitivisme (traiter l'information en mémoire), le constructivisme (construire ses connaissances), le socioconstructivisme (apprendre avec les autres) et le connectivisme (apprendre en réseau). Un bon formateur les combine selon l'objectif visé.",
+  pts: ["Béhaviorisme (Pavlov, Skinner) : l'apprentissage est un changement de comportement obtenu par stimulus, réponse et renforcement. Utile pour les gestes et les automatismes.", "Cognitivisme (Gagné, Atkinson et Shiffrin) : l'esprit traite l'information (perception, mémoire de travail, mémoire à long terme). Utile pour structurer les contenus.", "Constructivisme (Piaget) : l'apprenant construit ses connaissances par assimilation et accommodation, à partir de ses acquis.", "Socioconstructivisme (Vygotski, Doise, Mugny) : on apprend avec les autres, grâce à l'interaction et au conflit sociocognitif.", "Connectivisme (Siemens) : apprendre, c'est aussi savoir trouver et relier l'information dans des réseaux numériques et humains."],
+  kw: ["Béhaviorisme", "Cognitivisme", "Constructivisme", "Socioconstructivisme", "Connectivisme", "Renforcement", "Conflit sociocognitif"],
+  ex: "Configuration d'un switch : démonstration et répétition du geste (béhaviorisme), schéma de la topologie (cognitivisme), panne à résoudre (constructivisme), binômes qui se corrigent (socioconstructivisme), recherche dans la documentation du constructeur (connectivisme).",
+  tip: "Cinq théories, cinq verbes : béhaviorisme = répéter, cognitivisme = organiser, constructivisme = construire, socioconstructivisme = échanger, connectivisme = relier.",
+  mn: "B-C-C-S-C : Béhaviorisme (répéter), Cognitivisme (organiser), Constructivisme (construire), Socio (échanger), Connectivisme (relier). Chaque théorie répond à un besoin différent.",
+  conf: [["Constructivisme ou socioconstructivisme", "Constructivisme : l'apprenant construit en agissant sur un problème. Socioconstructivisme : il construit avec les autres, par interactions et confrontation de points de vue."], ["Conditionnement classique ou opérant", "Classique (Pavlov) : associer un stimulus à une réponse réflexe. Opérant (Skinner) : un comportement augmente s'il est renforcé par ses conséquences."], ["Assimilation ou accommodation", "Assimilation : intégrer une information nouvelle dans ses schémas existants. Accommodation : modifier ses schémas pour tenir compte de la nouveauté."]],
+  piege: "Aucune théorie n'est « la bonne » : la bonne réponse associe la théorie au contexte (geste technique, résolution de problème, travail de groupe). Méfiez-vous des réponses qui jugent le béhaviorisme inutile : il reste efficace pour les automatismes.",
+  aut: ["Ivan Pavlov, B. F. Skinner : conditionnement et renforcement.", "Jean Piaget : développement cognitif, assimilation et accommodation.", "Lev Vygotski : zone proximale de développement et médiation sociale.", "George Siemens : connectivisme et apprentissage à l'ère du numérique."],
+  sch: "Les grands courants de l'apprentissage",
+  ex2: [["Béhaviorisme", "Apprendre par répétition et renforcement. Exemple : s'entraîner à sertir un câble RJ45 jusqu'à ce que le geste soit automatique, avec un retour immédiat."], ["Cognitivisme", "Aider l'esprit à traiter l'information : plans, schémas, regroupements, révisions espacées. Exemple : schéma des couches du modèle OSI."], ["Constructivisme", "L'apprenant construit en agissant sur un problème. Exemple : diagnostiquer une panne sans solution donnée."], ["Socioconstructivisme", "Interactions et confrontation de points de vue. Exemple : deux stagiaires comparent leurs plans d'adressage et se corrigent."], ["Connectivisme", "Savoir chercher, évaluer et relier l'information en réseau. Exemple : retrouver la procédure dans la documentation officielle."]],
+  p2: ["Le formateur combine les théories selon l'objectif visé : geste, compréhension, résolution de problème, travail collectif.", "Le conflit sociocognitif : un désaccord entre pairs pousse chacun à réorganiser ses idées.", "Piaget insiste sur les stades de développement ; Vygotski, sur l'aide d'autrui."],
+  gl: [
+    ["Béhaviorisme", "Théorie qui voit l'apprentissage comme un changement de comportement observable.", "السلوكية", "نظرية ترى التعلم تغيراً في السلوك الملاحَظ ناتجاً عن المثير والاستجابة.", "Comportement observable, répétition, renforcement."],
+    ["Conditionnement opérant", "Un comportement est renforcé ou affaibli par ses conséquences (Skinner).", "الاشتراط الإجرائي", "تقوية السلوك أو إضعافه بحسب نتائجه (سكينر).", "Un comportement récompensé se répète."],
+    ["Renforcement", "Conséquence qui augmente la probabilité qu'un comportement se répète.", "التعزيز", "نتيجة تزيد احتمال تكرار السلوك.", "Positif = on ajoute quelque chose d'agréable. Négatif = on retire un désagrément."],
+    ["Cognitivisme", "Théorie centrée sur ce qui se passe dans l'esprit : attention, mémoire, compréhension.", "المعرفية", "نظرية تهتم بما يجري في الذهن: الانتباه والذاكرة والفهم.", "Cognitif = dans la tête."],
+    ["Traitement de l'information", "Modèle où l'information passe par la perception, la mémoire de travail puis la mémoire à long terme.", "معالجة المعلومات", "نموذج تمر فيه المعلومة بالإدراك فالذاكرة العاملة فالذاكرة طويلة المدى.", "Entrée, traitement, stockage."],
+    ["Constructivisme", "Théorie selon laquelle l'apprenant construit ses connaissances à partir de ses acquis (Piaget).", "البنائية", "نظرية ترى أن المتعلم يبني معارفه انطلاقاً من مكتسباته.", "Construire, c'est agir sur un problème."],
+    ["Assimilation", "Intégrer une information nouvelle dans ses schémas existants.", "الاستيعاب", "إدماج معلومة جديدة في البنيات الذهنية الموجودة.", "Je range dans un tiroir existant."],
+    ["Accommodation", "Modifier ses schémas pour tenir compte d'une situation nouvelle.", "الملاءمة", "تعديل البنيات الذهنية لمراعاة وضعية جديدة.", "Je change le tiroir."],
+    ["Socioconstructivisme", "Théorie selon laquelle on construit les savoirs grâce aux interactions avec les autres (Vygotski).", "البنائية الاجتماعية", "نظرية ترى أن المعارف تُبنى بالتفاعل مع الآخرين.", "Apprendre ensemble."],
+    ["Conflit sociocognitif", "Désaccord entre pairs qui pousse à réorganiser ses idées (Doise, Mugny).", "الصراع السوسيو-معرفي", "اختلاف بين الأقران يدفع إلى إعادة تنظيم الأفكار.", "Un désaccord productif, pas une dispute."],
+    ["Médiation", "Aide d'un adulte, d'un pair ou d'un outil qui permet de franchir une difficulté.", "الوساطة", "مساعدة من راشد أو قرين أو أداة تتيح تجاوز صعوبة.", "Je ne porte pas à la place, j'aide à passer."],
+    ["Connectivisme", "Théorie qui voit l'apprentissage comme la capacité de relier des informations dans des réseaux (Siemens).", "الترابطية", "نظرية ترى التعلم قدرة على الربط بين المعلومات داخل شبكات.", "Savoir où chercher vaut autant que savoir."],
+    ["Humanisme", "Courant centré sur la personne, sa motivation et son épanouissement (Rogers, Maslow).", "النظرية الإنسانية", "تيار يركز على الشخص ودافعيته ونموه (روجرز، ماسلو).", "La personne d'abord, le climat de confiance."],
+    ["Stade de développement", "Étape du développement intellectuel décrite par Piaget.", "مرحلة النمو", "مرحلة من النمو العقلي وصفها بياجيه.", "Piaget = stades. Vygotski = aide des autres."]
+  ],
+  tAr: "أساسيات: نظريات التعلم",
+  rep: "Associez chaque théorie à son verbe-clé : répéter, organiser, construire, échanger, relier. Dans un QCM, le cas décrit (geste, problème, groupe) indique la théorie. Méfiez-vous des affirmations absolues du type « une seule théorie suffit ».",
+  cas: { c: "Vous devez enseigner la configuration d'un routeur à un groupe de stagiaires de niveaux variés. Expliquez comment les grandes théories de l'apprentissage guident votre séance.", p: ["Béhaviorisme : démontrer le geste, faire répéter avec un retour immédiat.", "Cognitivisme : donner un schéma de la topologie et structurer le contenu en étapes.", "Constructivisme : proposer une panne à diagnostiquer à partir de leurs acquis.", "Socioconstructivisme : binômes qui comparent et corrigent leurs configurations.", "Connectivisme et bilan : chercher dans la documentation officielle puis faire verbaliser ce qui a été appris."] },
+  q: [
+    { q: "Quelle théorie voit l'apprentissage comme un changement de comportement observable obtenu par renforcement ?", o: ["Le béhaviorisme", "Le cognitivisme", "Le constructivisme", "Le connectivisme"], e: "Pour Pavlov et Skinner, on apprend lorsque le comportement observable change sous l'effet de stimuli et de renforcements." },
+    { q: "Un formateur fait répéter un geste de sertissage avec un retour immédiat jusqu'à l'automatisme. Quelle théorie illustre-t-il ?", o: ["Le béhaviorisme", "Le socioconstructivisme", "Le connectivisme", "L'humanisme"], e: "Répétition, retour immédiat et renforcement : c'est la logique béhavioriste, très efficace pour les gestes techniques." },
+    { q: "Quelle théorie s'intéresse au traitement de l'information par la mémoire de travail et la mémoire à long terme ?", o: ["Le cognitivisme", "Le béhaviorisme", "Le connectivisme", "L'humanisme"], e: "Le cognitivisme étudie ce qui se passe dans l'esprit : attention, mémorisation, compréhension." },
+    { q: "Selon Piaget, l'assimilation consiste à :", o: ["Intégrer une information nouvelle dans ses schémas existants", "Modifier ses schémas à cause de la nouveauté", "Mémoriser par cœur", "Imiter le formateur"], e: "Assimiler, c'est ranger la nouveauté dans ce que l'on sait déjà, sans changer ses schémas." },
+    { q: "Et l'accommodation ?", o: ["Modifier ses schémas mentaux pour tenir compte d'une situation nouvelle", "Ranger l'information sans rien changer", "Oublier l'ancien savoir", "Copier un modèle"], e: "Quand la nouveauté ne rentre pas dans les schémas existants, on les transforme : c'est l'accommodation." },
+    { q: "Le conflit sociocognitif se produit lorsque :", o: ["Des points de vue différents se confrontent et poussent à réorganiser ses idées", "Deux stagiaires se disputent", "Le formateur impose sa solution", "Un stagiaire copie son voisin"], e: "Ce n'est pas une dispute : c'est un désaccord productif entre pairs qui oblige chacun à justifier et à reconsidérer sa position." },
+    { q: "Pour Vygotski, l'apprentissage progresse surtout grâce à :", o: ["L'interaction avec autrui dans la zone proximale de développement", "La répétition seule", "Le hasard", "L'isolement"], e: "Avec l'aide d'un pair ou du formateur, le stagiaire réussit ce qu'il ne saurait pas faire seul : c'est la zone proximale de développement." },
+    { q: "Quelle activité relève du socioconstructivisme ?", o: ["Deux stagiaires comparent leurs plans d'adressage et se corrigent", "Un stagiaire recopie le cours", "Le formateur lit un texte", "Un test à choix unique sans échange"], e: "La confrontation entre pairs et la construction commune sont la marque du socioconstructivisme." },
+    { q: "Le connectivisme (Siemens) insiste sur :", o: ["La capacité à trouver et relier l'information dans des réseaux", "La mémorisation par cœur", "Le renforcement positif", "Les stades de développement"], e: "À l'ère du numérique, savoir où chercher et comment relier les sources compte autant que savoir." },
+    { q: "Dans la théorie de Skinner, un renforcement positif est :", o: ["Une conséquence agréable qui augmente la probabilité du comportement", "Une punition", "Une sanction", "Une note éliminatoire"], e: "Le renforcement augmente la probabilité qu'un comportement se répète. La punition, elle, cherche à le diminuer." },
+    { q: "Quelle théorie justifie de proposer une situation-problème sans donner la solution ?", o: ["Le constructivisme", "Le béhaviorisme", "Le conditionnement classique", "Aucune"], e: "Pour le constructivisme, l'apprenant construit ses connaissances en agissant sur un problème et en se heurtant à ses limites." },
+    { q: "Quelle affirmation sur l'usage des théories est correcte ?", o: ["Un bon formateur combine plusieurs théories selon l'objectif visé", "Une seule théorie convient à tous les cas", "Les théories anciennes sont inutiles", "Les théories n'ont aucun lien avec la pratique"], e: "Geste technique, compréhension, résolution de problème, travail collectif : chaque situation appelle une approche adaptée." },
+    { q: "Pavlov est associé :", o: ["Au conditionnement classique (stimulus et réponse réflexe)", "Au constructivisme", "À la zone proximale de développement", "Au connectivisme"], e: "Pavlov a décrit l'association d'un stimulus neutre à une réponse réflexe, point de départ du béhaviorisme." },
+    { q: "Un schéma des couches OSI proposé pour aider la mémorisation relève surtout :", o: ["Du cognitivisme", "Du béhaviorisme", "Du connectivisme", "De l'humanisme"], e: "Organiser et structurer l'information pour faciliter son traitement et son stockage est une démarche cognitiviste." },
+    { q: "Pour l'approche humaniste (Rogers), le formateur doit surtout :", o: ["Créer un climat de confiance et soutenir la motivation de la personne", "Imposer un programme rigide", "Se limiter à l'évaluation", "Éviter toute relation"], e: "L'humanisme place la personne au centre : écoute, confiance, respect de son rythme et de sa motivation." },
+    { q: "Quelle phrase résume le mieux le constructivisme ?", o: ["Apprendre, c'est construire ses connaissances en agissant à partir de ce que l'on sait déjà", "Apprendre, c'est recevoir passivement", "Apprendre, c'est imiter", "Apprendre, c'est être récompensé"], e: "L'apprenant n'est pas un récipient : il construit activement le sens à partir de ses acquis." }
+  ]
+};
+
+var T14 = {
+  id: 14, enr: true,
+  t: "Fondamentaux : objectifs et évaluation", short: "Des objectifs clairs, une évaluation juste",
+  def: "Un objectif pédagogique décrit ce que le stagiaire saura faire à la fin d'une formation. L'évaluation mesure si cet objectif est atteint, avec des critères connus à l'avance. Objectifs et évaluation doivent rester cohérents : on évalue ce qu'on a enseigné, de la façon dont on l'a enseigné.",
+  pts: ["Un objectif opérationnel (Mager) précise un comportement observable, les conditions de réalisation et un critère de réussite.", "La taxonomie de Bloom révisée hiérarchise six niveaux : se souvenir, comprendre, appliquer, analyser, évaluer, créer.", "Fonctions de l'évaluation : diagnostique (avant), formative (pendant), sommative (après), certificative (reconnaître officiellement).", "Une évaluation juste est valide (elle mesure ce qu'elle prétend mesurer), fiable (mêmes résultats d'un correcteur à l'autre) et équitable (mêmes chances pour tous).", "Le feedback utile est précis, rapide et tourné vers l'action suivante."],
+  kw: ["Objectif opérationnel", "Critère", "Indicateur", "Bloom", "Validité", "Fiabilité", "Feedback"],
+  ex: "Objectif : « configurer un VLAN sur un switch à partir d'un schéma, sans aide, avec un ping réussi entre deux hôtes ». Évaluation : TP chronométré avec grille critériée communiquée dès le départ.",
+  tip: "Trois questions avant toute séance : que saura-t-il faire ? Comment le verrai-je ? À quel niveau est-ce réussi ?",
+  mn: "C-C-C : Comportement, Condition, Critère. Pour l'évaluation : V-F-É : Valide, Fiable, Équitable.",
+  conf: [["Objectif général ou opérationnel", "Général : intention large (« maîtriser le réseau »). Opérationnel : comportement observable, conditions et critère."], ["Critère ou indicateur", "Critère : qualité attendue (« configuration correcte »). Indicateur : signe observable qui permet de la vérifier (« le ping aboutit »)."], ["Formative ou sommative", "Formative : pendant, pour aider à progresser, sans enjeu. Sommative : à la fin, pour faire le bilan et décider."]],
+  piege: "« Comprendre », « savoir » et « connaître » ne sont pas des objectifs opérationnels : on ne peut pas les observer. Cherchez un verbe d'action : configurer, comparer, justifier.",
+  aut: ["Robert Mager : objectifs opérationnels (comportement, condition, critère).", "Benjamin Bloom (1956), révisé par Anderson et Krathwohl (2001) : taxonomie des objectifs.", "Paul Black et Dylan Wiliam : évaluation formative et feedback."],
+  sch: "La chaîne objectif, activité, évaluation",
+  ex2: [["Formuler l'objectif", "Verbe d'action + conditions + critère. Exemple : « configurer un VLAN avec la documentation autorisée, sans erreur »."], ["Choisir le niveau de Bloom", "Appliquer, analyser, créer… Le niveau de l'objectif doit se retrouver dans l'évaluation."], ["Prévoir l'évaluation", "Situation proche du métier, grille critériée, barème, consignes claires."], ["Donner un feedback", "Précis et rapide : ce qui est réussi, ce qui manque, quoi faire ensuite."]],
+  p2: ["Communiquer objectifs et critères dès le début : les stagiaires savent ce qui est attendu.", "Une évaluation par compétences observe la tâche réalisée, pas seulement des définitions.", "L'auto-évaluation et l'évaluation par les pairs développent l'autonomie quand elles s'appuient sur une grille."],
+  gl: [
+    ["Objectif général", "Intention large qui oriente une formation, sans être mesurable directement.", "هدف عام", "قصد واسع يوجّه التكوين دون أن يكون قابلاً للقياس مباشرة.", "« Maîtriser les réseaux » : trop large pour être évalué."],
+    ["Objectif spécifique", "Objectif plus précis qui découpe l'objectif général en étapes.", "هدف خاص", "هدف أدق يجزّئ الهدف العام إلى مراحل.", "Un objectif général donne plusieurs objectifs spécifiques."],
+    ["Comportement observable", "Ce que le stagiaire fait et que l'on peut voir ou mesurer.", "سلوك قابل للملاحظة", "ما يقوم به المتدرب ويمكن رؤيته أو قياسه.", "Si je ne peux pas le voir, ce n'est pas un objectif."],
+    ["Condition de réalisation", "Contexte de la tâche : outils autorisés, temps, aide disponible.", "شروط الإنجاز", "سياق المهمة: الأدوات المسموح بها والزمن والمساعدة المتاحة.", "Avec ou sans documentation ? En combien de temps ?"],
+    ["Critère de réussite", "Qualité ou seuil qui permet de dire que l'objectif est atteint.", "معيار النجاح", "جودة أو عتبة تسمح بالقول إن الهدف تحقق.", "Zéro erreur, 90 %, tous les tests réussis."],
+    ["Indicateur", "Signe observable qui permet de vérifier un critère.", "مؤشر", "علامة ملاحظة تتيح التحقق من معيار.", "Critère : configuration correcte. Indicateur : le ping aboutit."],
+    ["Taxonomie de Bloom révisée", "Classification de six niveaux d'objectifs, de se souvenir à créer.", "تصنيف بلوم المنقح", "تصنيف لستة مستويات للأهداف من التذكر إلى الإبداع.", "Se souvenir, comprendre, appliquer, analyser, évaluer, créer."],
+    ["Évaluation certificative", "Évaluation qui reconnaît officiellement qu'une compétence est acquise.", "التقويم الإشهادي", "تقويم يُقرّ رسمياً بتحقق كفاية ما.", "Elle débouche sur un diplôme ou une attestation."],
+    ["Validité", "Qualité d'une évaluation qui mesure bien ce qu'elle prétend mesurer.", "الصدقية", "جودة تقويم يقيس فعلاً ما يدّعي قياسه.", "Évaluer un dépannage par un QCM de définitions n'est pas valide."],
+    ["Fiabilité", "Qualité d'une évaluation qui donne des résultats stables d'un correcteur à l'autre.", "الثبات", "جودة تقويم يعطي نتائج مستقرة من مصحح لآخر.", "Même copie, même note, quel que soit le correcteur."],
+    ["Barème", "Répartition des points selon les critères et les questions.", "سلّم التنقيط", "توزيع النقط حسب المعايير والأسئلة.", "Annoncé avant l'épreuve, appliqué à tous."],
+    ["Évaluation par les pairs", "Les stagiaires s'évaluent entre eux à l'aide d'une grille.", "تقويم الأقران", "يقوّم المتدربون بعضهم بعضاً بالاعتماد على شبكة.", "Sans grille ni cadre bienveillant, elle perd son intérêt."],
+    ["Seuil de réussite", "Niveau minimal à atteindre pour valider une compétence.", "عتبة النجاح", "الحد الأدنى المطلوب لاعتماد كفاية ما.", "Annoncé à l'avance : par exemple, toutes les tâches essentielles réussies."],
+    ["Corrigé-type", "Réponse de référence qui sert de base de correction.", "نموذج التصحيح", "جواب مرجعي يُعتمد في التصحيح.", "Il garantit la fiabilité entre correcteurs."]
+  ],
+  tAr: "أساسيات: الأهداف والتقويم",
+  rep: "Vérifiez que l'objectif contient un verbe d'action observable, puis que l'évaluation mesure ce même verbe. Valide = mesure la bonne chose, fiable = mêmes résultats, équitable = mêmes chances. Écartez les choix qui parlent de « comprendre » ou de critères révélés après l'épreuve.",
+  cas: { c: "Un stagiaire conteste sa note de TP : « Je ne savais pas ce qui était attendu. » Analysez la situation et proposez des corrections de votre dispositif d'évaluation.", p: ["Reconnaître le problème : critères non communiqués, manque de transparence.", "Reformuler l'objectif de façon opérationnelle (comportement, condition, critère).", "Construire une grille critériée avec barème et la donner avant le TP.", "Vérifier la validité (le TP mesure-t-il l'objectif ?) et l'équité (mêmes critères pour tous).", "Donner un feedback précis et proposer une évaluation formative avant la prochaine épreuve."] },
+  q: [
+    { q: "Quelle formulation est un objectif opérationnel ?", o: ["Configurer un VLAN sur un switch à partir d'un schéma, avec un ping réussi entre deux hôtes", "Comprendre les VLAN", "Connaître le réseau", "S'intéresser aux switchs"], e: "Seule la première décrit un comportement observable, une condition et un critère de réussite." },
+    { q: "Les trois composantes d'un objectif opérationnel selon Mager sont :", o: ["Comportement, condition, critère", "Contenu, durée, lieu", "Théorie, pratique, évaluation", "Entrée, traitement, sortie"], e: "C'est la règle des « 3C » : que fait le stagiaire, dans quelles conditions, à quel niveau de réussite." },
+    { q: "Quel verbe d'objectif est observable ?", o: ["Configurer", "Comprendre", "Connaître", "Apprécier"], e: "On voit quelqu'un configurer, pas comprendre. Un objectif exige un verbe d'action." },
+    { q: "Une évaluation est valide lorsque :", o: ["Elle mesure bien ce qu'elle prétend mesurer", "Elle est très longue", "Elle est très difficile", "Elle est identique chaque année"], e: "La validité tient à l'adéquation entre l'épreuve et l'objectif visé." },
+    { q: "Une évaluation est fiable lorsque :", o: ["Deux correcteurs donnent des résultats proches pour la même copie", "Elle plaît aux stagiaires", "Elle est courte", "Elle est orale"], e: "La fiabilité mesure la stabilité des résultats : un corrigé-type et une grille l'améliorent." },
+    { q: "L'évaluation diagnostique se situe :", o: ["Avant la formation, pour connaître les acquis", "À la fin, pour certifier", "Pendant, sans enjeu", "Jamais"], e: "Elle sert à connaître le point de départ pour adapter la formation." },
+    { q: "L'évaluation formative a pour but :", o: ["Aider le stagiaire à progresser pendant l'apprentissage", "Classer les stagiaires", "Sanctionner", "Délivrer le diplôme"], e: "Elle informe l'apprentissage en cours et n'a pas d'enjeu de certification." },
+    { q: "Un critère de réussite est :", o: ["Une qualité attendue de la réalisation, connue à l'avance", "Une note surprise", "Un défaut courant", "La durée du cours"], e: "Connu à l'avance, il guide aussi bien le travail du stagiaire que la correction du formateur." },
+    { q: "Quelle est la différence entre critère et indicateur ?", o: ["Le critère est la qualité attendue, l'indicateur est le signe observable qui permet de la vérifier", "Aucune", "L'indicateur est plus vague que le critère", "Le critère est toujours un chiffre"], e: "Critère : « configuration correcte ». Indicateurs : le ping aboutit, aucune erreur dans les logs." },
+    { q: "Dans la taxonomie de Bloom révisée, quel niveau est le plus élevé ?", o: ["Créer", "Se souvenir", "Comprendre", "Appliquer"], e: "L'ordre est : se souvenir, comprendre, appliquer, analyser, évaluer, créer." },
+    { q: "Un QCM de définitions pour évaluer l'objectif « diagnostiquer une panne » pose un problème de :", o: ["Validité : l'épreuve ne mesure pas l'objectif", "Fiabilité", "Durée", "Typographie"], e: "Pour mesurer un diagnostic, il faut une situation de panne à résoudre." },
+    { q: "Quel feedback est le plus utile ?", o: ["« Ton adressage est correct, mais le masque du sous-réseau B est erroné : vérifie le calcul »", "« Bien »", "« Mauvais »", "« Recommence »"], e: "Un feedback précis dit ce qui est réussi, ce qui manque et quoi faire ensuite." },
+    { q: "Communiquer la grille d'évaluation avant l'épreuve permet :", o: ["La transparence et une préparation orientée vers ce qui est attendu", "La triche", "Le relâchement", "Rien de particulier"], e: "Les stagiaires savent à quoi s'attendre, et l'évaluation devient plus juste." },
+    { q: "L'évaluation certificative sert à :", o: ["Reconnaître officiellement qu'une compétence est acquise", "Établir un diagnostic initial", "Faire un bilan informel", "Occuper les stagiaires"], e: "Elle débouche sur une attestation, un titre ou un diplôme." },
+    { q: "Un barème est :", o: ["Une répartition des points selon les critères et les questions", "Une liste de présence", "Un type de feedback", "Un matériel de TP"], e: "Un barème annoncé et appliqué à tous renforce l'équité et la fiabilité." },
+    { q: "Pour qu'une évaluation par les pairs soit efficace, il faut :", o: ["Une grille de critères claire et un cadre bienveillant", "L'absence de consignes", "De la compétition entre stagiaires", "Aucun retour"], e: "Sans grille ni cadre, les pairs jugent selon leurs impressions." }
+  ]
+};
+
+[T13, T14].forEach(function (t) {
+  t.q.forEach(function (q, i) { q.k = t.id + "-" + i; });
+  THEMES.push(t);
+});
+VID[13] = [
+  { id: "CJxfed5FQ9U", t: "Le socioconstructivisme, l’apprentissage par l’interaction", a: "Imagination Inventors", l: "fr", n: "" },
+  { id: "ACowHxGEAUg", t: "A Brief Overview of 4 Learning Theories", a: "Jo Harris", l: "en", n: "" },
+  { id: "SC3uP13Nwqk", t: "Big 3 Learning Theories: Behaviorism, Cognitivism, Constructivism!", a: "Lindsay O'Neill, MLIS, EdD", l: "en", n: "" }
+];
+VID[14] = [
+  { id: "Q1FVce0Hsw4", t: "Appliquer la règle des 3C en formation", a: "Henry-Laurent Jansa, FPA", l: "fr", n: "" },
+  { id: "vSE5BYIOP54", t: "Vidéo n°2 - Formulation objectifs pédagogiques", a: "KB Formation Formateurs FLE", l: "fr", n: "" },
+  { id: "Pyqz4IWuw4w", t: "Les évaluations formatives et sommatives", a: "Actualisation TV", l: "fr", n: "" },
+  { id: "PTMXVxj9-BM", t: "Mettre en place une évaluation formative", a: "Marie-Camille Coudert", l: "fr", n: "" }
+];
+VQ[13] = "théories de l'apprentissage béhaviorisme constructivisme";
+VQ[14] = "objectifs pédagogiques évaluation formative sommative";
+
+/* ===== Résumés arabes, journal d'étude, tableau de bord, quiz ciblé, sauvegarde ===== */
+var SUMAR = {
+1: "ما وراء المعرفة هي قدرة المتعلم على التفكير في طريقة تعلمه ومراقبتها وتعديلها. تقوم على ثلاث مراحل: التخطيط قبل الفعل، والمراقبة أثناءه، والتقويم بعده. يساعد المكوّن متدربيه بالنمذجة والتعبير اللفظي عن المسار وبأسئلة تدفع إلى التفكير في الطريقة لا في النتيجة فقط.",
+2: "الأندراغوجيا هي فن مساعدة الراشدين على التعلم. الراشد مستقل ويملك تجربة، ويريد أن يفهم فائدة ما يتعلمه، ويتعلم لحل مشكلات واقعية. لذلك يكون المكوّن ميسِّراً يبني مع المتدربين عقداً بيداغوجياً ويستثمر تجاربهم ويحترمهم.",
+3: "المواءمة البيداغوجية تعني الانسجام بين الأهداف والأنشطة والتقويم داخل مقاربة بالكفايات. تُصاغ الكفاية بفعل قابل للملاحظة ومعايير أداء معلنة مسبقاً، وتُقوَّم في وضعيات قريبة من المهنة، مع تقويم تشخيصي وتكويني وإجمالي.",
+4: "الذاكرة العاملة محدودة، لذلك يجب ألا نثقلها. نميّز الحمل الداخلي المرتبط بصعوبة المحتوى، والحمل الخارجي الناتج عن سوء العرض، والحمل الملائم المفيد للفهم. نخفف الحمل بالتجزيء والأمثلة المحلولة وتبسيط الوثائق وتقديم معلومة واحدة في كل مرة.",
+5: "التساؤل وسيلة لتحليل الممارسة المهنية. تُفضَّل الأسئلة المفتوحة المحايدة التي تدفع إلى وصف الفعل (كيف؟ ماذا؟) مع إعادة الصياغة والصمت البيداغوجي، وتُتجنب الأسئلة الإيحائية أو الاتهامية. وينتهي التحليل بقرار تحسين ملموس.",
+6: "نقل التعلمات هو إعادة توظيف المكتسبات في مكان العمل. يتوقف على ما قبل التكوين وأثناءه وبعده: أهداف واضحة، ووضعيات أصيلة ومتنوعة، وخطة عمل، ودعم المسؤول المباشر. ويُقاس بالمستويين الثالث والرابع من نموذج كيركباتريك، لا بالرضا فقط.",
+7: "البيداغوجيا الفارقية تعني هدفاً مشتركاً ومسارات متعددة. نبدأ بتشخيص المستوى ثم نكيّف المحتويات والمسارات والإنتاجات وبيئة العمل، مع مجموعات حاجة مؤقتة ومصاحبة تُسحب تدريجياً، دون خفض مستوى المتطلبات.",
+8: "البيداغوجيا باللعب توظف اللعب لتحقيق هدف تعلمي محدد، كلعب الأدوار والألعاب الجادة والتلعيب. نجاحها رهين بقواعد واضحة ومناخ آمن وتغذية راجعة فورية، ثم مناقشة بعدية تستخلص الدروس وتربطها بالمهنة.",
+9: "الإدماج والولوجية يعنيان تكييف البيئة والمنظومة مع تنوع المتدربين لا العكس. نعتمد التصميم الشامل للتعلم وصيغاً متعددة للمحتوى وترتيبات تيسيرية معقولة، مع احترام السرية وموافقة الشخص، ودون خفض مستوى الكفاية المستهدفة.",
+10: "الموقف التأملي هو أن يحلل المكوّن ممارسته ليحسّنها: تأمل أثناء الفعل وتأمل بعده، اعتماداً على مفكرة الممارسة والملاحظة المتبادلة وملف الإنجاز. ولا قيمة للتأمل ما لم ينتج تغييراً ملموساً ومقاساً في الممارسة.",
+11: "السيناريو البيداغوجي تصميم مفصل للحصة: هدف، وتمهيد أو وضعية مشكلة، وشرح قصير، وممارسة موجهة ثم مستقلة، وخلاصة وتقويم. نوازن بين النظري والتطبيقي بتوزيع زمني واقعي وهامش أمان وخطة بديلة.",
+12: "الحياد والأخلاقيات يقتضيان الإنصاف بتطبيق المعايير نفسها على الجميع، وحماية السرية، والنزاهة، وتجنب تضارب المصالح. والحياد لا يعني السلبية: فاحترام الآخر والسلامة وعدم التمييز قواعد غير قابلة للتفاوض.",
+13: "نظريات التعلم تفسّر كيف يكتسب الإنسان المعارف: السلوكية تعتمد المثير والاستجابة والتعزيز، والمعرفية تعالج المعلومة في الذاكرة، والبنائية ترى أن المتعلم يبني معارفه، والبنائية الاجتماعية تؤكد دور التفاعل مع الآخرين، والترابطية تركز على الشبكات. والمكوّن الجيد يوظفها بحسب الهدف.",
+14: "الهدف الإجرائي يصف سلوكاً قابلاً للملاحظة وشروط إنجازه ومعيار نجاحه (سلوك، شرط، معيار). والتقويم يقيس تحقق الهدف بمعايير معلنة، وقد يكون تشخيصياً أو تكوينياً أو إجمالياً أو إشهادياً. والتقويم الجيد صادق وثابت ومنصف، ويُرفق بتغذية راجعة دقيقة."
+};
+/* ===== Fondamentaux 15 à 17 : motivation, dynamique de groupe, méthodes pédagogiques ===== */
+DIAG[15] = function () {
+  return sW(206, "Trois besoins psychologiques, autonomie, compétence, appartenance, qui alimentent la motivation durable",
+    sB(10, 14, 140, 62, ["Autonomie", "choisir, décider"], "", "bs") + sB(170, 14, 140, 62, ["Compétence", "se sentir capable"], "", "bs") + sB(330, 14, 140, 62, ["Appartenance", "être relié aux autres"], "", "bs") +
+    sA(80, 76, 200, 128) + sA(240, 76, 240, 128) + sA(400, 76, 280, 128) +
+    sB(90, 130, 300, 56, ["Motivation durable", "(autodétermination)"], "acc", "bs"));
+};
+DIAG[16] = function () {
+  var n = ["Formation", "Tempête", "Normalisation", "Performance"], d = ["on se découvre", "tensions, conflits", "règles communes", "efficacité"], s = "", i;
+  for (i = 0; i < 4; i++) s += sB(4 + i * 120, 40, 112, 74, [n[i], d[i]], i === 3 ? "ok" : (i === 1 ? "acc" : ""), "bs");
+  return sW(170, "Les quatre phases de vie d'un groupe selon Tuckman : formation, tempête, normalisation, performance",
+    s + sA(116, 77, 124, 77) + sA(236, 77, 244, 77) + sA(356, 77, 364, 77) + sT(240, 20, "Les phases de Tuckman", "sm") + sT(240, 150, "La tempête est une étape normale : elle ne signifie pas un échec", "sm"));
+};
+DIAG[17] = function () {
+  var n = ["Expositive", "Démonstrative", "Interrogative", "Active"], d = ["j'explique", "je montre", "je questionne", "il cherche"], s = "", i;
+  for (i = 0; i < 4; i++) s += sB(4 + i * 120, 24, 112, 70, [n[i], d[i]], i === 3 ? "acc" : "", "bs");
+  return sW(170, "Quatre méthodes pédagogiques, de la plus centrée sur le formateur à la plus centrée sur le stagiaire",
+    s + sA(30, 130, 450, 130) + sT(60, 152, "Formateur actif", "sm") + sT(420, 152, "Stagiaire actif", "sm"));
+};
+
+var T15 = {
+  id: 15, enr: true,
+  t: "Fondamentaux : motivation et engagement", short: "Donner envie d'apprendre et de persévérer",
+  def: "La motivation est l'énergie qui pousse un stagiaire à s'engager dans l'apprentissage et à persévérer. Elle est intrinsèque (plaisir, intérêt) ou extrinsèque (note, diplôme, récompense). Selon la théorie de l'autodétermination (Deci et Ryan), elle se nourrit de trois besoins : autonomie, compétence et appartenance. Le formateur agit sur elle par le sens donné à l'activité, des défis réalistes et un feedback encourageant.",
+  pts: ["Motivation intrinsèque : on agit par intérêt pour l'activité elle-même. Motivation extrinsèque : on agit pour une récompense ou pour éviter une sanction.", "Autodétermination (Deci et Ryan) : trois besoins à satisfaire, l'autonomie (avoir du choix), la compétence (se sentir capable) et l'appartenance (se sentir relié au groupe).", "Dynamique motivationnelle (Viau) : trois perceptions du stagiaire, la valeur de l'activité, sa compétence à la réaliser et la contrôlabilité de son déroulement.", "Modèle ARCS (Keller) : Attention, Pertinence, Confiance, Satisfaction. Quatre leviers à penser pour chaque séance.", "Pyramide de Maslow : les besoins de base (sécurité, appartenance) doivent être comblés avant les besoins d'estime et d'accomplissement."],
+  kw: ["Motivation intrinsèque", "Motivation extrinsèque", "Autodétermination", "Sentiment de compétence", "ARCS", "Maslow", "Engagement"],
+  ex: "En début de module sur le routage : montrer un cas réel de panne d'entreprise (pertinence), proposer deux scénarios au choix (autonomie), commencer par un défi réussissable (compétence), puis faire présenter la solution au groupe (appartenance et satisfaction).",
+  tip: "Pour motiver : du sens (pourquoi), du choix (autonomie), du succès (compétence), du lien (groupe). Une récompense externe excessive peut même éteindre la motivation intrinsèque.",
+  mn: "ARCS : Attention, Pertinence, Confiance, Satisfaction. Et « ACA » pour Deci et Ryan : Autonomie, Compétence, Appartenance.",
+  conf: [["Motivation intrinsèque ou extrinsèque", "Intrinsèque : l'activité est source de plaisir ou d'intérêt. Extrinsèque : on cherche une récompense ou on évite une sanction."], ["Sentiment de compétence ou compétence réelle", "La motivation dépend surtout de ce que le stagiaire croit pouvoir réussir, pas seulement de son niveau réel."], ["Encourager ou récompenser", "Encourager porte sur l'effort et la progression. Une récompense systématique peut réduire l'intérêt pour la tâche elle-même."]],
+  piege: "Ne confondez pas motivation et amusement. Un QCM qui propose de « garder la motivation par des notes et des punitions » n'est pas la meilleure réponse : la réponse attendue passe par le sens, l'autonomie, le sentiment de compétence et le feedback positif.",
+  aut: ["Abraham Maslow : hiérarchie des besoins.", "Edward Deci et Richard Ryan : théorie de l'autodétermination.", "Rolland Viau : dynamique motivationnelle en contexte scolaire.", "John Keller : modèle ARCS."],
+  sch: "Les trois besoins qui nourrissent la motivation",
+  ex2: [["Autonomie", "Laisser des choix réels. Exemple : choisir entre deux scénarios de TP ou l'ordre des étapes."], ["Compétence", "Proposer des défis atteignables avec un retour clair. Exemple : une panne simple d'abord, puis une panne plus complexe."], ["Appartenance", "Créer un climat de confiance et de coopération. Exemple : binômes, entraide, droit à l'erreur."], ["Pertinence", "Relier l'apprentissage au métier visé. Exemple : partir d'un incident réel d'entreprise."], ["Feedback encourageant", "Souligner l'effort et la progression, pas seulement le résultat. Exemple : « Vous avez corrigé seul le masque, il reste la passerelle. »"]],
+  p2: ["La motivation se travaille à chaque séance : accroche, défi, feedback, bilan.", "Un stagiaire qui pense « je n'y arriverai jamais » se désengage : il faut des petites réussites rapides.", "Les récompenses doivent rester rares et informatives, jamais un moyen de contrôle."],
+  gl: [
+    ["Motivation", "Énergie qui pousse à s'engager dans une activité et à persévérer.", "الدافعية", "طاقة تدفع إلى الانخراط في نشاط والمثابرة عليه.", "Motivation = moteur de l'apprentissage."],
+    ["Motivation intrinsèque", "On agit par intérêt ou plaisir pour l'activité elle-même.", "الدافعية الداخلية", "الإقبال على النشاط لأجل المتعة أو الاهتمام به في حد ذاته.", "Intrinsèque = de l'intérieur."],
+    ["Motivation extrinsèque", "On agit pour obtenir une récompense ou éviter une sanction.", "الدافعية الخارجية", "الإقبال على النشاط لنيل مكافأة أو تفادي عقوبة.", "Extrinsèque = de l'extérieur (note, prime)."],
+    ["Autodétermination", "Théorie de Deci et Ryan : la motivation naît des besoins d'autonomie, de compétence et d'appartenance.", "تقرير المصير الذاتي", "نظرية ترى أن الدافعية تنشأ من حاجات الاستقلالية والكفاءة والانتماء.", "ACA : Autonomie, Compétence, Appartenance."],
+    ["Autonomie", "Besoin de choisir et de décider par soi-même.", "الاستقلالية", "حاجة المتعلم إلى الاختيار واتخاذ القرار بنفسه.", "Offrir un vrai choix."],
+    ["Sentiment de compétence", "Conviction d'être capable de réussir une tâche.", "الشعور بالكفاءة", "اقتناع المتعلم بقدرته على إنجاز المهمة.", "Il dépend de la perception, pas seulement du niveau."],
+    ["Sentiment d'appartenance", "Besoin de se sentir accepté et relié au groupe.", "الشعور بالانتماء", "حاجة المتعلم إلى أن يكون مقبولا ومرتبطا بالمجموعة.", "Un climat de confiance le renforce."],
+    ["Modèle ARCS", "Modèle de Keller : Attention, Pertinence, Confiance, Satisfaction.", "نموذج ARCS", "نموذج كيلر: الانتباه، الملاءمة، الثقة، الرضا.", "Quatre leviers pour chaque séance."],
+    ["Pyramide de Maslow", "Hiérarchie des besoins : physiologiques, sécurité, appartenance, estime, accomplissement.", "هرم ماسلو", "تدرج الحاجات: الفيزيولوجية، الأمان، الانتماء، التقدير، تحقيق الذات.", "On monte la pyramide étage par étage."],
+    ["Engagement", "Investissement actif et durable du stagiaire dans ses apprentissages.", "الانخراط", "استثمار المتعلم الفعلي والمستمر في تعلماته.", "Engagé = il agit, pas seulement il écoute."],
+    ["Persévérance", "Capacité à continuer malgré la difficulté.", "المثابرة", "القدرة على المواصلة رغم الصعوبة.", "Se nourrit de petites réussites."],
+    ["Sentiment d'efficacité personnelle", "Croyance en sa capacité d'organiser et d'accomplir une action (Bandura).", "الفعالية الذاتية", "اعتقاد الفرد في قدرته على تنظيم عمل ما وإنجازه (باندورا).", "Se construit par les réussites vécues."],
+    ["Pertinence", "Perception que l'apprentissage est utile pour son métier ou son projet.", "الملاءمة / الجدوى", "إدراك المتعلم أن التعلم مفيد لمهنته أو مشروعه.", "Répondre au « à quoi ça sert ? »"],
+    ["Attribution causale", "Explication que le stagiaire donne à ses réussites et échecs (effort, chance, don).", "العزو السببي", "التفسير الذي يقدمه المتعلم لنجاحه أو فشله (جهد، حظ، موهبة).", "Mieux vaut attribuer au travail qu'à un « don »."]
+  ],
+  tAr: "أساسيات: الدافعية والانخراط",
+  rep: "Pensez en quatre mots : sens, choix, réussite, lien. La bonne réponse relie la motivation aux besoins d'autonomie, de compétence et d'appartenance, et au feedback sur l'effort.",
+  cas: { c: "Dans votre groupe, plusieurs stagiaires se désengagent après trois semaines : retards, silence, travaux non rendus. Expliquez comment vous analysez la situation et relancez la motivation.", p: ["Diagnostiquer : échanger individuellement pour comprendre les causes (difficulté, sens, vie personnelle).", "Pertinence : relier les contenus à des situations réelles du métier visé.", "Compétence : proposer des défis progressifs et des réussites rapides avec un feedback sur l'effort.", "Autonomie et appartenance : offrir des choix, former des binômes, valoriser l'entraide.", "Suivi : fixer un objectif court, vérifier la progression et ajuster."] },
+  q: [
+    { q: "Un stagiaire révise parce qu'il trouve le routage passionnant. Quel type de motivation est en jeu ?", o: ["Intrinsèque", "Extrinsèque", "Amotivation", "Contrainte externe"], e: "Il agit par intérêt pour l'activité elle-même : c'est la motivation intrinsèque." },
+    { q: "Un stagiaire travaille uniquement pour obtenir son diplôme. Il s'agit surtout de motivation :", o: ["Extrinsèque", "Intrinsèque", "Métacognitive", "Réflexive"], e: "Le moteur est une récompense externe, le diplôme : motivation extrinsèque." },
+    { q: "Selon Deci et Ryan, quels sont les trois besoins psychologiques fondamentaux ?", o: ["Autonomie, compétence, appartenance", "Sécurité, argent, reconnaissance", "Attention, mémoire, répétition", "Discipline, effort, récompense"], e: "La théorie de l'autodétermination repose sur l'autonomie, la compétence et l'appartenance." },
+    { q: "Que signifie ARCS dans le modèle de Keller ?", o: ["Attention, Pertinence, Confiance, Satisfaction", "Analyse, Réponse, Contrôle, Suivi", "Accueil, Rythme, Consigne, Synthèse", "Autonomie, Réussite, Choix, Sens"], e: "ARCS regroupe quatre leviers : Attention, Pertinence, Confiance, Satisfaction." },
+    { q: "Pour renforcer le sentiment de compétence d'un stagiaire en difficulté, le formateur doit :", o: ["Proposer un défi atteignable et un retour sur ses progrès", "Lui donner une tâche très difficile pour le stimuler", "Comparer ses résultats à ceux du meilleur du groupe", "Éviter tout feedback pour ne pas le vexer"], e: "Des réussites progressives et un feedback sur la progression construisent la confiance en soi." },
+    { q: "Laisser le choix entre deux scénarios de TP répond surtout au besoin d'", o: ["Autonomie", "Appartenance", "Sécurité physique", "Évaluation sommative"], e: "Le choix donne au stagiaire le sentiment de décider : c'est l'autonomie." },
+    { q: "Selon la pyramide de Maslow, avant de viser l'accomplissement de soi, il faut d'abord satisfaire :", o: ["Les besoins de base, de sécurité et d'appartenance", "Uniquement le besoin de reconnaissance", "Les besoins de l'entreprise", "Aucun besoin particulier"], e: "Les besoins sont hiérarchisés : les besoins de base conditionnent les besoins supérieurs." },
+    { q: "Un formateur démarre la séance par un incident réel d'entreprise. Quel levier ARCS actionne-t-il surtout ?", o: ["La pertinence", "La satisfaction", "L'évaluation", "La discipline"], e: "Relier le contenu au métier répond au « à quoi ça sert ? » : c'est la pertinence." },
+    { q: "Dans la dynamique motivationnelle de Viau, les trois perceptions du stagiaire sont :", o: ["Valeur de l'activité, compétence, contrôlabilité", "Temps, coût, fatigue", "Attention, mémoire, vitesse", "Note, sanction, récompense"], e: "Viau retient la valeur de l'activité, la perception de sa compétence et la contrôlabilité." },
+    { q: "Quel feedback soutient le mieux la motivation ?", o: ["« Vous avez progressé sur l'adressage, voyons maintenant la passerelle »", "« C'est faux, recommencez »", "« Vous avez de la chance »", "« Les autres ont mieux réussi »"], e: "Un feedback précis qui valorise l'effort et la progression nourrit le sentiment de compétence." },
+    { q: "Un stagiaire dit : « Je suis nul en réseaux, c'est un don que je n'ai pas. » Quelle attribution est-ce ?", o: ["Une cause stable et incontrôlable, défavorable à la motivation", "Une attribution à l'effort", "Une attribution à la méthode", "Une attribution favorable à la persévérance"], e: "Attribuer l'échec à un don, stable et incontrôlable, décourage. Il faut l'orienter vers l'effort et les stratégies." },
+    { q: "Des récompenses systématiques et excessives peuvent :", o: ["Réduire la motivation intrinsèque", "Garantir la persévérance", "Remplacer le feedback", "Supprimer le besoin d'autonomie"], e: "Un contrôle par la récompense peut éteindre l'intérêt propre pour l'activité." },
+    { q: "Qu'est-ce que le sentiment d'efficacité personnelle (Bandura) ?", o: ["La croyance en sa capacité de réussir une action", "Le résultat d'un examen", "La rapidité d'exécution", "Le nombre d'heures de formation"], e: "C'est la conviction d'être capable d'accomplir une tâche, qui se construit par des réussites vécues." },
+    { q: "Pour favoriser le sentiment d'appartenance, le formateur peut :", o: ["Instaurer des règles de respect, des binômes et de l'entraide", "Mettre les stagiaires en compétition permanente", "Éviter les travaux de groupe", "Afficher publiquement les erreurs"], e: "Un climat de confiance et de coopération nourrit l'appartenance." },
+    { q: "Un stagiaire se désengage. Quelle première démarche est la plus pertinente ?", o: ["Échanger avec lui pour comprendre les causes", "L'exclure du groupe", "Baisser les exigences pour tous", "L'ignorer jusqu'à la fin du module"], e: "Un diagnostic individuel permet d'agir sur la vraie cause : difficulté, sens, contexte personnel." },
+    { q: "Le formateur qui alterne défis progressifs, choix et feedback agit principalement sur :", o: ["L'engagement et la persévérance des stagiaires", "La durée du programme", "Le matériel du TP", "L'archivage des notes"], e: "Ces leviers soutiennent l'engagement durable, bien plus que la contrainte." }
+  ]
+};
+
+var T16 = {
+  id: 16, enr: true,
+  t: "Fondamentaux : gestion de groupe et climat de classe", short: "Faire fonctionner un groupe d'adultes",
+  def: "La gestion de groupe consiste à créer un climat de travail sûr, à fixer des règles claires et à réguler les tensions pour que le groupe apprenne. Le groupe évolue en phases (Tuckman : formation, tempête, normalisation, performance) et le formateur adapte son style de conduite (autoritaire, démocratique ou laisser-faire selon Lewin). Un conflit bien géré peut devenir une occasion d'apprendre.",
+  pts: ["Phases du groupe (Tuckman) : formation, tempête, normalisation, performance. La tempête est normale et temporaire.", "Styles de leadership (Lewin) : autoritaire (le formateur décide), démocratique (on décide ensemble), laisser-faire (pas de cadre). Le style démocratique est en général le plus efficace avec des adultes, tout en gardant un cadre.", "Règles de fonctionnement : les établir dès le début, avec le groupe, et les appliquer de façon cohérente et équitable.", "Gestion de conflit : écouter, reformuler, distinguer les faits des interprétations, chercher une solution acceptable, rester neutre.", "Rôles dans le groupe : leader, médiateur, silencieux, opposant. Le formateur évite d'étiqueter et fait circuler la parole."],
+  kw: ["Tuckman", "Lewin", "Climat de classe", "Régulation", "Conflit", "Règles de groupe", "Leadership démocratique"],
+  ex: "Au premier jour d'un module : construire avec les stagiaires cinq règles de fonctionnement (ponctualité, respect de la parole, usage des téléphones), les afficher et s'y référer calmement quand un écart apparaît.",
+  tip: "Un groupe passe par une phase de tension avant d'être performant. Ne la prenez pas pour un échec : cadrez, régulez et rappelez les règles communes.",
+  mn: "Tuckman : « F-T-N-P » = Formation, Tempête, Normalisation, Performance. Lewin : A-D-L = Autoritaire, Démocratique, Laisser-faire.",
+  conf: [["Autorité ou autoritarisme", "L'autorité s'appuie sur un cadre clair et légitime. L'autoritarisme impose sans explication ni écoute."], ["Conflit de personnes ou de contenu", "Un conflit de contenu (idées, méthodes) peut être fécond. Un conflit de personnes est à réguler rapidement."], ["Régulation ou sanction", "Réguler, c'est rétablir le cadre et le dialogue. Sanctionner relève du règlement et reste le dernier recours."]],
+  piege: "Évitez les réponses extrêmes : « ignorer le conflit » ou « punir immédiatement devant tous ». La réponse attendue privilégie un cadre clair, l'écoute, une intervention calme et si possible en privé, puis un retour aux règles communes.",
+  aut: ["Bruce Tuckman : phases de développement du groupe.", "Kurt Lewin : styles de leadership et dynamique de groupe.", "Carl Rogers : écoute et climat de confiance.", "Thomas Gordon : communication non violente d'autorité, gestion de conflit."],
+  sch: "Les phases de vie d'un groupe",
+  ex2: [["Formation", "Les stagiaires se découvrent, restent polis. Le formateur cadre, présente, rassure."], ["Tempête", "Tensions, désaccords, remise en cause. Le formateur reste calme, rappelle les règles, écoute."], ["Normalisation", "Le groupe adopte des règles communes et coopère. Le formateur valorise et confie des responsabilités."], ["Performance", "Le groupe est efficace et autonome. Le formateur accompagne à distance."], ["Style démocratique", "Décider avec le groupe dans un cadre posé. Exemple : voter l'ordre des TP possibles."]],
+  p2: ["Le style de conduite s'adapte au groupe et à la phase : plus directif au début, plus délégatif ensuite.", "Intervenir en privé sur un comportement perturbateur préserve la dignité de la personne.", "Faire circuler la parole évite que deux ou trois personnes dominent."],
+  gl: [
+    ["Climat de classe", "Ambiance générale du groupe : confiance, respect, sécurité pour oser et se tromper.", "المناخ الصفي", "الجو العام للمجموعة: ثقة واحترام وأمان يسمح بالمحاولة والخطأ.", "Un bon climat = droit à l'erreur."],
+    ["Dynamique de groupe", "Ensemble des forces et interactions qui font évoluer un groupe (Lewin).", "دينامية الجماعة", "مجموع القوى والتفاعلات التي تحرك الجماعة وتطورها (ليفين).", "Un groupe n'est pas la somme des individus."],
+    ["Phases de Tuckman", "Formation, tempête, normalisation, performance : étapes de vie d'un groupe.", "مراحل توكمان", "التشكل، العاصفة، التطبيع، الأداء: مراحل حياة المجموعة.", "FTNP."],
+    ["Leadership démocratique", "Style où le formateur décide avec le groupe dans un cadre clair.", "القيادة الديمقراطية", "أسلوب يقرر فيه المكوّن مع المجموعة ضمن إطار واضح.", "Cadre + participation."],
+    ["Leadership autoritaire", "Style où le formateur décide seul et impose.", "القيادة التسلطية", "أسلوب يقرر فيه المكوّن بمفرده ويفرض قراراته.", "Efficace en urgence, peu motivant."],
+    ["Laisser-faire", "Style sans cadre : le groupe se débrouille seul.", "القيادة المتساهلة", "أسلوب بلا إطار تُترك فيه المجموعة وشأنها.", "Risque : désorganisation."],
+    ["Règles de fonctionnement", "Accords clairs sur la manière de travailler ensemble.", "قواعد التسيير", "اتفاقات واضحة حول كيفية العمل معا.", "Les construire avec le groupe."],
+    ["Régulation", "Action qui rétablit le cadre, le dialogue ou le rythme du groupe.", "التعديل / الضبط", "تدخل يعيد الإطار أو الحوار أو الإيقاع إلى المجموعة.", "Réguler avant de sanctionner."],
+    ["Conflit sociocognitif", "Désaccord d'idées entre pairs qui favorise l'apprentissage.", "الصراع السوسيو-معرفي", "اختلاف في الأفكار بين الأقران يدعم التعلم.", "Un désaccord d'idées n'est pas un conflit de personnes."],
+    ["Écoute active", "Écouter sans interrompre, reformuler et vérifier la compréhension.", "الإنصات الفعال", "الاستماع دون مقاطعة وإعادة الصياغة والتحقق من الفهم.", "Je reformule avant de répondre."],
+    ["Médiation", "Intervention d'un tiers neutre pour aider à résoudre un conflit.", "الوساطة", "تدخل طرف محايد للمساعدة على حل نزاع.", "Neutralité et écoute des deux côtés."],
+    ["Cohésion de groupe", "Force des liens qui unissent les membres et leur envie de rester ensemble.", "تماسك الجماعة", "قوة الروابط بين الأعضاء ورغبتهم في البقاء معا.", "Se construit par des objectifs communs."],
+    ["Leader informel", "Stagiaire qui influence le groupe sans position officielle.", "القائد غير الرسمي", "متدرب يؤثر في المجموعة دون موقع رسمي.", "L'identifier et s'appuyer sur lui."],
+    ["Comportement perturbateur", "Attitude qui gêne le déroulement de la séance (bavardage, retard, provocation).", "السلوك المشوِّش", "تصرف يعطل سير الحصة (ثرثرة، تأخر، استفزاز).", "Rechercher la cause avant de réagir."]
+  ],
+  tAr: "أساسيات: تدبير الجماعة والمناخ الصفي",
+  rep: "Retenez : cadre clair, écoute, calme, équité. Pour Tuckman, la tempête est normale. Pour Lewin, le style démocratique avec cadre est le plus adapté aux adultes.",
+  cas: { c: "Deux stagiaires s'opposent violemment pendant un travail de groupe et le reste du groupe est mal à l'aise. Expliquez comment vous intervenez.", p: ["Arrêter l'échange calmement, rester neutre et rappeler les règles communes de respect.", "Séparer les faits des interprétations et laisser chacun s'exprimer, avec reformulation.", "Recentrer sur la tâche et chercher un compromis acceptable pour les deux.", "Si besoin, reprendre en privé après la séance pour approfondir.", "Faire un bilan avec le groupe et ajuster les règles ou la composition des équipes."] },
+  q: [
+    { q: "Quelles sont les phases de vie d'un groupe selon Tuckman ?", o: ["Formation, tempête, normalisation, performance", "Accueil, cours, pause, bilan", "Analyse, conception, réalisation, évaluation", "Départ, voyage, arrivée, retour"], e: "Tuckman décrit quatre phases : formation, tempête, normalisation et performance." },
+    { q: "Pendant la phase de tempête, le formateur doit :", o: ["Garder son calme, rappeler les règles et écouter", "Dissoudre le groupe", "Ignorer toutes les tensions", "Imposer des sanctions à tous"], e: "La tempête est une étape normale qui se gère par le cadre, l'écoute et la régulation." },
+    { q: "Selon Lewin, quels sont les trois styles de leadership ?", o: ["Autoritaire, démocratique, laisser-faire", "Directif, ludique, magistral", "Sévère, tolérant, neutre", "Actif, passif, réactif"], e: "Lewin distingue les styles autoritaire, démocratique et laisser-faire." },
+    { q: "Avec des adultes en formation, quel style est en général le plus adapté ?", o: ["Démocratique, dans un cadre clair", "Laisser-faire total", "Autoritaire permanent", "Absence de consignes"], e: "Les adultes apprécient la participation, mais un cadre reste nécessaire." },
+    { q: "Pourquoi établir les règles de fonctionnement avec le groupe ?", o: ["Pour favoriser l'adhésion et le respect des règles", "Pour éviter de les appliquer", "Pour gagner du temps sur le programme", "Pour remplacer le règlement intérieur"], e: "Des règles construites ensemble sont mieux comprises et mieux respectées." },
+    { q: "Un stagiaire perturbe régulièrement. Quelle première réaction est la plus adaptée ?", o: ["Chercher à comprendre la cause et lui parler calmement, si possible en privé", "L'humilier devant le groupe", "L'exclure immédiatement", "Faire comme si de rien n'était"], e: "On cherche la cause, on préserve la dignité de la personne et on rappelle le cadre." },
+    { q: "Un désaccord d'idées entre deux stagiaires sur la meilleure solution réseau est :", o: ["Une occasion d'apprendre si le cadre est respectueux", "Toujours un conflit grave", "Une faute disciplinaire", "À éviter absolument"], e: "Le conflit sociocognitif fait avancer la réflexion quand il reste respectueux." },
+    { q: "Qu'est-ce que la régulation dans un groupe ?", o: ["Une action qui rétablit le cadre ou le dialogue", "Une sanction écrite", "Un test final", "Un changement de salle"], e: "Réguler, c'est rétablir un fonctionnement collectif sans forcément sanctionner." },
+    { q: "Pour que la parole circule dans le groupe, le formateur peut :", o: ["Poser des questions à tous et utiliser des travaux en binômes", "Interroger toujours les mêmes stagiaires", "Laisser les plus bavards décider", "Supprimer les échanges"], e: "Varier les modalités évite la domination de quelques-uns." },
+    { q: "L'écoute active consiste notamment à :", o: ["Reformuler pour vérifier la compréhension", "Couper la parole pour gagner du temps", "Donner immédiatement sa solution", "Hocher la tête sans écouter"], e: "Reformuler montre qu'on a compris et aide la personne à préciser sa pensée." },
+    { q: "Un leader informel dans le groupe est :", o: ["Un stagiaire qui influence les autres sans titre officiel", "Le directeur du centre", "Le formateur principal", "Un jury d'examen"], e: "Il influence le groupe par son prestige ou sa personnalité, d'où l'intérêt de s'en faire un allié." },
+    { q: "Un formateur laisse totalement le groupe sans consigne. Quel style adopte-t-il ?", o: ["Laisser-faire", "Démocratique", "Autoritaire", "Directif"], e: "Sans cadre ni décision du formateur, c'est le laisser-faire, source de désorganisation." },
+    { q: "Dans un conflit entre stagiaires, il est important de :", o: ["Distinguer les faits des interprétations", "Prendre parti pour le plus ancien", "Réduire la discussion à une accusation", "Remettre la décision au hasard"], e: "Séparer faits et interprétations permet une discussion plus sereine et équitable." },
+    { q: "La cohésion d'un groupe se construit surtout par :", o: ["Des objectifs communs et de la coopération", "La compétition individuelle", "Le silence", "Des sanctions collectives"], e: "Des buts partagés et des tâches coopératives renforcent les liens." },
+    { q: "Corriger un stagiaire devant tout le monde de manière sèche risque de :", o: ["Dégrader le climat et l'estime de soi", "Améliorer la cohésion", "Augmenter la motivation de tous", "Éviter les conflits"], e: "L'humiliation publique abîme le climat et peut bloquer l'apprentissage." },
+    { q: "Au début d'un module, le plus utile pour installer un bon climat est :", o: ["Présenter le cadre, les objectifs et construire des règles communes", "Passer directement à l'évaluation", "Éviter toute présentation", "Interdire les questions"], e: "Un début clair et participatif rassure et facilite la suite." }
+  ]
+};
+
+var T17 = {
+  id: 17, enr: true,
+  t: "Fondamentaux : méthodes pédagogiques", short: "Choisir la méthode adaptée à l'objectif",
+  def: "Une méthode pédagogique est la manière d'organiser l'apprentissage pour atteindre un objectif. On distingue quatre grandes familles : expositive (le formateur explique), démonstrative (il montre puis fait faire), interrogative (il guide par les questions) et active (le stagiaire cherche et construit). Le bon choix dépend de l'objectif, du public, du temps et du matériel, et on alterne souvent plusieurs méthodes dans une séance.",
+  pts: ["Méthode expositive (ou magistrale) : le formateur transmet un contenu. Efficace pour informer, moins pour faire acquérir une compétence.", "Méthode démonstrative : montrer, faire faire, faire refaire (je montre, nous faisons, tu fais). Idéale pour les gestes techniques.", "Méthode interrogative (maïeutique) : guider la réflexion par des questions pour que le stagiaire découvre la réponse.", "Méthode active (ou de découverte) : le stagiaire explore, expérimente, résout un problème. Exemples : étude de cas, travail de projet, apprentissage par problème, classe inversée.", "Choisir selon l'objectif visé : informer, faire acquérir un geste, faire réfléchir, faire construire. Alterner pour garder l'attention."],
+  kw: ["Méthode expositive", "Méthode démonstrative", "Méthode interrogative", "Méthode active", "Pédagogie de projet", "Classe inversée", "Étude de cas"],
+  ex: "Séance sur la configuration d'un VLAN : courte explication (expositive), démonstration sur le switch, questions de vérification (interrogative), puis panne à résoudre en binômes (active).",
+  tip: "Plus l'objectif est une compétence, plus le stagiaire doit agir. Si l'objectif est « savoir faire », la méthode doit faire faire.",
+  mn: "E-D-I-A : Expositive (j'explique), Démonstrative (je montre), Interrogative (je questionne), Active (il cherche).",
+  conf: [["Méthode ou technique pédagogique", "La méthode est l'approche générale. La technique est un outil précis qui la met en œuvre (jeu de rôle, brainstorming, étude de cas)."], ["Méthode démonstrative ou active", "Démonstrative : le formateur montre puis fait refaire. Active : le stagiaire cherche et construit seul ou en groupe."], ["Classe inversée ou cours magistral", "Classe inversée : le contenu est découvert avant la séance, le temps de séance sert à pratiquer et approfondir."]],
+  piege: "Il n'existe pas de « meilleure » méthode absolue. Une réponse qui affirme que la méthode expositive est toujours à bannir est fausse : elle reste utile pour informer rapidement. La bonne réponse adapte la méthode à l'objectif et alterne.",
+  aut: ["John Dewey : apprendre en faisant.", "Jérôme Bruner : apprentissage par la découverte.", "Célestin Freinet : pédagogie du tâtonnement expérimental.", "Howard Barrows : apprentissage par problèmes."],
+  sch: "Du formateur actif au stagiaire actif",
+  ex2: [["Expositive", "Le formateur présente un contenu. Exemple : expliquer en dix minutes le principe d'une adresse IP."], ["Démonstrative", "Montrer, faire faire, faire refaire. Exemple : sertir un câble devant le groupe, puis en binômes."], ["Interrogative", "Guider par les questions. Exemple : « Que se passe-t-il si deux hôtes ont la même adresse ? »"], ["Active", "Le stagiaire cherche et construit. Exemple : diagnostiquer une panne sans solution donnée."], ["Classe inversée", "Découvrir le contenu avant, pratiquer pendant. Exemple : lire une fiche à la maison puis réaliser le TP en séance."]],
+  p2: ["Alterner les méthodes maintient l'attention et respecte les profils variés.", "Une méthode active exige une consigne claire, du temps et un débriefing.", "La démonstration suit un schéma : montrer, faire faire, faire refaire, valider."],
+  gl: [
+    ["Méthode pédagogique", "Manière d'organiser l'apprentissage pour atteindre un objectif.", "الطريقة البيداغوجية", "كيفية تنظيم التعلم لبلوغ هدف محدد.", "Méthode = chemin vers l'objectif."],
+    ["Technique pédagogique", "Outil précis qui met en œuvre une méthode (jeu de rôle, brainstorming).", "التقنية البيداغوجية", "أداة محددة تطبق الطريقة (لعب أدوار، عصف ذهني).", "Technique = outil, méthode = approche."],
+    ["Méthode expositive", "Le formateur transmet un contenu oralement.", "الطريقة الإلقائية", "يقدم فيها المكوّن المحتوى شفويا.", "J'explique."],
+    ["Méthode démonstrative", "Montrer un geste, le faire faire puis le faire refaire.", "الطريقة الإيضاحية", "عرض الإجراء ثم إنجازه ثم إعادته من طرف المتدرب.", "Montrer, faire faire, faire refaire."],
+    ["Méthode interrogative", "Guider la réflexion par des questions.", "الطريقة الاستجوابية", "توجيه التفكير بواسطة أسئلة.", "Je questionne pour faire découvrir."],
+    ["Méthode active", "Le stagiaire explore, expérimente et construit ses savoirs.", "الطريقة النشيطة", "يستكشف المتدرب ويجرب ويبني معارفه.", "Il cherche, il agit."],
+    ["Maïeutique", "Art de faire accoucher les idées par le questionnement (Socrate).", "التوليد (المايوتيك)", "فن استخراج الأفكار من المتعلم بالأسئلة (سقراط).", "Le formateur accouche les idées."],
+    ["Étude de cas", "Analyse d'une situation réelle pour en tirer des solutions.", "دراسة حالة", "تحليل وضعية واقعية لاستخلاص حلول.", "Cas réel, solutions possibles."],
+    ["Apprentissage par problèmes", "Les connaissances sont construites en résolvant un problème complexe.", "التعلم بالمشكلات", "بناء المعارف من خلال حل مشكلة معقدة.", "Le problème vient avant la théorie."],
+    ["Pédagogie de projet", "Les apprentissages se font en réalisant un projet concret.", "بيداغوجيا المشروع", "يتم التعلم عبر إنجاز مشروع ملموس.", "Un livrable final."],
+    ["Classe inversée", "Découverte du contenu avant la séance, pratique pendant.", "الفصل المقلوب", "اكتشاف المحتوى قبل الحصة والتطبيق أثناءها.", "Théorie à la maison, pratique en classe."],
+    ["Jeu de rôle", "Simulation d'une situation où chacun joue un rôle.", "لعب الأدوار", "محاكاة وضعية يؤدي فيها كل متدرب دورا.", "Se mettre en situation."],
+    ["Brainstorming", "Production rapide d'idées sans les juger.", "العصف الذهني", "إنتاج أفكار بسرعة دون الحكم عليها.", "Quantité d'abord, tri ensuite."],
+    ["Travail en sous-groupes", "Répartition des stagiaires en petites équipes pour une tâche commune.", "العمل في مجموعات صغيرة", "توزيع المتدربين على فرق صغيرة لإنجاز مهمة مشتركة.", "3 à 5 personnes, rôles clairs."]
+  ],
+  tAr: "أساسيات: الطرائق البيداغوجية",
+  rep: "Associez : expositive = j'explique, démonstrative = je montre, interrogative = je questionne, active = il cherche. Choisissez la méthode selon l'objectif, et alternez.",
+  cas: { c: "Vous devez enseigner à un groupe de débutants le dépannage d'un réseau local en deux heures. Quelles méthodes combinez-vous et pourquoi ?", p: ["Expositive brève : présenter la démarche de diagnostic en quelques minutes.", "Démonstrative : montrer un dépannage complet sur un poste, puis faire refaire.", "Interrogative : poser des questions pour vérifier la compréhension des étapes.", "Active : donner une panne inédite à résoudre en binômes.", "Bilan : faire verbaliser la démarche et conclure avec une synthèse."] },
+  q: [
+    { q: "Dans la méthode démonstrative, la séquence classique est :", o: ["Montrer, faire faire, faire refaire", "Expliquer, interroger, noter", "Lire, copier, apprendre", "Observer, rire, passer"], e: "Le formateur montre le geste, les stagiaires le réalisent, puis le refont jusqu'à maîtrise." },
+    { q: "Quelle méthode convient le mieux pour apprendre à sertir un câble RJ45 ?", o: ["La méthode démonstrative", "Un exposé de vingt minutes", "Un questionnaire écrit seul", "Une dictée"], e: "Pour un geste technique, il faut montrer puis faire pratiquer." },
+    { q: "La méthode interrogative repose principalement sur :", o: ["Des questions qui guident la réflexion", "La lecture du cours", "La copie de schémas", "La répétition d'un geste"], e: "Le formateur pose des questions qui conduisent le stagiaire à découvrir la réponse." },
+    { q: "Dans la méthode active, qui est au centre de l'activité ?", o: ["Le stagiaire", "Le formateur seul", "Le directeur du centre", "Le matériel"], e: "Le stagiaire explore, expérimente et construit lui-même ses connaissances." },
+    { q: "La méthode expositive est la plus adaptée pour :", o: ["Informer rapidement sur un contenu nouveau", "Faire acquérir seul un geste", "Évaluer les stagiaires", "Remplacer les TP"], e: "Elle transmet efficacement une information, mais ne suffit pas pour acquérir une compétence." },
+    { q: "Une étude de cas relève d'une approche :", o: ["Active", "Uniquement expositive", "Uniquement démonstrative", "Administrative"], e: "Les stagiaires analysent une situation réelle et construisent des solutions : c'est actif." },
+    { q: "Dans la classe inversée :", o: ["Le contenu est découvert avant la séance et le temps de séance sert à pratiquer", "Les stagiaires enseignent à la place du formateur toute l'année", "On supprime les TP", "On évalue avant d'enseigner"], e: "On inverse l'ordre : théorie en autonomie, pratique accompagnée en séance." },
+    { q: "Quelle est la différence entre méthode et technique pédagogique ?", o: ["La méthode est l'approche générale, la technique un outil précis", "Il n'y en a aucune", "La technique est toujours plus longue", "La méthode concerne seulement l'évaluation"], e: "La méthode (active, démonstrative) se met en œuvre par des techniques (jeu de rôle, brainstorming)." },
+    { q: "Pour choisir une méthode, il faut d'abord considérer :", o: ["L'objectif visé et le public", "La couleur des supports", "Le choix du formateur uniquement", "La longueur du couloir"], e: "Objectif, public, temps et matériel guident le choix de la méthode." },
+    { q: "Alterner les méthodes dans une séance permet de :", o: ["Maintenir l'attention et répondre à des profils variés", "Rallonger inutilement la séance", "Supprimer l'évaluation", "Éviter de préparer"], e: "La variété soutient l'attention et la diversité des manières d'apprendre." },
+    { q: "Le brainstorming est une technique qui vise à :", o: ["Produire beaucoup d'idées sans les juger d'abord", "Évaluer des connaissances", "Imposer une solution", "Noter les stagiaires"], e: "On génère d'abord les idées, puis on les trie." },
+    { q: "L'apprentissage par problèmes commence par :", o: ["Un problème complexe à résoudre", "Un cours magistral complet", "Un examen final", "Une récitation"], e: "Le problème déclenche la recherche des connaissances nécessaires." },
+    { q: "Une activité active réussie nécessite :", o: ["Une consigne claire, du temps et un débriefing", "Aucune préparation", "Le silence total", "Une seule réponse possible imposée"], e: "Sans consigne ni retour, une activité active perd son intérêt pédagogique." },
+    { q: "La maïeutique est une méthode :", o: ["Qui fait découvrir par le questionnement", "Qui transmet un cours oral", "Qui consiste à copier", "Qui évalue en fin de module"], e: "Héritée de Socrate, elle aide à faire émerger les idées par les questions." },
+    { q: "Un formateur qui parle pendant toute la séance sans interaction applique surtout :", o: ["La méthode expositive", "La méthode active", "La pédagogie de projet", "La classe inversée"], e: "Il transmet, le stagiaire écoute : c'est une approche expositive, peu adaptée à l'acquisition de compétences." },
+    { q: "Pour une compétence « configurer un routeur », la meilleure combinaison est :", o: ["Explication brève, démonstration, puis pratique guidée en binômes", "Cours théorique complet sans pratique", "Lecture silencieuse du manuel", "Évaluation sommative immédiate"], e: "On alterne apport, démonstration et pratique pour installer la compétence." }
+  ]
+};
+
+/* ===== Fondamentaux 18 et 19 : communication et ingénierie de formation ===== */
+DIAG[18] = function () {
+  return sW(206, "Schéma de la communication : émetteur, message, récepteur, avec le bruit et le feedback",
+    sB(6, 40, 120, 60, ["Émetteur", "(formateur)"], "", "bs") + sB(180, 40, 120, 60, ["Message", "(code partagé)"], "acc", "bs") + sB(354, 40, 120, 60, ["Récepteur", "(stagiaire)"], "", "bs") +
+    sA(126, 70, 180, 70) + sA(300, 70, 354, 70) +
+    sB(160, 10, 160, 22, "Bruit : gêne, jargon", "", "sm") +
+    sB(100, 140, 280, 44, "Feedback : reformuler, vérifier", "ok", "bs") + sA(414, 100, 414, 162) + sA(414, 162, 380, 162) + sA(100, 162, 66, 162) + sA(66, 162, 66, 100));
+};
+DIAG[19] = function () {
+  var n = [["Niveau 4", "Résultats pour l'entreprise"], ["Niveau 3", "Comportement au travail"], ["Niveau 2", "Apprentissages"], ["Niveau 1", "Réaction (satisfaction)"]], s = "", i;
+  for (i = 0; i < 4; i++) s += sB(60 + i * 24, 10 + i * 48, 360 - i * 48, 40, n[i][0] + " · " + n[i][1], i === 0 ? "ok" : (i === 3 ? "" : "acc"), "bs");
+  return sW(212, "Les quatre niveaux d'évaluation de la formation selon Kirkpatrick",
+    s + sT(240, 204, "On évalue la formation du niveau 1 au niveau 4", "sm"));
+};
+
+var T18 = {
+  id: 18, enr: true,
+  t: "Fondamentaux : communication pédagogique et feedback", short: "Se faire comprendre et faire progresser",
+  def: "La communication pédagogique est l'ensemble des échanges verbaux et non verbaux entre le formateur et les stagiaires. Un message est bien reçu quand il est clair, adapté au public, vérifié par la reformulation et accompagné d'une attitude cohérente. Le feedback est un retour précis et utile sur une action, pour la faire progresser. Il est descriptif, bienveillant, rapide et orienté vers l'amélioration.",
+  pts: ["Schéma de la communication : émetteur, message, récepteur, code, canal, bruit et feedback. Le bruit (jargon, fatigue, bruit sonore) déforme le message.", "Verbal et non verbal : voix, rythme, regard, gestes, posture. Le non-verbal doit être cohérent avec le discours.", "Questionnement : privilégier les questions ouvertes qui font réfléchir ; les fermées servent à vérifier un point précis.", "Reformulation et écoute active : reformuler ce que dit le stagiaire pour vérifier et montrer qu'on l'a compris.", "Feedback efficace : précis, factuel, centré sur le comportement et non sur la personne, rapide, et suivi d'une piste d'amélioration (modèle SBI : situation, comportement, impact)."],
+  kw: ["Émetteur", "Récepteur", "Bruit", "Reformulation", "Feedback", "Questions ouvertes", "Communication non verbale"],
+  ex: "Après un TP : « Pendant la configuration (situation), tu as oublié de sauvegarder la configuration (comportement), donc elle a disparu au redémarrage (impact). La prochaine fois, pense à copier la running-config. »",
+  tip: "Un feedback utile décrit un fait, explique son effet et propose une piste. « C'est nul » n'est pas un feedback ; « Ton schéma manque d'étiquettes, on ne sait pas quel port est relié à quoi » en est un.",
+  mn: "SBI : Situation, Comportement, Impact. Et pour l'écoute : Écouter, Reformuler, Questionner.",
+  conf: [["Feedback ou évaluation", "Le feedback aide à progresser pendant l'apprentissage. L'évaluation mesure un résultat à un moment donné."], ["Question ouverte ou fermée", "Ouverte : appelle une réponse développée (« Pourquoi... ? »). Fermée : oui, non ou un mot précis."], ["Reformuler ou répéter", "Reformuler, c'est redire avec d'autres mots pour vérifier le sens. Répéter, c'est redire mot pour mot."]],
+  piege: "Évitez les feedbacks qui jugent la personne (« tu es lent ») ou qui noient le stagiaire sous les critiques. La réponse attendue est précise, factuelle, orientée vers l'amélioration, et donnée à un moment utile.",
+  aut: ["Claude Shannon : modèle de communication.", "Carl Rogers : écoute active et empathie.", "Albert Mehrabian : place du non-verbal (souvent mal interprétée).", "Center for Creative Leadership : modèle de feedback SBI."],
+  sch: "Le schéma de la communication",
+  ex2: [["Message clair", "Phrases courtes, vocabulaire adapté. Exemple : expliquer « passerelle » comme « la porte de sortie du réseau »."], ["Reformulation", "Redire pour vérifier. Exemple : « Si je comprends bien, tu veux dire que... »"], ["Questions ouvertes", "Faire réfléchir. Exemple : « Comment as-tu choisi ce masque ? »"], ["Non-verbal cohérent", "Regard, voix, gestes alignés avec le propos. Exemple : sourire en encourageant."], ["Feedback SBI", "Situation, comportement, impact. Exemple : « Lors du TP, tu n'as pas sauvegardé, donc tu as perdu ta config. »"]],
+  p2: ["La communication n'est complète que si le récepteur a compris : le feedback du récepteur la boucle.", "Les stagiaires retiennent aussi la manière dont on leur parle : ton, respect, regard.", "Un feedback se donne en privé pour les points sensibles, et publiquement pour valoriser."],
+  gl: [
+    ["Communication pédagogique", "Échanges verbaux et non verbaux entre formateur et stagiaires pour faire apprendre.", "التواصل البيداغوجي", "التبادلات اللفظية وغير اللفظية بين المكوّن والمتدربين لتيسير التعلم.", "Se faire comprendre, pas seulement parler."],
+    ["Émetteur", "Personne qui envoie le message.", "المرسِل", "الشخص الذي يبعث الرسالة.", "Le formateur quand il explique."],
+    ["Récepteur", "Personne qui reçoit et interprète le message.", "المستقبِل", "الشخص الذي يتلقى الرسالة ويؤولها.", "Le stagiaire qui écoute."],
+    ["Bruit", "Tout ce qui gêne ou déforme la transmission du message.", "التشويش", "كل ما يعيق أو يشوه انتقال الرسالة.", "Jargon, fatigue, bruit sonore."],
+    ["Code", "Ensemble de signes partagés (langue, schémas) qui permet de comprendre le message.", "الشفرة", "مجموعة علامات مشتركة (لغة، رسوم) تتيح فهم الرسالة.", "Il faut un code commun."],
+    ["Feedback", "Retour d'information sur une action pour la faire progresser.", "التغذية الراجعة", "معلومة راجعة حول فعل ما قصد تحسينه.", "Précis, factuel, utile."],
+    ["Reformulation", "Redire avec d'autres mots ce que l'autre a dit, pour vérifier le sens.", "إعادة الصياغة", "إعادة قول ما قاله الآخر بكلمات مختلفة للتحقق من المعنى.", "« Si je comprends bien... »"],
+    ["Écoute active", "Écouter sans interrompre, reformuler et montrer qu'on comprend.", "الإنصات الفعال", "الاستماع دون مقاطعة وإعادة الصياغة وإظهار الفهم.", "Je reformule avant de répondre."],
+    ["Question ouverte", "Question qui appelle une réponse développée.", "سؤال مفتوح", "سؤال يستدعي جوابا مفصلا.", "Commence par « comment », « pourquoi »."],
+    ["Question fermée", "Question qui appelle oui, non ou une réponse brève.", "سؤال مغلق", "سؤال جوابه بنعم أو لا أو كلمة قصيرة.", "Utile pour vérifier un point précis."],
+    ["Communication non verbale", "Messages transmis par le regard, les gestes, la posture et la voix.", "التواصل غير اللفظي", "رسائل تنقلها النظرات والإيماءات والوضعية ونبرة الصوت.", "Doit être cohérente avec les mots."],
+    ["Modèle SBI", "Feedback structuré : Situation, Comportement, Impact.", "نموذج SBI", "تغذية راجعة منظمة: الوضعية، السلوك، الأثر.", "Décrire sans juger."],
+    ["Empathie", "Capacité à comprendre ce que ressent l'autre sans forcément être d'accord.", "التعاطف", "القدرة على فهم ما يشعر به الآخر دون الاتفاق معه بالضرورة.", "Comprendre n'est pas approuver."],
+    ["Consigne", "Instruction donnée pour réaliser une activité.", "التعليمة", "توجيه يُعطى لإنجاز نشاط.", "Courte, claire, vérifiée par reformulation."]
+  ],
+  tAr: "أساسيات: التواصل البيداغوجي والتغذية الراجعة",
+  rep: "Retenez : message clair, reformulation, questions ouvertes, feedback factuel (SBI). Un bon feedback décrit, explique l'effet et propose une piste, sans juger la personne.",
+  cas: { c: "Un stagiaire rend un TP très incomplet et réagit mal à votre remarque : « Je n'y arriverai jamais ! » Expliquez comment vous communiquez avec lui.", p: ["Accueillir l'émotion avec calme et écoute active, sans minimiser.", "Reformuler pour vérifier ce qu'il ressent et ce qui bloque.", "Donner un feedback SBI : décrire la situation, le comportement observé, son impact.", "Valoriser ce qui est réussi, puis proposer une piste concrète et un petit objectif.", "Convenir d'un point de suivi pour vérifier les progrès."] },
+  q: [
+    { q: "Dans le schéma de la communication, le « bruit » désigne :", o: ["Tout ce qui gêne ou déforme la transmission du message", "Uniquement le son fort", "Le contenu du message", "Le feedback du récepteur"], e: "Le bruit peut être physique (sonore), psychologique (stress) ou linguistique (jargon)." },
+    { q: "Reformuler les propos d'un stagiaire permet surtout de :", o: ["Vérifier qu'on a bien compris et lui montrer qu'on l'écoute", "Gagner du temps", "Couper la parole", "Imposer son avis"], e: "La reformulation vérifie le sens et montre de l'attention." },
+    { q: "Quelle question favorise le plus la réflexion ?", o: ["« Comment as-tu choisi ce masque ? »", "« C'est bon ? »", "« Tu as compris, oui ou non ? »", "« Ça marche ? »"], e: "Une question ouverte appelle une réponse développée et fait réfléchir." },
+    { q: "Une question fermée est utile pour :", o: ["Vérifier rapidement un point précis", "Faire réfléchir en profondeur", "Lancer un débat long", "Évaluer une démarche complète"], e: "Elle appelle une réponse brève, utile pour confirmer une information." },
+    { q: "Que signifie SBI dans un feedback ?", o: ["Situation, Comportement, Impact", "Savoir, Bonne pratique, Intégration", "Sujet, Besoin, Information", "Sécurité, Barème, Indicateur"], e: "On décrit la situation, le comportement observé et son impact." },
+    { q: "Lequel de ces retours est un feedback efficace ?", o: ["« Ton schéma n'a pas d'étiquettes, on ne sait pas quel port est relié. Ajoute-les. »", "« Ton travail est nul. »", "« Tu es lent. »", "« Les autres ont mieux fait. »"], e: "Il est précis, factuel, centré sur le comportement et propose une piste." },
+    { q: "Un feedback est d'autant plus utile qu'il est :", o: ["Rapide, précis et orienté vers l'amélioration", "Tardif et général", "Public et humiliant", "Uniquement négatif"], e: "Donné à temps, précis et constructif, il permet de corriger et progresser." },
+    { q: "La communication non verbale du formateur doit être :", o: ["Cohérente avec son discours", "Absente", "Toujours exagérée", "Opposée à ses paroles"], e: "Des signaux contradictoires brouillent le message." },
+    { q: "Un formateur utilise beaucoup de jargon avec des débutants. Quel est le risque ?", o: ["Que le message ne soit pas compris (code non partagé)", "Aucun", "Une meilleure motivation", "Une meilleure mémorisation"], e: "Sans code commun, le message n'est pas décodé correctement." },
+    { q: "Quelle consigne est la mieux formulée ?", o: ["« En binômes, configurez l'adresse du routeur en dix minutes, puis montrez le résultat. »", "« Faites le TP. »", "« Débrouillez-vous. »", "« Vous savez ce qu'il faut faire. »"], e: "Une consigne efficace précise la tâche, la modalité, le temps et le livrable." },
+    { q: "L'empathie du formateur consiste à :", o: ["Comprendre ce que ressent le stagiaire sans forcément approuver", "Accepter tous les comportements", "Éviter toute exigence", "Imiter les émotions du stagiaire"], e: "Comprendre l'autre ne signifie pas tout accepter, mais permet un dialogue juste." },
+    { q: "Quand faut-il vérifier la compréhension d'une consigne ?", o: ["Avant que les stagiaires commencent l'activité", "Jamais", "À la fin du mois", "Uniquement en cas d'échec"], e: "Faire reformuler la consigne évite les erreurs d'interprétation." },
+    { q: "Un feedback sensible (erreur importante, comportement) se donne plutôt :", o: ["En privé, avec respect", "Devant tout le groupe", "Par affichage public", "Sans explication"], e: "La discrétion préserve la dignité et favorise l'écoute." },
+    { q: "Dire « Tu es nul en réseaux » est :", o: ["Un jugement sur la personne, pas un feedback utile", "Un excellent feedback", "Une reformulation", "Une question ouverte"], e: "Un jugement global ne donne aucune piste d'amélioration et blesse." },
+    { q: "Dans le schéma de la communication, le feedback du récepteur permet de :", o: ["Boucler l'échange et vérifier la compréhension", "Supprimer le message", "Ajouter du bruit", "Changer d'émetteur"], e: "Il indique à l'émetteur si le message a été compris et permet de l'ajuster." },
+    { q: "Pour écouter activement un stagiaire, le formateur :", o: ["Le laisse parler, reformule et pose des questions", "L'interrompt pour corriger", "Regarde son téléphone", "Répond avant la fin de la phrase"], e: "L'écoute active combine attention, reformulation et questionnement." }
+  ]
+};
+
+var T19 = {
+  id: 19, enr: true,
+  t: "Fondamentaux : ingénierie de formation et évaluation de la formation", short: "Concevoir, déployer et mesurer une formation",
+  def: "L'ingénierie de formation est la démarche qui conduit de l'analyse des besoins à l'évaluation d'une action de formation. Le modèle ADDIE la structure en cinq étapes : Analyse, Design (conception), Développement, Implémentation (mise en œuvre) et Évaluation. Le modèle de Kirkpatrick propose d'évaluer la formation à quatre niveaux : réaction, apprentissages, comportement au travail et résultats pour l'organisation.",
+  pts: ["Analyse des besoins : écart entre la situation actuelle et la situation attendue, public, contexte, contraintes.", "Modèle ADDIE : Analyse, Design, Développement, Implémentation, Évaluation. Démarche itérative : l'évaluation nourrit l'amélioration.", "Référentiel de compétences : base pour fixer les objectifs, construire le programme et évaluer.", "Kirkpatrick : niveau 1 réaction (satisfaction), niveau 2 apprentissages (acquis), niveau 3 comportement (transfert au poste), niveau 4 résultats (impact pour l'entreprise).", "Évaluer la formation ne se limite pas à évaluer les stagiaires : on évalue aussi le dispositif pour l'améliorer."],
+  kw: ["Analyse des besoins", "ADDIE", "Référentiel", "Kirkpatrick", "Ingénierie pédagogique", "Impact", "Amélioration continue"],
+  ex: "Une entreprise veut former ses techniciens au dépannage réseau : analyse du besoin (écart), objectifs issus du référentiel, conception du parcours, mise en œuvre, puis mesure de la satisfaction, des acquis, de l'usage au poste et de la baisse des incidents.",
+  tip: "Kirkpatrick se lit de bas en haut : plaît-elle ? (1), apprend-on ? (2), applique-t-on ? (3), l'entreprise y gagne-t-elle ? (4).",
+  mn: "ADDIE : Analyse, Design, Développement, Implémentation, Évaluation. Kirkpatrick : Réaction, Apprentissage, Comportement, Résultats (RACR).",
+  conf: [["Besoin ou demande de formation", "La demande est ce qu'on exprime (« une formation sur X »). Le besoin est l'écart réel à combler, à analyser."], ["Évaluation des acquis ou du transfert", "Acquis (niveau 2) : ce qu'on a appris. Transfert (niveau 3) : ce qu'on applique réellement au travail."], ["Évaluation à chaud ou à froid", "À chaud : juste après la formation (satisfaction). À froid : plusieurs semaines après (transfert, résultats)."]],
+  piege: "Ne confondez pas satisfaction et efficacité. Un stagiaire peut avoir adoré la formation (niveau 1) sans l'appliquer ensuite (niveau 3). Une réponse qui se limite à « faire un questionnaire de satisfaction » est incomplète.",
+  aut: ["Donald Kirkpatrick : quatre niveaux d'évaluation de la formation.", "Modèle ADDIE : ingénierie de conception pédagogique.", "Robert Mager : objectifs opérationnels.", "Jack Phillips : retour sur investissement de la formation (niveau 5)."],
+  sch: "Les quatre niveaux de Kirkpatrick",
+  ex2: [["Analyse", "Identifier l'écart de compétences et le public. Exemple : les techniciens ne savent pas diagnostiquer une panne de routage."], ["Design", "Fixer les objectifs, le parcours, les activités et l'évaluation à partir du référentiel."], ["Développement", "Produire les supports, TP et grilles d'évaluation."], ["Implémentation", "Mettre en œuvre la formation avec les stagiaires."], ["Évaluation", "Mesurer aux quatre niveaux de Kirkpatrick, puis améliorer le dispositif."]],
+  p2: ["L'analyse des besoins précède toute conception : on ne choisit pas la méthode avant de savoir quoi viser.", "Le niveau 3 se mesure à froid, sur le terrain, avec le manager.", "L'évaluation de la formation sert à la faire évoluer, pas seulement à la juger."],
+  gl: [
+    ["Ingénierie de formation", "Démarche qui conduit de l'analyse du besoin à l'évaluation d'une action de formation.", "هندسة التكوين", "منهجية تنتقل من تحليل الحاجة إلى تقويم عملية التكوين.", "Analyser, concevoir, réaliser, évaluer."],
+    ["Analyse des besoins", "Étude de l'écart entre la situation actuelle et la situation attendue.", "تحليل الحاجات", "دراسة الفارق بين الوضع الحالي والوضع المنتظر.", "Besoin = écart à combler."],
+    ["Modèle ADDIE", "Cinq étapes : Analyse, Design, Développement, Implémentation, Évaluation.", "نموذج ADDIE", "خمس مراحل: التحليل، التصميم، التطوير، التنفيذ، التقويم.", "ADDIE."],
+    ["Référentiel de compétences", "Document décrivant les compétences attendues d'un métier ou d'une formation.", "مرجعية الكفاءات", "وثيقة تصف الكفاءات المنتظرة من مهنة أو تكوين.", "Il guide objectifs et évaluation."],
+    ["Programme de formation", "Organisation des contenus, durées et modalités pour atteindre les objectifs.", "برنامج التكوين", "تنظيم المحتويات والمدد والصيغ لبلوغ الأهداف.", "Du référentiel au programme."],
+    ["Modèle de Kirkpatrick", "Quatre niveaux d'évaluation : réaction, apprentissages, comportement, résultats.", "نموذج كيركباتريك", "أربعة مستويات للتقويم: رد الفعل، التعلمات، السلوك، النتائج.", "RACR."],
+    ["Évaluation à chaud", "Évaluation réalisée juste après la formation, souvent la satisfaction.", "التقويم الآني", "تقويم يجرى مباشرة بعد التكوين، وغالبا لقياس الرضا.", "Niveau 1."],
+    ["Évaluation à froid", "Évaluation réalisée quelques semaines après, pour mesurer le transfert.", "التقويم المؤجل", "تقويم بعد أسابيع لقياس انتقال الأثر إلى الميدان.", "Niveaux 3 et 4."],
+    ["Transfert des acquis", "Application au poste de travail de ce qui a été appris.", "نقل المكتسبات", "توظيف ما تم تعلمه في موقع العمل.", "La vraie réussite d'une formation."],
+    ["Impact de la formation", "Effet de la formation sur les résultats de l'organisation.", "أثر التكوين", "تأثير التكوين على نتائج المؤسسة.", "Niveau 4."],
+    ["Public cible", "Personnes à qui s'adresse la formation (profil, niveau, attentes).", "الفئة المستهدفة", "الأشخاص الذين يتوجه إليهم التكوين (الملمح، المستوى، الانتظارات).", "Connaître son public d'abord."],
+    ["Objectif de formation", "Résultat attendu de la formation, exprimé en compétences observables.", "هدف التكوين", "النتيجة المنتظرة من التكوين معبّرا عنها في كفاءات قابلة للملاحظة.", "Verbe d'action + critère."],
+    ["Dispositif de formation", "Ensemble organisé de moyens (contenus, méthodes, outils, évaluation).", "منظومة التكوين", "مجموعة منظمة من الوسائل (محتويات، طرائق، أدوات، تقويم).", "Pas seulement des cours."],
+    ["Amélioration continue", "Utiliser les résultats de l'évaluation pour faire évoluer la formation.", "التحسين المستمر", "توظيف نتائج التقويم لتطوير التكوين.", "L'évaluation boucle sur l'analyse."]
+  ],
+  tAr: "أساسيات: هندسة التكوين وتقويم التكوين",
+  rep: "Retenez ADDIE pour concevoir et Kirkpatrick pour mesurer. La bonne réponse relie le besoin, les objectifs, l'évaluation et l'amélioration, et ne s'arrête pas à la satisfaction.",
+  cas: { c: "Un directeur vous demande de prouver que la formation que vous avez animée a été utile. Expliquez comment vous démontrez son efficacité.", p: ["Rappeler le besoin initial et les objectifs de la formation.", "Niveau 1 : mesurer la satisfaction à chaud.", "Niveau 2 : présenter les acquis évalués pendant et à la fin.", "Niveau 3 : observer à froid l'application des acquis au poste, avec les managers.", "Niveau 4 : relier aux résultats (moins d'incidents, gain de temps) et proposer des améliorations."] },
+  q: [
+    { q: "Que signifie ADDIE ?", o: ["Analyse, Design, Développement, Implémentation, Évaluation", "Accueil, Débat, Diagnostic, Intégration, Examen", "Action, Décision, Direction, Information, Éthique", "Apprentissage, Démonstration, Discussion, Intégration, Exercice"], e: "ADDIE structure la conception de formation en cinq étapes." },
+    { q: "Le besoin de formation correspond à :", o: ["L'écart entre la situation actuelle et la situation attendue", "La demande exprimée telle quelle", "Le budget disponible", "Le nombre de stagiaires"], e: "Le besoin est l'écart réel à combler, à analyser au-delà de la demande exprimée." },
+    { q: "Quel niveau de Kirkpatrick mesure la satisfaction des stagiaires ?", o: ["Niveau 1, la réaction", "Niveau 2, les apprentissages", "Niveau 3, le comportement", "Niveau 4, les résultats"], e: "Le niveau 1 mesure la réaction, c'est-à-dire la satisfaction." },
+    { q: "Quel niveau de Kirkpatrick mesure l'application des acquis sur le poste de travail ?", o: ["Niveau 3, le comportement", "Niveau 1, la réaction", "Niveau 2, les apprentissages", "Niveau 4, les résultats"], e: "Le niveau 3 évalue le transfert au travail, à froid." },
+    { q: "Quel niveau de Kirkpatrick mesure l'impact sur les résultats de l'organisation ?", o: ["Niveau 4, les résultats", "Niveau 1, la réaction", "Niveau 2, les apprentissages", "Niveau 3, le comportement"], e: "Le niveau 4 évalue les effets sur l'entreprise (qualité, coûts, productivité)." },
+    { q: "Le niveau 2 de Kirkpatrick évalue :", o: ["Les connaissances et compétences acquises", "La qualité de la salle", "Le salaire", "Le nombre d'inscrits"], e: "Il mesure ce que les stagiaires ont réellement appris." },
+    { q: "Quelle est la première étape de l'ingénierie de formation ?", o: ["L'analyse des besoins", "L'évaluation finale", "L'achat du matériel", "Le choix du formateur"], e: "On analyse le besoin avant de concevoir quoi que ce soit." },
+    { q: "À quoi sert le référentiel de compétences ?", o: ["À fixer les objectifs, construire le programme et évaluer", "À décorer la salle", "À fixer les horaires de la pause", "À remplacer l'évaluation"], e: "Il décrit les compétences attendues et sert de base à toute la démarche." },
+    { q: "Un questionnaire de satisfaction remis en fin de formation relève de l'évaluation :", o: ["À chaud, niveau 1", "À froid, niveau 4", "Du transfert, niveau 3", "Des acquis, niveau 2"], e: "Il mesure la réaction immédiate des stagiaires." },
+    { q: "Une évaluation à froid est réalisée :", o: ["Quelques semaines après la formation", "Avant la formation", "Pendant la pause", "Le premier jour"], e: "Elle laisse le temps d'observer l'application des acquis." },
+    { q: "Pourquoi évaluer le dispositif de formation et pas seulement les stagiaires ?", o: ["Pour l'améliorer et vérifier qu'il atteint ses objectifs", "Pour sanctionner le formateur", "Pour supprimer les TP", "Pour augmenter la durée"], e: "L'évaluation du dispositif alimente l'amélioration continue." },
+    { q: "Des stagiaires très satisfaits mais qui n'appliquent rien au travail montrent que :", o: ["Le niveau 1 est atteint mais pas le niveau 3", "La formation est parfaite", "Le niveau 4 est atteint", "Il n'y a rien à évaluer"], e: "Satisfaction ne signifie pas transfert : il faut évaluer à plusieurs niveaux." },
+    { q: "Le transfert des acquis désigne :", o: ["L'application au travail de ce qui a été appris", "Le changement de salle", "Le paiement de la formation", "La remise du diplôme"], e: "C'est l'utilisation réelle des acquis dans l'activité professionnelle." },
+    { q: "Dans ADDIE, la phase « Implémentation » consiste à :", o: ["Mettre en œuvre la formation", "Analyser le besoin", "Concevoir le plan", "Rédiger le bilan seulement"], e: "Elle correspond au déploiement de la formation auprès des stagiaires." },
+    { q: "Un bon objectif de formation est :", o: ["Exprimé en compétences observables et mesurables", "Vague et général", "Centré sur le formateur", "Sans critère de réussite"], e: "Un objectif précis permet de concevoir et d'évaluer la formation." },
+    { q: "Connaître le public cible avant de concevoir permet de :", o: ["Adapter les contenus, le niveau et les méthodes", "Supprimer l'évaluation", "Réduire la durée à zéro", "Éviter l'analyse des besoins"], e: "Le profil, les acquis et les attentes du public orientent les choix de conception." }
+  ]
+};
+
+[T15, T16, T17, T18, T19].forEach(function (t) {
+  t.q.forEach(function (q, i) { q.k = t.id + "-" + i; });
+  THEMES.push(t);
+});
+SUMAR[15] = "الدافعية طاقة تدفع المتدرب إلى الانخراط والمثابرة. تكون داخلية (متعة واهتمام) أو خارجية (نقطة أو مكافأة). حسب ديسي وريان تتغذى من ثلاث حاجات: الاستقلالية والكفاءة والانتماء. ويستعمل المكوّن نموذج ARCS: الانتباه والملاءمة والثقة والرضا، مع تغذية راجعة تشجع الجهد والتقدم.";
+SUMAR[16] = "تمر المجموعة بأربع مراحل حسب توكمان: التشكل، العاصفة، التطبيع، الأداء، والعاصفة مرحلة عادية. وحسب ليفين هناك ثلاثة أساليب للقيادة: التسلطي والديمقراطي والمتساهل، والديمقراطي ضمن إطار واضح هو الأنسب للراشدين. يضع المكوّن قواعد مع المجموعة، ويعدّل بهدوء، وينصت ويعيد الصياغة عند النزاع.";
+SUMAR[17] = "الطريقة البيداغوجية هي كيفية تنظيم التعلم لبلوغ هدف. نميز الإلقائية (أشرح)، والإيضاحية (أُظهر ثم أُنجز ثم أعيد)، والاستجوابية (أسأل ليكتشف)، والنشيطة (يبحث المتدرب ويبني). نختار حسب الهدف والفئة والوقت ونتناوب بين الطرائق، ومنها دراسة الحالة والمشروع والفصل المقلوب.";
+SUMAR[18] = "التواصل البيداغوجي تبادل لفظي وغير لفظي بين المكوّن والمتدربين. تتضمن الدورة مرسلا ورسالة ومستقبلا وتشويشا وتغذية راجعة. نستعمل الأسئلة المفتوحة وإعادة الصياغة والإنصات الفعال. التغذية الراجعة الجيدة دقيقة ووصفية وسريعة وتقترح تحسينا، وفق نموذج SBI: الوضعية والسلوك والأثر.";
+SUMAR[19] = "هندسة التكوين تبدأ بتحليل الحاجات، أي الفارق بين الوضع الحالي والمنتظر، ثم تتبع نموذج ADDIE: التحليل، التصميم، التطوير، التنفيذ، التقويم. ويقيس نموذج كيركباتريك التكوين في أربعة مستويات: رد الفعل، التعلمات، السلوك في العمل، والنتائج للمؤسسة. والتقويم يخدم التحسين المستمر.";
+VQ[15] = "motivation apprenants formation théorie autodétermination";
+VQ[16] = "gestion de groupe formation dynamique de groupe formateur";
+VQ[17] = "méthodes pédagogiques expositive démonstrative active";
+VQ[18] = "communication pédagogique feedback formateur";
+VQ[19] = "ingénierie de formation ADDIE Kirkpatrick";
+
+THEMES.forEach(function (t) { t.sumAr = SUMAR[t.id]; });
+
+/* Journal d'étude : sert au plan du jour et à la série de jours */
+function dayKey(off) { return new Date(Date.now() - (off || 0) * 864e5).toISOString().slice(0, 10); }
+function logToday(kind, id) {
+  prog.log = prog.log || {};
+  var d = dayKey(), L = prog.log[d] = prog.log[d] || {};
+  if (kind === "err" || kind === "sim" || kind === "cards") { L[kind] = 1; }
+  else { L[kind] = L[kind] || []; if (L[kind].indexOf(id) < 0) L[kind].push(id); }
+  save();
+}
+function streak() {
+  var n = 0, L = prog.log || {};
+  for (var i = 0; i < 400; i++) {
+    if (L[dayKey(i)]) n++;
+    else if (i > 0) break;
+    else if (i === 0) continue;
+  }
+  return n;
+}
+function has(a, id) { return !!a && a.indexOf(id) > -1; }
+
+var _fin = finish;
+finish = function () {
+  var m = S.mode, id = S.themeId;
+  _fin();
+  if (m === "theme") logToday("quiz", id); else if (m === "errors" || m === "weak") logToday("err");
+};
+var _sf = simFinish;
+simFinish = function (exp) {
+  var had = !!prog.sim;
+  _sf(exp);
+  if (had && prog.simLast) {
+    prog.simHist = (prog.simHist || []).concat([{ d: dayKey(), n: simNote(prog.simLast) }]).slice(-10);
+    save(); logToday("sim");
+  }
+};
+var _ad = afterDraw;
+afterDraw = function () {
+  _ad();
+  if (S.view === "theme") logToday("fiche", S.themeId);
+  if (S.view === "cards" && S.i >= S.cs.length) logToday("cards");
+};
+
+function startWeak() {
+  var ranked = THEMES.slice().sort(function (a, b) {
+    var pa = prog.t[a.id] ? prog.t[a.id].best : -1, pb = prog.t[b.id] ? prog.t[b.id].best : -1;
+    return pa - pb || a.id - b.id;
+  }).slice(0, 3);
+  var pool = [];
+  ranked.forEach(function (t) { t.q.forEach(function (q) { pool.push(prepare(q, t)); }); });
+  (prog.w || []).forEach(function (k) {
+    var e = QMAP[k]; if (e && !pool.some(function (p) { return p.k === k; })) pool.push(prepare(e.q, e.th));
+  });
+  S = { view: "quiz", mode: "weak", qs: shuffle(pool).slice(0, 20), i: 0, score: 0, picked: null, wrong: [] };
+  draw();
+}
+
+function planTasks() {
+  var t = todayTheme(), L = (prog.log && prog.log[dayKey()]) || {}, nErr = (prog.w || []).length;
+  var a = [
+    { ok: has(L.fiche, t.id), label: "Lire la fiche · thème " + pad(t.id), act: "theme", id: t.id },
+    { ok: has(L.quiz, t.id), label: "Faire le QCM du thème " + pad(t.id), act: "start", id: t.id },
+    nErr ? { ok: !!L.err, label: "Revoir mes erreurs · " + nErr, act: "errors" } : { ok: !!L.cards, label: "Cartes de révision du glossaire", act: "cards" }
+  ];
+  var left = daysTo(2026, 11, 22) >= 0 ? daysTo(2026, 11, 22) : daysTo(2026, 12, 27);
+  if (left <= 14 && Math.floor(Date.now() / 864e5) % 3 === 0) a.push({ ok: !!L.sim, label: "Simulation d’examen · 120 min", act: "sim" });
+  return a;
+}
+
+function viewDash() {
+  var tasks = planTasks();
+  var done = tasks.filter(function (x) { return x.ok; }).length;
+  var tk = tasks.map(function (x) {
+    return '<button class="row" data-act="' + x.act + '"' + (x.id !== undefined ? ' data-id="' + x.id + '"' : '') + '><span class="n">' + (x.ok ? "✓" : "○") + '</span><span><strong>' + x.label + '</strong></span><span>' + (x.ok ? '<span class="chip ok">fait</span>' : '') + '</span></button>';
+  }).join("");
+  var ranked = THEMES.slice().sort(function (a, b) {
+    var pa = prog.t[a.id] ? prog.t[a.id].best : -1, pb = prog.t[b.id] ? prog.t[b.id].best : -1;
+    return pa - pb || a.id - b.id;
+  });
+  var mast = ranked.map(function (t) {
+    var p = prog.t[t.id], v = p ? p.best : 0;
+    return '<button class="row" data-act="theme" data-id="' + t.id + '"><span class="n">' + pad(t.id) + '</span><span><strong>' + t.short + '</strong><span class="bar" aria-hidden="true"><i style="width:' + v + '%"></i></span></span><span class="chip ' + (v >= 80 ? "ok" : "") + '">' + (p ? v + " % · " + p.tries + "×" : "à faire") + '</span></button>';
+  }).join("");
+  var hist = (prog.simHist || []).slice().reverse().map(function (h) { return "<li><strong>" + fmtNote(h.n) + " / 20</strong> · " + h.d + "</li>"; }).join("");
+  var st = streak();
+  return '<div class="stack"><div><button class="ghost" data-act="home">← Thématiques</button></div>' +
+    '<div class="block"><p class="eyebrow">Ma préparation</p><h2 id="h" tabindex="-1">Plan du jour · ' + done + ' / ' + tasks.length + '</h2></div>' +
+    '<p class="stats">' + (st ? "Série : " + st + " jour" + (st > 1 ? "s" : "") + " d’étude · " : "") + 'Examens : ' + jLabel(daysTo(2026, 11, 22)) + ' (session 2024) · ' + jLabel(daysTo(2026, 12, 27)) + ' (session 2025)</p>' +
+    '<nav class="list" aria-label="Plan du jour">' + tk + '</nav>' +
+    '<button class="btn" data-act="weak">Quiz ciblé · 20 questions sur mes points faibles</button>' +
+    '<div class="block"><h3>Maîtrise par thème · du plus faible au plus fort</h3><nav class="list">' + mast + '</nav></div>' +
+    (hist ? '<div class="block"><h3>Historique des simulations</h3><ul class="pts">' + hist + '</ul></div>' : '') +
+    '<details class="gls"' + (S.bkmsg ? ' open' : '') + '><summary>Sauvegarde entre appareils</summary><div class="stack"><p class="vm">Votre progression reste dans ce navigateur. Pour la retrouver sur un autre appareil, générez un code, copiez-le, puis collez-le là-bas.</p>' +
+    '<button class="btn alt" data-act="bkgen">Générer mon code</button><textarea id="bk-out" rows="3" readonly aria-label="Code de sauvegarde"></textarea>' +
+    '<textarea id="bk-in" rows="3" placeholder="Collez ici un code pour restaurer" aria-label="Code à restaurer"></textarea>' +
+    '<button class="btn alt" data-act="bkrestore">Restaurer ce code</button><p class="vm" id="bk-msg" aria-live="polite">' + (S.bkmsg || "") + '</p></div></details></div>';
+}
+function dashAct(act) {
+  if (act === "dash") { S = { view: "dash" }; draw(); return true; }
+  if (act === "weak") { startWeak(); return true; }
+  if (act === "bkgen") {
+    var o = document.getElementById("bk-out"), m = document.getElementById("bk-msg");
+    try { o.value = btoa(unescape(encodeURIComponent(JSON.stringify(prog)))); o.select(); m.textContent = "Code généré. Copiez-le en entier."; }
+    catch (e) { m.textContent = "Impossible de générer le code."; }
+    return true;
+  }
+  if (act === "bkrestore") {
+    var v = (document.getElementById("bk-in") || {}).value || "";
+    try {
+      var p = JSON.parse(decodeURIComponent(escape(atob(v.trim()))));
+      if (!p || typeof p.t !== "object") throw new Error("x");
+      prog = p; save(); S = { view: "dash", bkmsg: "Progression restaurée." }; draw();
+    } catch (e) { var m2 = document.getElementById("bk-msg"); if (m2) m2.textContent = "Code invalide. Vérifiez qu'il est copié en entier."; }
+    return true;
+  }
+  return false;
+}
+
+/* ===== Avancement personnel par thème et tableau de bord ===== */
+function themeStats(t) {
+  var m = prog.m || {}, total = t.q.length;
+  var mastered = t.q.filter(function (q) { return m[q.k]; }).length;
+  var p = prog.t[t.id], best = p ? p.best : 0, tries = p ? p.tries : 0;
+  var fi = !!(prog.fi && prog.fi[t.id]);
+  var errs = (prog.w || []).filter(function (k) { return k.split("-")[0] === String(t.id); }).length;
+  var vids = VID[t.id] || [], vw = vids.filter(function (v) { return prog.vw && prog.vw[v.id]; }).length;
+  var pct = Math.round(15 * (fi ? 1 : 0) + 55 * mastered / total + 30 * best / 100);
+  var lvl = pct >= 75 ? "Maîtrisé" : pct >= 50 ? "Solide" : pct >= 25 ? "En progression" : "À démarrer";
+  return { t: t, mastered: mastered, total: total, best: best, tries: tries, fi: fi, errs: errs, vw: vw, vn: vids.length, pct: pct, lvl: lvl };
+}
+function allStats() { return THEMES.map(themeStats); }
+todayTheme = function () {
+  var s = allStats().sort(function (a, b) { return a.pct - b.pct || a.t.id - b.t.id; });
+  return s[0].t;
+};
+startWeak = function () {
+  var ranked = allStats().sort(function (a, b) { return a.pct - b.pct || a.t.id - b.t.id; }).slice(0, 3);
+  var pool = [], m = prog.m || {};
+  ranked.forEach(function (x) { x.t.q.forEach(function (q) { if (!m[q.k] || (prog.w || []).indexOf(q.k) > -1) pool.push(prepare(q, x.t)); }); });
+  if (pool.length < 10) ranked.forEach(function (x) { x.t.q.forEach(function (q) { pool.push(prepare(q, x.t)); }); });
+  (prog.w || []).forEach(function (k) { var e = QMAP[k]; if (e && !pool.some(function (p) { return p.k === k; })) pool.push(prepare(e.q, e.th)); });
+  S = { view: "quiz", mode: "weak", qs: shuffle(pool).slice(0, 20), i: 0, score: 0, picked: null, wrong: [] };
+  draw();
+};
+function startThemeErrors(id) {
+  var th = themeById(id), qs = [];
+  th.q.forEach(function (q) { if ((prog.w || []).indexOf(q.k) > -1) qs.push(prepare(q, th)); });
+  if (!qs.length) return;
+  S = { view: "quiz", mode: "errors", qs: shuffle(qs), i: 0, score: 0, picked: null, wrong: [] };
+  draw();
+}
+
+/* Suivi : questions maîtrisées, précision, historique, vidéos vues, fiches lues */
+var _an = answer;
+answer = function (idx) {
+  var cur = S.qs && S.qs[S.i], fresh = S.picked === null;
+  _an(idx);
+  if (fresh && cur) {
+    prog.m = prog.m || {}; prog.cT = (prog.cT || 0) + 1;
+    if (cur.opts[idx].ok) { prog.m[cur.k] = 1; prog.cA = (prog.cA || 0) + 1; }
+    save();
+  }
+};
+var _fin2 = finish;
+finish = function () {
+  _fin2();
+  if (S.view === "result" && typeof S.pct === "number") {
+    prog.hist = (prog.hist || []).concat([{ d: dayKey(), n: S.pct, k: S.mode === "theme" ? S.themeId : 0 }]).slice(-60);
+    save();
+  }
+};
+var _sf2 = simFinish;
+simFinish = function (exp) {
+  var sm = prog.sim;
+  if (sm) {
+    prog.m = prog.m || {};
+    sm.qs.forEach(function (e, i) {
+      if (sm.ans[i] !== undefined) { prog.cT = (prog.cT || 0) + 1; if (sm.ans[i] === 0) { prog.m[e.k] = 1; prog.cA = (prog.cA || 0) + 1; } }
+    });
+  }
+  _sf2(exp);
+  if (sm && prog.simLast) {
+    prog.hist = (prog.hist || []).concat([{ d: dayKey(), n: Math.round(prog.simLast.score * 100 / prog.simLast.n), k: -1 }]).slice(-60);
+    save();
+  }
+};
+var _ad2 = afterDraw;
+afterDraw = function () {
+  _ad2();
+  if (S.view === "theme") { prog.fi = prog.fi || {}; if (!prog.fi[S.themeId]) { prog.fi[S.themeId] = dayKey(); save(); } }
+};
+var _va = videoAct;
+videoAct = function (act, b) {
+  if (act === "vplay") { prog.vw = prog.vw || {}; prog.vw[b.getAttribute("data-v")] = 1; save(); }
+  return _va(act, b);
+};
+
+function chartHtml() {
+  var h = (prog.hist || []).slice(-15), n = h.length;
+  if (n < 2) return '<p class="vm">Le graphique apparaît après 2 tests terminés (QCM de thème, quiz rapide, quiz ciblé ou simulation).</p>';
+  var x0 = 40, x1 = 464, y0 = 12, y1 = 138, pts = [], dots = "", i;
+  function X(k) { return (x0 + (x1 - x0) * k / (n - 1)).toFixed(1); }
+  function Y(v) { return (y1 - (y1 - y0) * v / 100).toFixed(1); }
+  for (i = 0; i < n; i++) { pts.push(X(i) + "," + Y(h[i].n)); dots += '<circle class="da" cx="' + X(i) + '" cy="' + Y(h[i].n) + '" r="4.5"/>'; }
+  var grid = [0, 50, 80, 100].map(function (v) {
+    return '<line class="dash" x1="' + x0 + '" y1="' + Y(v) + '" x2="' + x1 + '" y2="' + Y(v) + '"/><text class="sm" x="' + (x0 - 6) + '" y="' + Y(v) + '" text-anchor="end" dominant-baseline="central">' + v + '</text>';
+  }).join("");
+  var last = h[n - 1].n, first = h[0].n, diff = last - first;
+  var avg = Math.round(h.reduce(function (s, x) { return s + x.n; }, 0) / n);
+  return '<figure class="fig"><figcaption>Évolution · ' + n + ' derniers tests</figcaption>' +
+    '<svg class="sv" viewBox="0 0 480 160" role="img" aria-label="Courbe des scores en pourcentage sur les ' + n + ' derniers tests, de ' + first + ' % à ' + last + ' %">' + grid +
+    '<polyline fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" points="' + pts.join(" ") + '"/>' + dots +
+    '<text class="b" x="' + X(n - 1) + '" y="' + (parseFloat(Y(last)) - 12) + '" text-anchor="end">' + last + ' %</text></svg>' +
+    '<p class="vm">Moyenne ' + avg + ' % · ' + (diff > 0 ? "+" + diff : diff) + ' points depuis le premier test affiché. Repère : 80 % = niveau solide.</p></figure>';
+}
+
+function viewDash() {
+  var tasks = planTasks(), done = tasks.filter(function (x) { return x.ok; }).length;
+  var tk = tasks.map(function (x) {
+    return '<button class="row" data-act="' + x.act + '"' + (x.id !== undefined ? ' data-id="' + x.id + '"' : '') + '><span class="n">' + (x.ok ? "✓" : "○") + '</span><span><strong>' + x.label + '</strong></span><span>' + (x.ok ? '<span class="chip ok">fait</span>' : '') + '</span></button>';
+  }).join("");
+  var st = allStats(), overall = Math.round(st.reduce(function (s, x) { return s + x.pct; }, 0) / st.length);
+  var mast = st.reduce(function (s, x) { return s + x.mastered; }, 0), tot = st.reduce(function (s, x) { return s + x.total; }, 0);
+  var acc = prog.cT ? Math.round((prog.cA || 0) * 100 / prog.cT) : null;
+  var sorted = st.slice().sort(function (a, b) { return a.pct - b.pct || a.t.id - b.t.id; });
+  var cards = sorted.map(function (x) {
+    var t = x.t;
+    return '<details class="th"><summary><span class="n">' + pad(t.id) + '</span><span><strong>' + t.short + '</strong><span class="bar" aria-hidden="true"><i style="width:' + x.pct + '%"></i></span></span><span class="chip ' + (x.pct >= 75 ? "ok" : "") + '">' + x.pct + ' %</span></summary>' +
+      '<div class="in"><p class="eyebrow">' + x.lvl + '</p><ul class="pts">' +
+      '<li>Fiche : <strong>' + (x.fi ? "lue" : "pas encore lue") + '</strong></li>' +
+      '<li>Questions maîtrisées : <strong>' + x.mastered + ' / ' + x.total + '</strong></li>' +
+      '<li>Meilleur QCM : <strong>' + (x.tries ? x.best + " %" : "aucun") + '</strong>' + (x.tries ? ' · ' + x.tries + ' tentative' + (x.tries > 1 ? 's' : '') : '') + '</li>' +
+      '<li>Erreurs à revoir : <strong>' + x.errs + '</strong></li>' +
+      '<li>Vidéos vues : <strong>' + x.vw + ' / ' + x.vn + '</strong></li></ul>' +
+      '<div class="actions"><button class="btn alt" data-act="theme" data-id="' + t.id + '">Fiche</button><button class="btn" data-act="start" data-id="' + t.id + '">QCM</button>' + (x.errs ? '<button class="btn alt" data-act="terr" data-id="' + t.id + '">Erreurs · ' + x.errs + '</button>' : '') + '</div></div></details>';
+  }).join("");
+  var hist = (prog.simHist || []).slice().reverse().map(function (h) { return "<li><strong>" + fmtNote(h.n) + " / 20</strong> · " + h.d + "</li>"; }).join("");
+  var s = streak();
+  return '<div class="stack"><div><button class="ghost" data-act="home">← Thématiques</button></div>' +
+    '<div class="block"><p class="eyebrow">Ma préparation</p><h2 id="h" tabindex="-1">Tableau de bord</h2></div>' +
+    '<div class="kpis"><div class="kpi"><b>' + overall + ' %</b><span>Avancement</span></div><div class="kpi"><b>' + mast + '<small> / ' + tot + '</small></b><span>Questions maîtrisées</span></div><div class="kpi"><b>' + (acc === null ? "–" : acc + " %") + '</b><span>Précision</span></div></div>' +
+    '<p class="stats">' + (s ? "Série : " + s + " jour" + (s > 1 ? "s" : "") + " d’étude · " : "") + 'Examens : ' + jLabel(daysTo(2026, 11, 22)) + ' (session 2024) · ' + jLabel(daysTo(2026, 12, 27)) + ' (session 2025)</p>' +
+    '<div class="block"><h3>Plan du jour · ' + done + ' / ' + tasks.length + '</h3><nav class="list" aria-label="Plan du jour">' + tk + '</nav></div>' +
+    '<button class="btn" data-act="weak">Quiz ciblé · 20 questions sur mes points faibles</button>' +
+    chartHtml() +
+    '<div class="block"><h3>Mon avancement par thème · du plus faible au plus fort</h3><p class="vm">Avancement = fiche lue (15 %) + questions maîtrisées (55 %) + meilleur QCM (30 %). Touchez un thème pour le détail.</p><div class="list">' + cards + '</div></div>' +
+    (hist ? '<div class="block"><h3>Historique des simulations</h3><ul class="pts">' + hist + '</ul></div>' : '') +
+    '<details class="gls"' + (S.bkmsg ? ' open' : '') + '><summary>Sauvegarde entre appareils</summary><div class="stack"><p class="vm">Votre progression reste dans ce navigateur. Pour la retrouver sur un autre appareil, générez un code, copiez-le, puis collez-le là-bas.</p>' +
+    '<button class="btn alt" data-act="bkgen">Générer mon code</button><textarea id="bk-out" rows="3" readonly aria-label="Code de sauvegarde"></textarea>' +
+    '<textarea id="bk-in" rows="3" placeholder="Collez ici un code pour restaurer" aria-label="Code à restaurer"></textarea>' +
+    '<button class="btn alt" data-act="bkrestore">Restaurer ce code</button><p class="vm" id="bk-msg" aria-live="polite">' + (S.bkmsg || "") + '</p></div></details></div>';
+}
+var _da = dashAct;
+dashAct = function (act, b) {
+  if (act === "terr") { startThemeErrors(parseInt(b.getAttribute("data-id"), 10)); return true; }
+  return _da(act);
+};
 
 /* ===== Bilingue, astuces de réponse, situations à rédiger ===== */
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -1277,8 +2065,8 @@ function simHomeBtn() {
 
 function simStart() {
   var qs = [];
-  THEMES.forEach(function (t) { shuffle(t.q).slice(0, 4).forEach(function (q) { qs.push({ k: q.k, o: shuffle([0, 1, 2, 3]) }); }); });
-  prog.sim = { start: Date.now(), qs: shuffle(qs), ans: {}, fl: {}, i: 0, text: "", cas: THEMES[Math.floor(Math.random() * THEMES.length)].id };
+  THEMES.forEach(function (t) { if (t.enr) return; shuffle(t.q).slice(0, 4).forEach(function (q) { qs.push({ k: q.k, o: shuffle([0, 1, 2, 3]) }); }); });
+  prog.sim = { start: Date.now(), qs: shuffle(qs), ans: {}, fl: {}, i: 0, text: "", cas: THEMES[Math.floor(Math.random() * 12)].id };
   save(); S = { view: "sim" }; draw();
 }
 function simOpen() {
@@ -1305,7 +2093,7 @@ function simFinish(expired) {
 
 function viewSimIntro() {
   var tips = TIPS.map(function (t) { return "<li><strong>" + t[0] + "</strong>" + t[1] + "</li>"; }).join("");
-  var th = THEMES.map(function (t) { return "<li><strong>" + pad(t.id) + " · " + t.short + "</strong>" + t.rep + "</li>"; }).join("");
+  var th = THEMES.filter(function (t) { return !t.enr; }).map(function (t) { return "<li><strong>" + pad(t.id) + " · " + t.short + "</strong>" + t.rep + "</li>"; }).join("");
   return '<div class="stack"><div><button class="ghost" data-act="home">← Thématiques</button></div>' +
     '<div class="block"><p class="eyebrow">Simulation · 120 minutes</p><h2 id="h" tabindex="-1">Conditions d’examen</h2></div>' +
     '<p>48 QCM (4 par thème, tirés au hasard) puis 1 situation professionnelle à rédiger. Le chrono ne s’arrête pas si vous quittez la page : vous pouvez reprendre là où vous en étiez. Corrections détaillées et note sur 20 à la fin.</p>' +
@@ -1528,7 +2316,7 @@ function next() {
 }
 function finish() {
   var pct = Math.round(S.score * 100 / S.qs.length);
-  if (S.mode === "errors") {
+  if (S.mode === "errors" || S.mode === "weak") {
     /* pas de score enregistré pour la révision des erreurs */
   } else if (S.mode === "theme") {
     var old = prog.t[S.themeId] || { best: 0, tries: 0 };
@@ -1548,23 +2336,25 @@ function viewHome() {
   var nErr = (prog.w || []).length;
   var ids = Object.keys(prog.t);
   var avg = ids.length ? Math.round(ids.reduce(function (s, k) { return s + prog.t[k].best; }, 0) / ids.length) : null;
-  var stats = ids.length + " / 12 thèmes travaillés" + (avg !== null ? " · meilleure moyenne " + avg + " %" : "") + (prog.exam ? " · quiz rapide " + prog.exam.best + " %" : "") + (prog.simBest ? " · simulation " + fmtNote(prog.simBest) + " / 20" : "");
+  var stats = ids.length + " / " + THEMES.length + " thèmes travaillés" + (avg !== null ? " · meilleure moyenne " + avg + " %" : "") + (prog.exam ? " · quiz rapide " + prog.exam.best + " %" : "") + (prog.simBest ? " · simulation " + fmtNote(prog.simBest) + " / 20" : "");
   var rows = THEMES.map(function (t) {
     var p = prog.t[t.id];
-    return '<button class="row" data-act="theme" data-id="' + t.id + '"><span class="n">' + pad(t.id) + '</span><span><strong>' + t.t + '</strong><small>' + t.short + '</small></span>' + (p ? '<span class="chip ' + (p.best >= 80 ? "ok" : "") + '">' + p.best + ' %</span>' : '<span></span>') + '</button>';
+    return (t.id === 13 ? '<p class="eyebrow sec">Enrichissement · fondamentaux</p>' : '') + '<button class="row" data-act="theme" data-id="' + t.id + '"><span class="n">' + pad(t.id) + '</span><span><strong>' + t.t + '</strong><small>' + t.short + '</small></span>' + (p ? '<span class="chip ' + (p.best >= 80 ? "ok" : "") + '">' + p.best + ' %</span>' : '<span></span>') + '</button>';
   }).join("");
   return '<div class="stack"><header class="hero"><p class="eyebrow">OFPPT · Promotion interne 2024 &amp; 2025 · Corps formateur</p>' +
     '<h1 id="h" tabindex="-1">Prépa QCM Pédagogie</h1>' +
-    '<p class="lead">12 thématiques, ' + total + ' questions. Chaque thème a sa fiche : schéma, définition, astuce, étapes pas à pas, confusions fréquentes, pièges d’examen, astuces de réponse, glossaire bilingue arabe-français et simulation d’examen de 120 minutes. Chaque réponse est expliquée et les choix sont mélangés à chaque tirage.</p>' +
+    '<p class="lead">12 thématiques officielles et 7 thèmes fondamentaux, ' + total + ' questions. Chaque thème a sa fiche : schéma, définition, astuce, étapes pas à pas, confusions fréquentes, pièges d’examen, astuces de réponse, glossaire bilingue arabe-français et simulation d’examen de 120 minutes. Chaque réponse est expliquée et les choix sont mélangés à chaque tirage.</p>' +
     '<div class="actions">' + simHomeBtn() + '<button class="btn alt" data-act="exam">Quiz rapide · 24 questions</button>' + (nErr ? '<button class="btn alt" data-act="errors">Revoir mes erreurs · ' + nErr + '</button>' : '') + '</div><p class="stats">' + stats + '</p>' + countdownHtml() + '<button class="ghost" data-act="gloss">Glossaire FR / عربي · ' + glossCount() + ' mots-clés et astuces</button><button class="ghost" data-act="videos">Vidéos YouTube · ' + vidCount() + '</button></header>' +
-    '<nav class="list" aria-label="Thématiques">' + rows + '</nav></div>';
+    '<nav class="list" aria-label="Thématiques">' + rows + '</nav>' +
+    '<p class="vm">Application d’entraînement indépendante, non officielle. Les QCM sont des propositions pédagogiques construites à partir des thématiques annoncées : seuls les textes et avis officiels font foi.</p></div>';
 }
 
 function viewTheme() {
   var t = themeById(S.themeId);
   return '<div class="stack fiche"><div><button class="ghost" data-act="home">← Thématiques</button></div>' +
-    '<div class="block"><p class="eyebrow">Thème ' + pad(t.id) + ' sur 12</p><h2 id="h" tabindex="-1">' + t.t + '</h2><p class="ar" dir="rtl" lang="ar">' + t.tAr + '</p></div>' +
+    '<div class="block"><p class="eyebrow">' + (t.enr ? "Enrichissement · fondamentaux" : "Thème " + pad(t.id) + " sur 12") + '</p><h2 id="h" tabindex="-1">' + t.t + '</h2><p class="ar" dir="rtl" lang="ar">' + t.tAr + '</p></div>' +
     '<div class="block"><h3>Définition</h3><p class="def">' + t.def + '</p></div>' +
+    '<div class="block"><h3>الملخص بالعربية</h3><p class="ar" dir="rtl" lang="ar">' + t.sumAr + '</p></div>' +
     figHtml(t) + tipHtml(t) + stepsHtml(t) +
     '<div class="block"><h3>Points essentiels</h3><ul class="pts">' + t.pts.concat(t.p2).map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>' +
     '<div class="block"><h3>Mots-clés</h3><div class="kws">' + t.kw.map(function (k) { return "<span>" + k + "</span>"; }).join("") + '</div></div>' +
@@ -1603,15 +2393,15 @@ function viewResult() {
   }).join("");
   var again = S.mode === "theme"
     ? '<button class="btn" data-act="start" data-id="' + S.themeId + '">Refaire ce thème</button><button class="btn alt" data-act="theme" data-id="' + S.themeId + '">Relire la fiche</button>'
-    : S.mode === "errors" ? '' : '<button class="btn" data-act="exam">Nouvel examen blanc</button>';
-  return '<div class="stack"><p class="eyebrow">' + (S.mode === "exam" ? "Examen blanc" : S.mode === "errors" ? "Révision des erreurs" : "Thème " + pad(S.themeId)) + '</p>' +
+    : S.mode === "errors" || S.mode === "weak" ? '' : '<button class="btn" data-act="exam">Nouvel examen blanc</button>';
+  return '<div class="stack"><p class="eyebrow">' + (S.mode === "exam" ? "Examen blanc" : S.mode === "errors" ? "Révision des erreurs" : S.mode === "weak" ? "Quiz ciblé" : "Thème " + pad(S.themeId)) + '</p>' +
     '<h1 class="score" id="h" tabindex="-1">' + S.score + '<small> / ' + n + '</small></h1><p>' + msg + '</p>' +
     '<div class="actions">' + again + '<button class="btn alt" data-act="home">Toutes les thématiques</button></div>' +
     (S.wrong.length ? '<div class="review"><h3 class="eyebrow">À revoir · ' + S.wrong.length + ' question' + (S.wrong.length > 1 ? "s" : "") + '</h3>' + rv + '</div>' : '<p class="eyebrow">Aucune erreur. Beau parcours.</p>') + '</div>';
 }
 
 function draw(keepScroll) {
-  var html = S.view === "home" ? viewHome() : S.view === "theme" ? viewTheme() : S.view === "gloss" ? viewGloss() : S.view === "videos" ? viewVideos() : S.view === "cards" ? viewCards() : S.view === "simintro" ? viewSimIntro() : S.view === "sim" ? viewSim() : S.view === "simres" ? viewSimRes() : S.view === "quiz" ? viewQuiz() : viewResult();
+  var html = S.view === "home" ? viewHome() : S.view === "theme" ? viewTheme() : S.view === "gloss" ? viewGloss() : S.view === "dash" ? viewDash() : S.view === "videos" ? viewVideos() : S.view === "cards" ? viewCards() : S.view === "simintro" ? viewSimIntro() : S.view === "sim" ? viewSim() : S.view === "simres" ? viewSimRes() : S.view === "quiz" ? viewQuiz() : viewResult();
   app.innerHTML = html;
   afterDraw();
   if (keepScroll) {
@@ -1634,6 +2424,7 @@ app.addEventListener("click", function (e) {
   else if (act === "exam") startExam();
   else if (act === "errors") startErrors();
   else if (act === "gloss") { S = { view: "gloss" }; draw(); }
+  else if (dashAct(act, b)) { }
   else if (videoAct(act, b)) { }
   else if (cardsAct(act)) { }
   else if (simAct(act, b, id)) { }
@@ -1648,6 +2439,3 @@ document.addEventListener("keydown", function (e) {
 
 draw();
 </script>
-
-</body>
-</html>
