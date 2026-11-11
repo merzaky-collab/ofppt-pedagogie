@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Prépa QCM Pédagogie OFPPT : 312 QCM, glossaire bilingue de 168 mots-clés, simulation de 120 minutes.">
+<meta name="description" content="Prépa QCM Pédagogie OFPPT : 312 QCM, glossaire bilingue de 168 mots-clés, simulation de 120 minutes, 42 vidéos YouTube.">
 <title>QCM Pédagogie OFPPT</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=JetBrains+Mono:wght@500&family=Source+Sans+3:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap">
 <style>
@@ -178,6 +178,12 @@ textarea { font: inherit; color: var(--ink); background: var(--surface); border:
 .tk .l { font-weight: 700; color: var(--ok); }
 .mytext { white-space: pre-wrap; background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 12px; }
 .row .bar { margin-top: 6px; }
+.vlist { display: flex; flex-direction: column; gap: 18px; }
+.vid { border-top: 1.5px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.vp iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; background: #000; }
+.vp:empty { display: none; }
+.vm { color: var(--muted); font-size: .92rem; }
+.lnk { display: inline-flex; align-items: center; min-height: 50px; font-weight: 600; color: var(--accent); }
 .as { background: var(--accent-soft); border-radius: 6px; padding: 6px 10px; margin-top: 4px !important; font-size: .95rem; }
 .as b { font: 500 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; }
 select { font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; min-height: 50px; padding: 10px 14px; width: 100%; }
@@ -1166,6 +1172,71 @@ function cardsAct(act) {
   return false;
 }
 
+/* ===== Vidéos YouTube ===== */
+var VID = {"1": [{"id": "v4ciuq9hF9w", "t": "La métacognition", "a": "Catherine SEMER", "l": "fr", "n": ""}, {"id": "30OHOYvkbWI", "t": "Métacognition : un atelier pour apprendre à apprendre", "a": "Sciences Po", "l": "fr", "n": ""}, {"id": "SQKF6rmk_dc", "t": "What is Metacognition and why is it important to learning?", "a": "Challenge Innovate Grow: Teacher &  Learner Centre", "l": "en", "n": ""}], "2": [{"id": "oVq1UtjwpdA", "t": "L'andragogie : définition, exemples... (expliquée en 3 minutes)", "a": "le Savoir Partagé", "l": "fr", "n": "Format court, 3 minutes"}, {"id": "s1sKPO686o4", "t": "Comment enseigner aux adultes ? Andragogie", "a": "SOFAD", "l": "fr", "n": ""}, {"id": "48iuwRkc_xo", "t": "Replay - Andragogie et formation d'adultes", "a": "Digital Learning Academy", "l": "fr", "n": ""}, {"id": "m2dEsdTmVUA", "t": "ما هي طرق تعليم الكبار؟", "a": "زووم نقطة", "l": "ar", "n": ""}, {"id": "kga7re5JYA8", "t": "Knowles' Adult Learning Theory or Andragogy - Simplest Explanation Ever", "a": "Mister Simplify", "l": "en", "n": ""}], "3": [{"id": "0J_FOKDHF_g", "t": "Approche Pédagogique APC - OFPPT-Academy", "a": "DIGITAL LEARNING LAB - OFPPT", "l": "fr", "n": "Spécifique OFPPT"}, {"id": "rqSc818D8uc", "t": "L'Approche par compétences : définition, enjeux, mise en place et évaluation", "a": "Education Voyageuse", "l": "fr", "n": ""}, {"id": "4UuFhfFd8EI", "t": "L’alignement pédagogique", "a": "UIZ OPEN COURSE", "l": "fr", "n": ""}, {"id": "cc_IWSWuPJg", "t": "La taxonomie de Bloom en formation professionnelle et technique (Approche par compétences)", "a": "Formation continue (FCSEI) - Cégep de Saint-Jérôme", "l": "fr", "n": "Formation professionnelle et technique"}, {"id": "HM1wZDQHJDQ", "t": "دليلك خطوة بخطوة لتطبيق المقاربة بالكفاءات في التكوين المهني", "a": "دروس التكوين المهني", "l": "ar", "n": "Contexte formation professionnelle"}, {"id": "SSkEtsAdzRE", "t": "فن التقييم في المقاربة بالكفاءات (APC) في التكوين المهني | مع أمثلة عملية", "a": "دروس التكوين المهني", "l": "ar", "n": "Évaluation en APC, avec exemples"}], "4": [{"id": "3O6W40AhPnE", "t": "#5 Vidéo et charge cognitive : trouver le bon équilibre", "a": "iCAP Université Claude Bernard Lyon 1", "l": "fr", "n": "Charge cognitive et vidéo"}, {"id": "J6LYLw6FzEc", "t": "Why Chunking Information Works in the Classroom: Cognitive Load Theory for Teachers", "a": "Tech Fix: Technology and Teaching", "l": "en", "n": ""}, {"id": "MeIx4FVgPsk", "t": "Cognitive Load Theory for Teachers", "a": "Simon Rigelsford", "l": "en", "n": ""}], "5": [{"id": "3mJPKH1jnuY", "t": "l'entretien d'explicitation", "a": "Pierre Boegli", "l": "fr", "n": ""}, {"id": "NUaEeUQY82Q", "t": "Un exemple pratique d'entretien explicitation", "a": "4Cristol", "l": "fr", "n": ""}, {"id": "6of0WwKx73I", "t": "Originalité de l'entretien d'explicitation", "a": "Pierre Vermersch", "l": "fr", "n": "Par l'auteur de la méthode"}], "6": [{"id": "MG5YVZwl-To", "t": "Le plan en 5 étapes pour maximiser le transfert des acquis de formation", "a": "Laurie Raphalen", "l": "fr", "n": ""}, {"id": "HphmqzPdg4k", "t": "#55 - Comment évaluer une formation avec la Méthode Kirkpatrick ? Avec Jonathan Pottiez - AGESYS", "a": "Edusign", "l": "fr", "n": ""}, {"id": "ZboHN7Gf_DY", "t": "Mastering Training Evaluation - Kirkpatrick's Model (5 Minutes)", "a": "BioTech Whisperer", "l": "en", "n": "Format court, 5 minutes"}], "7": [{"id": "Jq4KONCj75M", "t": "La pédagogie différenciée : une mise en pratique", "a": "Ifadem Liban", "l": "fr", "n": ""}, {"id": "da0QQagVRTo", "t": "Premiers pas vers une pédagogie différenciée", "a": "PROGRAMME APPRENDRE", "l": "fr", "n": ""}, {"id": "8MSnHmDWCqA", "t": "Différencier simplement", "a": "Marie-Camille Coudert", "l": "fr", "n": ""}, {"id": "dtsbvC2rPKo", "t": "البيداغوجية الفارقية تعريفها و أهدافها و أسسها و خصائصها شرح بسيط و شامل.", "a": "هيا نتعلم", "l": "ar", "n": ""}], "8": [{"id": "SKc6UJu3two", "t": "Ludopédagogie : mode d’emploi en formation professionnelle", "a": "C2RP-Carif-Oref Hauts-de-France", "l": "fr", "n": "Formation professionnelle"}, {"id": "ZWyC7bCcYN8", "t": "Comment créer un serious game pédagogique", "a": "Welcome to the future", "l": "fr", "n": ""}], "9": [{"id": "wQRG21j7EUs", "t": "Conception universelle de l’apprentissage", "a": "KnowledgeOne", "l": "fr", "n": ""}, {"id": "EGzpz9Yx3DA", "t": "Qu'est-ce que la CUA?", "a": "Espace conseils FGA", "l": "fr", "n": ""}, {"id": "ChSK3tPlB2M", "t": "Concevoir l’apprentissage de façon universelle", "a": "L'École branchée", "l": "fr", "n": ""}], "10": [{"id": "aI_A8NZhf3c", "t": "Exposé de cours sur le praticien réflexif et enseignant/formateur", "a": "formation2pro", "l": "fr", "n": ""}, {"id": "7FSPYclPdek", "t": "Reflective practitioner", "a": "Gabriele Vollmar", "l": "en", "n": ""}], "11": [{"id": "nr1-yFo66no", "t": "Construire un déroulé pédagogique", "a": "MMC Formations", "l": "fr", "n": ""}, {"id": "qY744eryqYQ", "t": "Rédiger un scénario pédagogique", "a": "Actualisation TV", "l": "fr", "n": ""}, {"id": "xemqqlK_dEs", "t": "La scénarisation pédagogique", "a": "UIZ OPEN COURSE", "l": "fr", "n": ""}, {"id": "IrVhL6vmoE8", "t": "Comment Rédiger un Scenario Pédagogique Général en Tableau ? Formation de Formateur FPA", "a": "Aurelia Formations de Formateurs & Ludopedagogie ", "l": "fr", "n": ""}], "12": [{"id": "s1O8oKZKSrc", "t": "Agir avec éthique : une compétence complexe", "a": "ManagEduc", "l": "fr", "n": ""}, {"id": "rKziS3Ukbzo", "t": "L'éthique et la professionnalité du formateur académique (CAFFA)", "a": "Approcher les maths", "l": "fr", "n": ""}, {"id": "XU6lp7coH_M", "t": "Neutralité axiologique : peut-on être un \"prof engagé\" ?", "a": "Philoxime", "l": "fr", "n": ""}, {"id": "_9mZw1BDG7A", "t": "Les normes de déontologie de la profession enseignante", "a": "Ontario College of Teachers", "l": "fr", "n": ""}]};
+var VQ = {"1": "métacognition apprentissage", "2": "andragogie formation des adultes", "3": "approche par compétences alignement pédagogique", "4": "charge cognitive pédagogie", "5": "questionnement pédagogique explicitation", "6": "transfert des apprentissages formation", "7": "pédagogie différenciée", "8": "ludopédagogie serious game", "9": "conception universelle de l'apprentissage inclusion", "10": "praticien réflexif formateur", "11": "scénario pédagogique séance de formation", "12": "éthique déontologie formateur"};
+
+function vidCount() { var n = 0; for (var k in VID) n += VID[k].length; return n; }
+var VLANG = { fr: "FR", ar: "عربي", en: "EN" };
+function vidCard(v) {
+  return '<div class="vid"><div class="vp" id="vp-' + v.id + '"></div><p><strong>' + esc(v.t) + '</strong></p>' +
+    '<p class="vm">' + esc(v.a) + ' <span class="chip">' + VLANG[v.l] + '</span>' + (v.n ? ' <span class="chip ok">' + v.n + '</span>' : '') + '</p>' +
+    '<div class="actions"><button class="btn alt" data-act="vplay" data-v="' + v.id + '">Lire ici</button>' +
+    '<a class="lnk" href="https://www.youtube.com/watch?v=' + v.id + '" target="_blank" rel="noopener noreferrer">Ouvrir sur YouTube ↗</a></div></div>';
+}
+function vidSearch(id) {
+  return '<a class="lnk" href="https://www.youtube.com/results?search_query=' + encodeURIComponent(VQ[id]) + '" target="_blank" rel="noopener noreferrer">Chercher d’autres vidéos ↗</a>';
+}
+function vidHtml(t) {
+  var a = VID[t.id] || [];
+  return '<details class="gls"><summary>Vidéos pour comprendre · ' + a.length + '</summary><div class="vlist">' + a.map(vidCard).join("") + vidSearch(t.id) + '</div></details>';
+}
+function vidListHtml(lang) {
+  return THEMES.map(function (t) {
+    var a = (VID[t.id] || []).filter(function (v) { return !lang || v.l === lang; });
+    if (!a.length) return "";
+    return '<div class="block"><h3>Thème ' + pad(t.id) + ' · ' + t.short + '</h3><div class="vlist">' + a.map(vidCard).join("") + vidSearch(t.id) + '</div></div>';
+  }).join("");
+}
+function viewVideos() {
+  return '<div class="stack"><div><button class="ghost" data-act="home">← Thématiques</button></div>' +
+    '<div class="block"><p class="eyebrow">Vidéos YouTube</p><h2 id="h" tabindex="-1">' + vidCount() + ' vidéos classées par thème</h2></div>' +
+    '<p class="vm">Sélection faite d’après les titres et les chaînes : regardez-les avant de les recommander à vos stagiaires. Si la lecture ici est bloquée, utilisez « Ouvrir sur YouTube ».</p>' +
+    '<select id="vl" aria-label="Filtrer par langue"><option value="">Toutes les langues</option><option value="fr">Français</option><option value="ar">عربي</option><option value="en">English</option></select>' +
+    '<div id="vl-list" class="stack">' + vidListHtml("") + '</div></div>';
+}
+function videoAct(act, b) {
+  if (act === "videos") { S = { view: "videos" }; draw(); return true; }
+  if (act === "vplay") {
+    var id = b.getAttribute("data-v"), box = document.getElementById("vp-" + id);
+    if (box) {
+      box.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0&autoplay=1" title="Vidéo YouTube" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    }
+    return true;
+  }
+  return false;
+}
+document.addEventListener("change", function (e) {
+  if (e.target && e.target.id === "vl") { var el = document.getElementById("vl-list"); if (el) el.innerHTML = vidListHtml(e.target.value); }
+});
+
+/* ===== Compte à rebours et thème du jour ===== */
+function daysTo(y, m, d) { return Math.ceil((Date.UTC(y, m - 1, d, 8, 0) - Date.now()) / 864e5); }
+function jLabel(n) { return n > 0 ? "J-" + n : n === 0 ? "aujourd’hui" : "passé"; }
+function todayTheme() {
+  var best = null;
+  THEMES.forEach(function (t) {
+    var p = prog.t[t.id], sc = p ? p.best : -1;
+    if (!best || sc < best.sc) best = { t: t, sc: sc };
+  });
+  return best.t;
+}
+function countdownHtml() {
+  var t = todayTheme();
+  return '<p class="stats">Examens : session 2024 le 22 nov. 2026 (' + jLabel(daysTo(2026, 11, 22)) + ') · session 2025 le 27 déc. 2026 (' + jLabel(daysTo(2026, 12, 27)) + ') · dates à confirmer avec la note officielle</p>' +
+    '<button class="ghost" data-act="theme" data-id="' + t.id + '">À travailler aujourd’hui : thème ' + pad(t.id) + ' · ' + t.short + ' →</button>';
+}
+
 /* ===== Bilingue, astuces de réponse, situations à rédiger ===== */
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 function casHtml(t) {
@@ -1485,7 +1556,7 @@ function viewHome() {
   return '<div class="stack"><header class="hero"><p class="eyebrow">OFPPT · Promotion interne 2024 &amp; 2025 · Corps formateur</p>' +
     '<h1 id="h" tabindex="-1">Prépa QCM Pédagogie</h1>' +
     '<p class="lead">12 thématiques, ' + total + ' questions. Chaque thème a sa fiche : schéma, définition, astuce, étapes pas à pas, confusions fréquentes, pièges d’examen, astuces de réponse, glossaire bilingue arabe-français et simulation d’examen de 120 minutes. Chaque réponse est expliquée et les choix sont mélangés à chaque tirage.</p>' +
-    '<div class="actions">' + simHomeBtn() + '<button class="btn alt" data-act="exam">Quiz rapide · 24 questions</button>' + (nErr ? '<button class="btn alt" data-act="errors">Revoir mes erreurs · ' + nErr + '</button>' : '') + '</div><p class="stats">' + stats + '</p><button class="ghost" data-act="gloss">Glossaire FR / عربي · ' + glossCount() + ' mots-clés et astuces</button></header>' +
+    '<div class="actions">' + simHomeBtn() + '<button class="btn alt" data-act="exam">Quiz rapide · 24 questions</button>' + (nErr ? '<button class="btn alt" data-act="errors">Revoir mes erreurs · ' + nErr + '</button>' : '') + '</div><p class="stats">' + stats + '</p>' + countdownHtml() + '<button class="ghost" data-act="gloss">Glossaire FR / عربي · ' + glossCount() + ' mots-clés et astuces</button><button class="ghost" data-act="videos">Vidéos YouTube · ' + vidCount() + '</button></header>' +
     '<nav class="list" aria-label="Thématiques">' + rows + '</nav></div>';
 }
 
@@ -1498,7 +1569,7 @@ function viewTheme() {
     '<div class="block"><h3>Points essentiels</h3><ul class="pts">' + t.pts.concat(t.p2).map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>' +
     '<div class="block"><h3>Mots-clés</h3><div class="kws">' + t.kw.map(function (k) { return "<span>" + k + "</span>"; }).join("") + '</div></div>' +
     '<div class="reseau"><b>Exemple en réseaux</b>' + t.ex + '</div>' +
-    extrasHtml(t) + casHtml(t) +
+    extrasHtml(t) + vidHtml(t) + casHtml(t) +
     '<button class="btn" data-act="start" data-id="' + t.id + '">Lancer le QCM · ' + t.q.length + ' questions</button></div>';
 }
 
@@ -1540,7 +1611,7 @@ function viewResult() {
 }
 
 function draw(keepScroll) {
-  var html = S.view === "home" ? viewHome() : S.view === "theme" ? viewTheme() : S.view === "gloss" ? viewGloss() : S.view === "cards" ? viewCards() : S.view === "simintro" ? viewSimIntro() : S.view === "sim" ? viewSim() : S.view === "simres" ? viewSimRes() : S.view === "quiz" ? viewQuiz() : viewResult();
+  var html = S.view === "home" ? viewHome() : S.view === "theme" ? viewTheme() : S.view === "gloss" ? viewGloss() : S.view === "videos" ? viewVideos() : S.view === "cards" ? viewCards() : S.view === "simintro" ? viewSimIntro() : S.view === "sim" ? viewSim() : S.view === "simres" ? viewSimRes() : S.view === "quiz" ? viewQuiz() : viewResult();
   app.innerHTML = html;
   afterDraw();
   if (keepScroll) {
@@ -1563,6 +1634,7 @@ app.addEventListener("click", function (e) {
   else if (act === "exam") startExam();
   else if (act === "errors") startErrors();
   else if (act === "gloss") { S = { view: "gloss" }; draw(); }
+  else if (videoAct(act, b)) { }
   else if (cardsAct(act)) { }
   else if (simAct(act, b, id)) { }
   else if (act === "pick") answer(parseInt(b.getAttribute("data-i"), 10));
