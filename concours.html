@@ -82,6 +82,7 @@ details > summary::after { content: "＋"; margin-left: auto; color: var(--accen
 .tabs { display: flex; gap: 8px; flex-wrap: wrap; } .tabs button { border: 2px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-weight: 700; min-height: 40px; } .tabs .on { border-color: var(--p0); background: color-mix(in srgb, var(--p0) 14%, var(--surface)); }
 .hist { display: flex; align-items: flex-end; gap: 6px; height: 90px; } .hist i { flex: 1; min-width: 8px; border-radius: 5px 5px 0 0; background: linear-gradient(180deg, var(--p0), var(--p1)); }
 @media (min-width: 720px) { .nav { grid-template-columns: 200px 200px; justify-content: space-between; } }
+.at { width: 100%; border-collapse: collapse; font-size: .95rem; } .at th, .at td { text-align: left; vertical-align: top; padding: 7px 8px; border-top: 1px solid var(--line); } .at th { width: 34%; font-weight: 600; } .at th.main { color: var(--p0); font-weight: 800; }
 </style>
 </head>
 <body>
@@ -1619,6 +1620,48 @@ var BD = {
  "Discrétion = informations sensibles."]
 ]
 };
+var AU = [
+[1,"Métacognition",[["Flavell","invente le terme (1976)"],["Brown","stratégies et régulation"],["Nelson et Narens","monitoring / contrôle"],["Schraw et Dennison","questionnaire MAI"],["Zimmerman","autorégulation en 3 phases"]],"FLAVELL : « FLAire » de ce que je sais."],
+[2,"Andragogie, apprenant adulte",[["Knowles","théorie de l’andragogie"],["Lindeman","précurseur (1926)"],["Rogers","apprentissage centré sur la personne"],["Kolb","cycle d’apprentissage par l’expérience"],["Mezirow","apprentissage transformateur"]],"KNOWLES : le stagiaire adulte « KNOWS » (sait) déjà des choses."],
+[3,"APC, objectifs, alignement",[["Biggs","alignement constructif"],["Bloom","taxonomie des objectifs"],["Mager","objectif opérationnel"],["Le Boterf","définition de la compétence"],["Tardif","compétence = savoir-agir complexe"],["Wiggins et McTighe","conception à rebours"]],"BIGgs : une GRANDE cohérence objectif, activité, évaluation."],
+[4,"Charge cognitive, mémoire de travail",[["Sweller","théorie de la charge cognitive"],["Miller","7 ± 2 éléments"],["Baddeley","modèle de la mémoire de travail"],["Mayer","apprentissage multimédia"],["Paivio","double codage"],["Paas","mesure de l’effort mental"]],"SWELLer : « to swell » = gonfler : la mémoire de travail déborde."],
+[5,"Questionnement, explicitation",[["Socrate","maïeutique"],["Vermersch","entretien d’explicitation"],["Bloom","niveaux de questions"],["Rowe","temps d’attente (wait time)"]],"VERMERSCH : « VER » comme VÉRifier ce qui s’est vraiment fait."],
+[6,"Transfert des apprentissages",[["Thorndike","éléments identiques"],["Baldwin et Ford","modèle du transfert en formation"],["Kirkpatrick","4 niveaux d’évaluation (niveau 3 = transfert)"],["Perkins et Salomon","transfert proche / lointain"],["Lave et Wenger","apprentissage situé"]],"KIRKPATRICK : 4 étages, le 3e = ce qu’on fait AU TRAVAIL."],
+[7,"Différenciation, ZPD, étayage",[["Vygotsky","zone proche de développement"],["Bruner","étayage"],["Tomlinson","classe différenciée"],["Przesmycki","pédagogie différenciée (France)"],["Bloom","pédagogie de maîtrise"],["Meirieu","« apprendre, oui, mais comment »"]],"VYGOTSKY : ZPD = la zone où l’on grandit AVEC de l’aide."],
+[8,"Ludopédagogie, jeu, flow",[["Huizinga","Homo ludens"],["Caillois","4 types de jeux (agôn, alea, mimicry, ilinx)"],["Hunicke, LeBlanc, Zubek","modèle MDA"],["Csikszentmihalyi","état de flow"],["Kapp","gamification de l’apprentissage"],["Piaget","stades du jeu de l’enfant"]],"HUIZINGA : l’homme qui JOUE = « Homo ludens »."],
+[9,"Inclusion, accessibilité",[["Rose et Meyer (CAST)","conception universelle de l’apprentissage (UDL)"],["Ainscow","école inclusive"],["Booth et Ainscow","Index pour l’inclusion"],["Warnock","rapport sur les besoins éducatifs spéciaux (1978)"]],"CAST : 3 principes UDL = représentation, action et expression, engagement."],
+[10,"Posture réflexive",[["Schön","praticien réflexif"],["Argyris","apprentissage en double boucle"],["Dewey","penser par l’expérience"],["Gibbs","cycle réflexif en 6 étapes"],["Perrenoud","formateur praticien réflexif"],["Ericsson","pratique délibérée"]],"ARGYRIS : 2 boucles = je change l’action ET mes croyances."],
+[11,"Scénarisation pédagogique",[["Gagné","9 événements d’instruction"],["Merrill","premiers principes d’instruction"],["Reigeluth","théorie de l’élaboration"],["Hunter","modèle de plan de leçon"],["Bruner","curriculum en spirale"]],"GAGNÉ : « 9 » événements, comme une pièce en 9 scènes."],
+[12,"Éthique et neutralité",[["Weber","éthique de conviction et de responsabilité"],["Jonas","principe responsabilité"],["Ricœur","éthique et visée de la vie bonne"],["Kohlberg","stades du développement moral"],["Freire","pédagogie critique, non neutralité de l’éducation"]],"WEBER : conviction vs RESPONSABILITÉ, le formateur choisit la 2e."],
+[0,"Constructivisme, socioconstructivisme",[["Piaget","constructivisme, assimilation / accommodation"],["Vygotsky","socioconstructivisme"],["Bruner","apprentissage par découverte"],["Dewey","learning by doing"]],"PIAGET construit seul, VYGOTSKY construit avec les autres."],
+[0,"Béhaviorisme, apprentissage social",[["Pavlov","conditionnement classique"],["Skinner","conditionnement opérant"],["Bandura","apprentissage social, sentiment d’efficacité personnelle"]],"SKINNER = renforcement ; BANDURA = j’observe, donc j’imite."],
+[0,"Motivation",[["Deci et Ryan","théorie de l’autodétermination"],["Dweck","état d’esprit de croissance (mindset)"],["Maslow","pyramide des besoins"],["Viau","dynamique motivationnelle (Québec)"]],"DECI et RYAN = 3 besoins : autonomie, compétence, appartenance."],
+[0,"Évaluation",[["Scriven","formatif et sommatif"],["Black et Wiliam","évaluation formative (Inside the black box)"],["Bloom","évaluation formative en pédagogie de maîtrise"],["Rosenthal et Jacobson","effet Pygmalion"],["Hadji","évaluation, régulation"]],"BLACK et WILIAM : ouvrir la BOÎTE NOIRE de la classe par le feedback."],
+[0,"Apprentissage significatif",[["Ausubel","accrocher le nouveau à l’ancien"],["Novak","cartes conceptuelles"],["Montessori","apprendre en manipulant"],["Freinet","tâtonnement expérimental"]],"AUSUBEL : le plus important, c’est ce que l’élève sait DÉJÀ."]
+];
+var AM = [
+ ["Un nom = un mot-clé", "N’apprends jamais un nom seul. Associe-le à UN mot : Sweller = charge ; Vygotsky = ZPD ; Schön = réflexif. Le mot-clé, c’est ce que l’examen te donne dans la question."],
+ ["Une phrase-image par auteur", "Invente une phrase absurde ou une rime : « Sweller gonfle (swell) la mémoire ». Le cerveau retient mieux le bizarre que le neutre."],
+ ["3 à 5 noms par thème, pas plus", "Commence par les 2 auteurs principaux de chaque thème (en gras dans la grille), puis ajoute les autres. Les noms secondaires sont rarement posés."],
+ ["Repère les doublons", "Bloom, Bruner, Vygotsky, Kolb, Dewey apparaissent dans plusieurs thèmes. Apprends leur trace PAR thème : Bloom = taxonomie (3), maîtrise (7), questions (5)."],
+ ["Rappel actif, pas relecture", "Active le mode test : les auteurs sont cachés, tu dois les dire à voix haute avant de les révéler. Une relecture donne une illusion de maîtrise."],
+ ["Répétition espacée", "Revois à J+1, J+3, J+7, J+14. Cinq minutes par passage suffisent. Mieux vaut 10 minutes par jour que 2 heures la veille."],
+ ["Technique du réflexe", "Devant une question, nomme d’abord le cadre (Knowles, Biggs, Sweller…) avant de lire les choix. Le nom devient l’outil pour éliminer les distracteurs."]
+];
+function viewAuth() {
+  var h = '<div class="stack"><div><button class="ghost" data-act="home">← Accueil</button></div><header class="hero"><p class="eyebrow">Culture pédagogique</p><h1 id="h" tabindex="-1">Concepts et auteurs</h1><p>Pour chaque concept, les auteurs qui y ont laissé une trace et ce qu’ils ont apporté. Utilise le mode test pour t’entraîner.</p>' +
+    '<div class="acts"><button class="btn alt" data-act="atest">' + (S.atest ? "Afficher les auteurs" : "Mode test : masquer les auteurs") + '</button></div></header>';
+  h += '<div class="card"><h3>Comment retenir ces noms</h3><ol class="m6">' + AM.map(function (g, k) { return "<li style=\"--c:" + tcol(k + 1) + "\"><b>" + g[0] + "</b><br><span class=\"muted\">" + g[1] + "</span></li>"; }).join("") + '</ol></div>';
+  AU.forEach(function (r, ri) {
+    var col = r[0] ? tcol(r[0]) : "var(--p5)", open = !S.atest || S.areveal[ri];
+    h += '<div class="card au" style="border-left:6px solid ' + col + '"><h3>' + (r[0] ? "Thème " + (r[0] < 10 ? "0" : "") + r[0] + " · " : "Transversal · ") + esc(r[1]) + '</h3>';
+    if (open) {
+      h += '<table class="at"><tbody>' + r[2].map(function (a, k) { return '<tr><th scope="row"' + (k < 2 ? ' class="main"' : "") + '>' + esc(a[0]) + '</th><td>' + esc(a[1]) + '</td></tr>'; }).join("") + '</tbody></table><p class="muted small">Mnémo : ' + esc(r[3]) + '</p>';
+    } else h += '<button class="btn alt sm" data-act="areveal" data-i="' + ri + '">Voir les auteurs (' + r[2].length + ')</button>';
+    h += '</div>';
+  });
+  return h + '</div>';
+}
 var TH = {1:"Métacognition",2:"Andragogie",3:"APC et alignement",4:"Charge cognitive",5:"Questionnement",6:"Transfert",7:"Différenciation",8:"Ludopédagogie",9:"Inclusion",10:"Posture réflexive",11:"Scénarisation",12:"Éthique et neutralité"};
 var TC = ["","var(--p0)","var(--p1)","var(--p2)","var(--p3)","var(--p4)","var(--p5)"];
 function tcol(t) { return TC[((t - 1) % 6) + 1]; }
@@ -1638,7 +1681,7 @@ function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { va
 var DB = { sess: null, hist: [], seen: {} };
 try { var raw = localStorage.getItem(KEY); if (raw) { var d = JSON.parse(raw); if (d && typeof d === "object") DB = { sess: d.sess || null, hist: d.hist || [], seen: d.seen || {} }; } } catch (e) {}
 function save() { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) {} }
-var S = { view: "home", tab: "ko", open: {}, grid: false, showM: false };
+var S = { atest: false, areveal: {}, view: "home", tab: "ko", open: {}, grid: false, showM: false };
 var timerId = null;
 
 function draw(mode) {
@@ -1702,7 +1745,7 @@ function viewHome() {
     '<p>Questions difficiles à 5 choix (A à E), tirées au sort parmi ' + BANK.length + ' à chaque lancement. La dernière option peut être « Aucune de ces réponses n’est juste » (c’est la bonne dans ' + nE + ' questions). Chaque question vient avec son explication et sa méthode.</p>' +
     '<div class="acts"><button class="btn" data-act="serie">Série de 20 · 24 min</button><button class="btn alt" data-act="exam">Examen blanc · 100 · 120 min</button><button class="btn alt" data-act="train">Entraînement · 20 avec méthode</button></div>' +
     (resume ? '<p>' + MODES[s.mode].lab + ' en cours (' + (s.ans.filter(function (a) { return a > -1; }).length) + ' / ' + s.ids.length + ' répondues). <button class="btn alt sm" data-act="resume">Reprendre</button></p>' : '') + '</header>';
-  h += '<div class="card"><h3>La méthode en 6 gestes</h3>' + gestesHtml() + '</div>';
+  h += '<div class="card"><h3>Concepts et auteurs</h3><p class="muted">Le tableau des auteurs par concept, avec une méthode pour retenir les noms.</p><button class="btn alt sm" data-act="auth">Ouvrir le tableau</button></div><div class="card"><h3>La méthode en 6 gestes</h3>' + gestesHtml() + '</div>';
   h += '<div class="card"><h3>Les 6 pièges classiques</h3><ul class="trap">' + PIEGES.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>';
   if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + x.s + ' / ' + (x.n || 100) + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat : ' + best + ' % · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
   h += '<p class="muted small">Série de 20 : chronomètre de 24 minutes (72 s par question), correction à la fin. Entraînement : 20 questions, correction et méthode après chaque réponse, sans limite. Examen blanc : 100 questions, 120 minutes. Les questions viennent de la banque intégrée ; pour l’agrandir, demande-moi un nouveau lot. Le format réel (100 questions, 5 choix) est celui que tu m’as indiqué ; vérifie-le dans la convocation officielle. <a href="index.html">← Prépa QCM complète</a></p></div>';
@@ -1760,7 +1803,7 @@ function viewRes() {
 }
 function render() {
   var app = document.getElementById("app");
-  app.innerHTML = S.view === "run" && DB.sess ? viewRun() : S.view === "res" && DB.sess && DB.sess.done ? viewRes() : viewHome();
+  app.innerHTML = S.view === "auth" ? viewAuth() : S.view === "run" && DB.sess ? viewRun() : S.view === "res" && DB.sess && DB.sess.done ? viewRes() : viewHome();
   var rh = document.getElementById("rh"); if (rh) setRhythm(rh);
   if (S.view !== "run" && timerId) { clearInterval(timerId); timerId = null; }
   if (S.view === "run" && !timerId) timerId = setInterval(tick, 1000);
@@ -1773,6 +1816,9 @@ document.addEventListener("click", function (ev) {
   if (act === "exam" || act === "train" || act === "serie") { draw(act); return; }
   if (act === "resume") { S.view = "run"; if (cd() && left() <= 0) { finish(); return; } render(); return; }
   if (act === "home" || act === "quit") { S.view = "home"; render(); return; }
+  if (act === "auth") { S.view = "auth"; render(); return; }
+  if (act === "atest") { S.atest = !S.atest; S.areveal = {}; render(); return; }
+  if (act === "areveal") { S.areveal[+b.getAttribute("data-i")] = 1; var y = window.scrollY; render(); window.scrollTo(0, y); return; }
   if (act === "tab") { S.tab = b.getAttribute("data-t"); render(); return; }
   if (!s) return;
   var i = s.cur;
