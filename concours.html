@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Concours 100 : 100 QCM difficiles à 5 choix (A à E) en 120 minutes, tirés au sort à chaque lancement, avec la méthode pour trouver la bonne réponse. Promotion interne OFPPT, corps formateur.">
+<meta name="description" content="Concours 100 : séries de 20 QCM chronométrées (24 min) ou examen de 100 en 120 min, 5 choix dont « Aucune de ces réponses », avec explication et méthode. Promotion interne OFPPT.">
 <title>Concours 100 · Pédagogie OFPPT</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -1240,14 +1240,397 @@ var BC = {
  "Critères techniques."]
 ]
 };
-
+/* Banque D : 50 questions avec option E fixe « Aucune de ces réponses n'est juste ».
+   Format normal : [question, BONNE, faux1, faux2, faux3, explication, méthode]  (la bonne est parmi A à D)
+   Format « aucune » : ["N", question, faux1, faux2, faux3, faux4, explication, méthode]  (la bonne est E) */
+var BD = {
+1: [
+["Selon Flavell, une « expérience métacognitive » correspond à :",
+ "Un ressenti conscient lié à la tâche en cours, comme le sentiment de difficulté ou de familiarité",
+ "Un savoir stable sur sa manière d'apprendre",
+ "Un stage pratique validé par une attestation",
+ "Une évaluation finale notée par le formateur",
+ "Les expériences métacognitives sont des vécus subjectifs sur le moment (sentiment de comprendre, de difficulté, de savoir). Elles se distinguent des connaissances métacognitives, qui sont des savoirs stables.",
+ "Distingue vécu ressenti sur le moment (expérience) et savoir stable (connaissance). Élimine d'abord l'option « savoir stable », qui décrit les connaissances."],
+["Le « sentiment de savoir » devient trompeur lorsque :",
+ "La familiarité avec une correction est confondue avec la capacité de refaire seul la tâche",
+ "Le stagiaire relit son cours trois jours avant la pratique",
+ "Le formateur limite le temps de réalisation",
+ "Le stagiaire demande de l'aide à un pair",
+ "Reconnaître une solution quand on la voit n'est pas la produire seul. Cette illusion de maîtrise est une source classique de surconfiance.",
+ "Cherche l'option qui confond reconnaître et savoir faire seul. Les autres propositions ne sont pas des causes d'illusion."],
+["Quel dispositif est le moins susceptible de développer la métacognition ?",
+ "Un exercice chronométré répété sans retour ni analyse",
+ "Un carnet de bord avec analyse hebdomadaire",
+ "Un entretien d'explicitation après le TP",
+ "Une grille d'autoévaluation comparée à celle du formateur",
+ "Sans retour ni analyse, la répétition n'amène pas à examiner sa démarche. Les trois autres obligent à décrire, comparer ou analyser.",
+ "Question « le moins » : cherche l'option sans temps de réflexion ni retour."],
+["Dans la phase d'autoréflexion de Zimmerman, l'activité caractéristique est :",
+ "Attribuer sa réussite ou son échec à des causes contrôlables (stratégie, effort) et ajuster",
+ "Fixer l'objectif de la séance",
+ "Choisir la stratégie avant d'agir",
+ "Surveiller son déroulement pendant la tâche",
+ "L'autoréflexion suit la performance : jugement, attributions causales, réactions. Les autres options correspondent à l'anticipation ou à la réalisation.",
+ "Repère le moment : après l'action = autoréflexion. Écarte les actes situés avant ou pendant."],
+["N", "Laquelle de ces affirmations sur la métacognition est exacte ?",
+ "Elle désigne la capacité à mémoriser rapidement de grandes quantités d'information",
+ "Elle se développe seule avec l'ancienneté, sans intervention pédagogique",
+ "Elle ne concerne que les savoirs théoriques et jamais les gestes professionnels",
+ "Elle se confond avec l'intelligence mesurée par un test de QI",
+ "Chaque proposition contient une erreur : la métacognition est la pensée sur sa propre pensée, elle se travaille, concerne aussi les gestes et diffère de l'intelligence ou de la mémoire.",
+ "Teste les quatre propositions une à une. Si chacune contient un mot excessif ou une confusion de notion (seule, jamais, se confond), la réponse est E."]
+],
+2: [
+["Quel écart distingue le mieux l'andragogie d'une pédagogie traditionnelle sur le rôle du formateur ?",
+ "Il passe de détenteur du savoir à facilitateur qui organise des situations d'apprentissage",
+ "Il cesse de fixer des objectifs",
+ "Il ne participe plus à l'évaluation",
+ "Il devient simple surveillant de salle",
+ "Le formateur andragogique garde un cadre mais organise l'apprentissage et accompagne, au lieu de transmettre seul.",
+ "Rogers et Knowles : facilitateur. Écarte les réponses qui annulent le cadre (ni objectifs, ni évaluation)."],
+["Un stagiaire formule une règle générale à partir de la panne qu'il vient de vivre. Quelle étape du cycle de Kolb réalise-t-il ?",
+ "La conceptualisation abstraite",
+ "L'expérience concrète",
+ "L'observation réflexive",
+ "L'expérimentation active",
+ "Passer du vécu à une règle générale est la conceptualisation abstraite.",
+ "Verbe clé : « formule une règle générale » = abstraire. Concret = vivre, réflexive = observer, active = tester."],
+["Un stagiaire de vingt ans d'ancienneté dit : « Je fais comme ça depuis toujours. » Quelle réponse du formateur est la plus pertinente ?",
+ "Lui demander de comparer sa méthode au critère de sécurité du référentiel sur un cas concret",
+ "Lui rappeler son statut de stagiaire",
+ "Lui donner raison pour préserver son estime",
+ "L'exclure de l'exercice commun",
+ "On valorise l'expérience et on la confronte à des critères objectifs, sans affrontement.",
+ "Choisis la réponse qui respecte la personne ET ramène à un critère objectif. Les deux extrêmes (humilier ou céder) sont des pièges."],
+["Pour Mezirow, la réflexion critique porte surtout sur :",
+ "Les présupposés qui fondent notre manière d'interpréter une situation",
+ "L'exactitude des réponses techniques",
+ "Le rythme de la séance",
+ "La conformité du matériel",
+ "L'apprentissage transformateur passe par l'examen de ses cadres de référence.",
+ "Mezirow = cadres de référence et présupposés. Les autres options sont techniques ou organisationnelles."],
+["N", "Laquelle est une caractéristique de la posture andragogique ?",
+ "Le formateur fixe seul, sans explication, les objectifs, les méthodes et les critères",
+ "Les stagiaires sont supposés sans expérience utile et dépendants du formateur",
+ "L'évaluation est exclusivement sommative et réservée au formateur",
+ "La motivation est considérée comme uniquement extrinsèque",
+ "Les quatre propositions décrivent l'inverse de l'andragogie : unilatéral, dépendance, évaluation fermée, motivation extérieure.",
+ "Si toutes les propositions sont des contraires de ce que dit la théorie (explication, expérience, co-évaluation, motivation interne), choisis E."]
+],
+3: [
+["Dans un référentiel de compétences, un critère se distingue d'un indicateur car il :",
+ "Exprime la qualité attendue de la réalisation, que l'indicateur permet d'observer",
+ "Décrit le matériel à utiliser",
+ "Fixe la durée de la séance",
+ "Liste les prérequis du stagiaire",
+ "Le critère est une qualité (précision, sécurité). L'indicateur est un signe observable qui la rend vérifiable.",
+ "Critère = qualité abstraite ; indicateur = fait observable. Élimine les options qui parlent de matériel, durée ou prérequis."],
+["Quelle situation viole l'alignement constructif de Biggs ?",
+ "Objectif « diagnostiquer une panne », activités de lecture de cours, évaluation par recopie de définitions",
+ "Objectif « mesurer une tension », TP de mesure, évaluation pratique chronométrée",
+ "Objectif « câbler un coffret », exercices de câblage, contrôle sur coffret réel",
+ "Objectif « expliquer un principe », étude de cas, oral argumenté",
+ "Le niveau cognitif de l'objectif (diagnostiquer) n'est ni travaillé ni évalué : lecture et recopie ne mobilisent que la mémoire.",
+ "Dans chaque option, compare le verbe de l'objectif, l'activité et l'évaluation. L'intrus est celui où ils ne se correspondent pas."],
+["En approche par compétences, l'évaluation formative sert avant tout à :",
+ "Réguler l'apprentissage en cours en informant le stagiaire et le formateur",
+ "Classer les stagiaires pour la certification",
+ "Valider officiellement la compétence",
+ "Sanctionner les écarts",
+ "L'évaluation formative accompagne la progression et permet d'ajuster. Elle ne certifie pas.",
+ "Formative = pendant, pour réguler. Certificative = fin, pour valider."],
+["N", "Lequel de ces énoncés est un objectif opérationnel complet (comportement, conditions, critère) ?",
+ "Être capable de comprendre le fonctionnement d'un commutateur",
+ "Connaître les différents types de câbles",
+ "Sensibiliser les stagiaires à la sécurité électrique",
+ "Savoir réaliser un câblage correct",
+ "Aucun ne contient à la fois un verbe d'action observable, des conditions et un critère mesurable. « Correct » n'est pas un critère précis.",
+ "Pour chaque énoncé, cherche trois éléments : verbe observable, conditions, critère chiffré. S'il en manque un partout, E."]
+],
+4: [
+["Pourquoi une narration orale accompagnant un schéma est-elle préférable à un texte écrit sous ce schéma ?",
+ "Elle répartit l'information entre les canaux visuel et auditif (effet de modalité)",
+ "Elle supprime la nécessité du schéma",
+ "Elle augmente la redondance utile",
+ "Elle réduit la charge intrinsèque du contenu",
+ "Le schéma occupe déjà le canal visuel. Le son soulage ce canal.",
+ "Repère : image + son plutôt qu'image + texte = effet de modalité."],
+["Un novice bute sur un TP de dépannage. Quel ajustement est le plus cohérent avec la théorie de la charge cognitive ?",
+ "Lui fournir un exemple résolu commenté puis un problème à compléter",
+ "Lui donner le problème le plus difficile pour qu'il se débrouille",
+ "Supprimer le schéma de câblage pour l'obliger à raisonner",
+ "Ajouter un cours théorique de deux heures sans pratique",
+ "Les exemples résolus puis la complétion allègent la mémoire de travail du novice.",
+ "Novice = exemples résolus d'abord. Écarte les solutions qui surchargent ou privent d'appui."],
+["Le chunking (regroupement) consiste à :",
+ "Regrouper des éléments en unités signifiantes pour réduire le nombre d'éléments à traiter",
+ "Répéter une consigne jusqu'à l'automatisme",
+ "Ajouter des détails pour enrichir la consigne",
+ "Supprimer les étapes jugées faciles",
+ "Les blocs signifiants rendent l'information plus facile à retenir malgré la limite de la mémoire de travail.",
+ "Chunk = bloc. Cherche l'option qui parle de regrouper et de réduire le nombre d'éléments."],
+["N", "Laquelle de ces affirmations sur la mémoire de travail est exacte ?",
+ "Elle peut traiter simultanément une vingtaine d'éléments nouveaux sans difficulté",
+ "Sa capacité augmente avec la quantité de supports distribués",
+ "Elle conserve les informations nouvelles pendant plusieurs jours sans répétition",
+ "Elle stocke durablement les procédures professionnelles",
+ "La mémoire de travail est limitée en capacité et en durée. La conservation durable relève de la mémoire à long terme.",
+ "Capacité limitée (quelques éléments) et durée brève. Si tout contredit cela, E."]
+],
+5: [
+["Quelle question est une question de clarification ?",
+ "« Quand tu dis que le câblage était bizarre, qu'est-ce que tu voyais exactement ? »",
+ "« Tu n'as pas vérifié la prise, n'est-ce pas ? »",
+ "« Pourquoi n'as-tu pas suivi la procédure ? »",
+ "« Tu es sûr que tu es à l'aise avec ça ? »",
+ "La clarification demande de préciser un terme vague. Les autres questions suggèrent la réponse ou accusent.",
+ "Cherche la question qui reprend un mot du stagiaire et demande de le préciser."],
+["Le stagiaire répond par une généralité (« en général je vérifie »). Que fait le formateur en explicitation ?",
+ "Il ramène à un moment précis : « la dernière fois, que s'est-il passé ? »",
+ "Il note la généralité comme une réponse suffisante",
+ "Il lui demande de justifier sa méthode générale",
+ "Il passe à la question suivante",
+ "L'explicitation travaille sur une situation singulière et réelle, pas sur des généralités.",
+ "Règle de Vermersch : toujours revenir à une occurrence précise."],
+["Une question ouverte se reconnaît à ce qu'elle :",
+ "Appelle une réponse développée et ne contient pas la réponse attendue",
+ "Appelle oui ou non",
+ "Propose deux réponses à choisir",
+ "Contient la solution du formateur",
+ "Elle invite à développer sans orienter la réponse.",
+ "Ouverte = « comment, qu'est-ce que, de quelle façon ». Écarte les formats oui/non."],
+["N", "Laquelle de ces règles de conduite d'un entretien d'analyse de pratique est correcte ?",
+ "Couper la parole quand la personne s'écarte du sujet pour tenir le temps",
+ "Poser plusieurs questions à la fois pour gagner du temps",
+ "Donner son avis dès le début pour orienter l'échange",
+ "Éviter les silences, qui mettent mal à l'aise",
+ "Chaque règle est contraire à une bonne pratique : écoute sans interruption, une question à la fois, suspension du jugement, respect des silences.",
+ "Vérifie chaque règle contre l'écoute active. Si toutes la violent, E."]
+],
+6: [
+["Quel facteur appartient aux caractéristiques de la conception de la formation (Baldwin et Ford) ?",
+ "La similitude entre les situations d'apprentissage et les situations de travail",
+ "Le soutien du supérieur hiérarchique",
+ "La motivation initiale du stagiaire",
+ "Les opportunités d'appliquer au poste",
+ "La similitude des situations relève de la conception. Les autres relèvent de l'apprenant ou de l'environnement.",
+ "Classe chaque option : apprenant, conception ou environnement."],
+["Une formation réussie en atelier ne donne aucun transfert au poste. Quelle hypothèse vérifier en premier ?",
+ "L'absence de matériel, de temps ou de soutien du responsable pour appliquer",
+ "Le caractère trop pratique de la formation",
+ "Le trop grand nombre de stagiaires",
+ "L'âge des stagiaires",
+ "Quand l'apprentissage est acquis mais non appliqué, on regarde l'environnement de travail.",
+ "Réussite en formation + échec au poste = barrière externe probable."],
+["Le transfert proche se produit quand :",
+ "La situation d'application ressemble fortement à la situation d'apprentissage",
+ "Le stagiaire applique le principe à un domaine très éloigné",
+ "Le formateur évalue juste après la séance",
+ "Le stagiaire oublie ce qu'il a appris",
+ "Proche = contextes similaires. Lointain = contextes différents.",
+ "Proche / lointain renvoie à la distance entre les situations."],
+["N", "Quelle affirmation sur le transfert des apprentissages est exacte ?",
+ "Il est automatique dès que la note finale est élevée",
+ "Il dépend uniquement de la qualité du formateur",
+ "Il se mesure au niveau 1 de Kirkpatrick",
+ "Il est impossible à favoriser par la pédagogie",
+ "Le transfert n'est pas automatique, dépend de plusieurs facteurs, se mesure au niveau 3 et peut être favorisé.",
+ "Repère les mots excessifs (automatique, uniquement, impossible) et le niveau de Kirkpatrick erroné."]
+],
+7: [
+["Quelle pratique différencie le processus sans changer l'objectif ?",
+ "Proposer au choix une vidéo, un tutorat ou une fiche pas à pas pour atteindre le même critère",
+ "Donner un objectif réduit aux stagiaires faibles",
+ "Imposer le même support à tous au même rythme",
+ "Supprimer l'évaluation pour les stagiaires en difficulté",
+ "Différencier c'est varier les chemins vers un même but.",
+ "Même critère, moyens variés."],
+["Quel signe indique qu'un groupe de besoin est mal utilisé ?",
+ "Les mêmes stagiaires y restent toute l'année sans réévaluation",
+ "Sa composition change selon les objectifs travaillés",
+ "Il est constitué après un diagnostic précis",
+ "Il dure une séance courte",
+ "Un groupe de besoin doit être temporaire et révisable.",
+ "Cherche l'option qui fige la composition."],
+["Dans le cadre de la ZPD, l'étayage du formateur doit :",
+ "Diminuer progressivement à mesure que le stagiaire devient autonome",
+ "Rester constant jusqu'à la fin",
+ "Remplacer la tâche par une tâche plus simple",
+ "Intervenir uniquement après l'échec complet",
+ "L'étayage s'ajuste puis s'estompe.",
+ "Étayage = soutien temporaire qui diminue."],
+["N", "Laquelle de ces affirmations sur l'hétérogénéité est exacte ?",
+ "Elle disparaît si l'on constitue des groupes de niveau fixes dès le premier jour",
+ "Elle est un défaut du public qu'il faut supprimer avant la formation",
+ "Elle ne concerne que les différences de diplômes",
+ "Elle impose d'enseigner uniquement au niveau le plus bas",
+ "Aucune n'est vraie : l'hétérogénéité persiste, est normale, est multiple et ne justifie pas de baisser l'exigence.",
+ "Les quatre propositions sont des idées reçues. Si chacune est démentie par un argument, E."]
+],
+8: [
+["Un débriefing de jeu pédagogique bien conduit passe par :",
+ "Les réactions des joueurs, l'analyse des décisions prises, puis le lien avec la pratique professionnelle",
+ "L'annonce du gagnant puis la clôture",
+ "La lecture des règles du jeu une seconde fois",
+ "Un exposé du formateur sur ce qu'il fallait faire",
+ "Ressenti, analyse, transfert : c'est la structure du débriefing.",
+ "Cherche le trio réaction, analyse, application."],
+["Dans le modèle MDA, les « mécaniques » désignent :",
+ "Les règles et systèmes du jeu (points, niveaux, ressources, temps)",
+ "Les émotions ressenties par le joueur",
+ "Le décor visuel et sonore du jeu",
+ "L'objectif pédagogique du formateur",
+ "MDA = mécaniques, dynamiques, esthétique. Les mécaniques sont les règles et systèmes.",
+ "M = règles ; D = comportements qui en résultent ; A = émotions."],
+["Pour travailler la compétence « gérer un client mécontent », le dispositif le plus pertinent est :",
+ "Un jeu de rôle avec observateurs, grille et débriefing, répété avec des variantes",
+ "Un quiz chronométré sur les définitions",
+ "Une vidéo regardée sans discussion",
+ "Un classement des meilleurs scores",
+ "La compétence comportementale se construit par pratique, feedback et variation.",
+ "Compétence comportementale = pratique + feedback."],
+["N", "Quelle affirmation sur l'usage des points et classements est exacte ?",
+ "Un classement public motive toujours tous les stagiaires",
+ "Les points remplacent efficacement le feedback du formateur",
+ "Plus il y a de récompenses, plus la motivation intrinsèque augmente",
+ "Un classement est indispensable à tout dispositif ludique",
+ "Chaque proposition est excessive ou fausse : le classement peut démotiver, les points n'informent pas, les récompenses peuvent réduire la motivation intrinsèque.",
+ "Mots absolus (toujours, indispensable) et inversions. Si tout est démenti, E."]
+],
+9: [
+["Un aménagement raisonnable pour un stagiaire malvoyant en TP est :",
+ "Fournir les documents en gros caractères ou en audio et adapter l'éclairage du poste",
+ "Le dispenser de TP",
+ "L'installer dans un groupe séparé",
+ "Lui faire passer l'évaluation à la fin",
+ "L'aménagement permet la participation sans baisser le niveau.",
+ "Choisis ce qui permet de participer à la même tâche."],
+["La conception universelle de l'apprentissage préconise :",
+ "Plusieurs moyens d'accéder au contenu, de s'exprimer et de s'engager",
+ "Un parcours unique très structuré pour tous",
+ "Des adaptations seulement sur certificat médical",
+ "La suppression des évaluations",
+ "Les trois principes de l'UDL : représentation, action et expression, engagement.",
+ "UDL = flexibilité pour tous dès la conception."],
+["Le principe d'inclusion implique que le formateur :",
+ "Anticipe les barrières de son atelier et de ses supports pour la diversité du groupe",
+ "Attend la déclaration de chaque difficulté",
+ "Réserve les adaptations aux seuls stagiaires reconnus",
+ "Constitue des groupes par type de handicap",
+ "L'inclusion agit sur le système, de façon préventive.",
+ "Inclusion = adapter le système en amont."],
+["N", "Laquelle de ces pratiques est conforme à l'accessibilité ?",
+ "Diffuser des vidéos sans sous-titres ni transcription car les stagiaires entendent",
+ "Utiliser des documents scannés non sélectionnables pour tous les supports",
+ "Afficher des consignes uniquement en rouge sur fond vert",
+ "Imposer une présentation orale sans alternative aux personnes bègues",
+ "Chacune crée une barrière : absence de sous-titres, textes non exploitables, contraste insuffisant, exigence unique sans alternative.",
+ "Pour chaque pratique, identifie la barrière créée. Si chacune en crée une, E."]
+],
+10: [
+["Qu'est-ce que la pratique délibérée (Ericsson) ?",
+ "Un entraînement ciblé sur un point faible, avec objectif précis et feedback immédiat",
+ "La répétition quotidienne d'un geste déjà maîtrisé",
+ "L'ancienneté accumulée dans le métier",
+ "Un entraînement libre sans objectif",
+ "La pratique délibérée sort de la zone de confort avec un retour rapide.",
+ "Mots clés : ciblé, feedback."],
+["Quelle formulation montre une réflexion en double boucle sur sa pratique ?",
+ "« Je remets en cause ma croyance que corriger vite est la meilleure aide »",
+ "« Je rallonge la durée du TP de dix minutes »",
+ "« Je change la police de mes diapositives »",
+ "« Je distribue la fiche avant le cours »",
+ "La double boucle questionne les croyances qui orientent l'action.",
+ "Cherche la croyance remise en cause, pas le réglage."],
+["Dans le cycle de Gibbs, l'étape « analyse » consiste à :",
+ "Chercher le sens de la situation en croisant faits, ressentis et références théoriques",
+ "Décrire factuellement ce qui s'est passé",
+ "Lister les actions futures",
+ "Exprimer les émotions",
+ "Analyser, c'est donner du sens, après description et ressentis.",
+ "Ordre de Gibbs : description, sentiments, évaluation, analyse, conclusion, plan."],
+["Pour limiter le biais de confirmation dans l'analyse de sa pratique, il est utile de :",
+ "Chercher volontairement des données qui contredisent son interprétation",
+ "Ne relire que les retours positifs",
+ "Se fier à son impression générale",
+ "Éviter de demander l'avis des collègues",
+ "Le biais de confirmation retient ce qui confirme. On le contre en cherchant le contraire.",
+ "Le remède d'un biais de confirmation est de chercher l'infirmation."]
+],
+11: [
+["Quel élément d'un scénario pédagogique est le plus directement lié à l'alignement ?",
+ "La cohérence entre l'objectif, l'activité des apprenants et le mode d'évaluation",
+ "Le nombre de diapositives",
+ "L'horaire de la pause",
+ "La couleur du support",
+ "L'alignement relie objectif, activités et évaluation.",
+ "Alignement = triangle objectif, activité, évaluation."],
+["Un déroulé articule bien théorie et pratique lorsque :",
+ "Chaque apport théorique est suivi rapidement d'une mise en pratique qui l'utilise",
+ "La théorie est regroupée en début de journée sans application",
+ "La pratique est supprimée par manque de temps",
+ "La théorie est donnée après l'évaluation",
+ "L'articulation exige que la pratique mobilise la théorie sans délai.",
+ "Cherche l'alternance courte."],
+["Dans le modèle de Gagné, « stimuler le rappel des acquis » sert à :",
+ "Activer les connaissances antérieures pour y accrocher les nouvelles",
+ "Évaluer la performance finale",
+ "Faire mémoriser le vocabulaire",
+ "Annoncer l'objectif aux stagiaires",
+ "On active les prérequis avant de présenter le contenu.",
+ "Rappel des acquis = accroche aux connaissances antérieures."],
+["N", "Quelle affirmation sur la préparation d'une séance est exacte ?",
+ "Un scénario détaillé interdit toute adaptation en cours de séance",
+ "La durée prévue d'une activité n'a pas besoin d'être estimée",
+ "Les prérequis se supposent acquis dès le début",
+ "L'évaluation se prévoit après la séance, une fois les résultats connus",
+ "Aucune n'est correcte : le scénario reste adaptable, les durées s'estiment, les prérequis se vérifient et l'évaluation se prévoit en amont.",
+ "Vérifie chaque proposition contre les bonnes pratiques de planification. Si toutes sont fausses, E."]
+],
+12: [
+["Un stagiaire signale que l'entreprise d'accueil lui impose des horaires dépassant le cadre légal. Quelle réaction est conforme à l'éthique du formateur ?",
+ "Écouter, vérifier les faits et orienter vers la hiérarchie du centre pour une réponse conforme à la réglementation",
+ "Lui conseiller de ne rien dire pour préserver son stage",
+ "Contacter directement l'entreprise et la menacer",
+ "Publier la situation en ligne",
+ "On protège le stagiaire par une voie institutionnelle, sans minimiser ni dénoncer publiquement.",
+ "Éthique = protéger, vérifier, canaliser."],
+["Quelle situation relève d'un conflit d'intérêts pour un formateur ?",
+ "Être rémunéré par un fournisseur dont il recommande l'équipement aux stagiaires",
+ "Participer à une formation de perfectionnement",
+ "Recevoir un document pédagogique du centre",
+ "Évaluer ses stagiaires selon une grille commune",
+ "Un intérêt personnel peut influencer une décision professionnelle.",
+ "Conflit d'intérêts = intérêt privé qui touche l'impartialité."],
+["Face à un propos discriminatoire d'un stagiaire, la posture éthique est de :",
+ "Rappeler fermement le cadre de respect, sans humilier, puis traiter selon la procédure",
+ "Ignorer car chacun a ses opinions",
+ "Ironiser devant le groupe",
+ "Rester neutre en laissant le propos sans réponse",
+ "La neutralité n'est pas l'indifférence : on protège la dignité des personnes.",
+ "Neutre ≠ passif. Cadre ferme, sans humiliation."],
+["La discrétion professionnelle implique que le formateur :",
+ "Ne divulgue pas les informations personnelles ou confidentielles reçues dans l'exercice de sa fonction",
+ "Évite de parler de pédagogie avec ses collègues",
+ "Cache les résultats aux intéressés",
+ "Refuse toute réunion pédagogique",
+ "La discrétion protège les informations sensibles, pas les échanges professionnels.",
+ "Discrétion = informations sensibles."]
+]
+};
 var TH = {1:"Métacognition",2:"Andragogie",3:"APC et alignement",4:"Charge cognitive",5:"Questionnement",6:"Transfert",7:"Différenciation",8:"Ludopédagogie",9:"Inclusion",10:"Posture réflexive",11:"Scénarisation",12:"Éthique et neutralité"};
 var TC = ["","var(--p0)","var(--p1)","var(--p2)","var(--p3)","var(--p4)","var(--p5)"];
 function tcol(t) { return TC[((t - 1) % 6) + 1]; }
-var BANK = [], LET = ["A","B","C","D","E"], KEY = "concours100-v1", TOTAL = 100, DUR = 7200, PER = 72;
+var BANK = [], LET = ["A","B","C","D","E"], KEY = "concours100-v1", PER = 72, NONE = "Aucune de ces réponses n’est juste";
+var MODES = { exam: { n: 100, dur: 7200, lab: "Examen blanc" }, serie: { n: 20, dur: 1440, lab: "Série de 20" }, train: { n: 20, dur: 0, lab: "Entraînement" } };
 (function () {
   var all = {}, k; for (k in BA) all[k] = BA[k]; for (k in BB) all[k] = BB[k]; for (k in BC) all[k] = BC[k];
-  for (k in all) all[k].forEach(function (r, i) { BANK.push({ id: k + "-" + i, th: +k, q: r[0], o: r.slice(1, 6), e: r[6], m: r[7] }); });
+  for (k in all) all[k].forEach(function (r, i) { BANK.push({ id: k + "-" + i, th: +k, q: r[0], o: r.slice(1, 6), e: r[6], m: r[7], c: 0, fx: 0 }); });
+  for (k in BD) BD[k].forEach(function (r, i) {
+    if (r[0] === "N") BANK.push({ id: "d" + k + "-" + i, th: +k, q: r[1], o: [r[2], r[3], r[4], r[5], NONE], e: r[6], m: r[7], c: 4, fx: 1 });
+    else BANK.push({ id: "d" + k + "-" + i, th: +k, q: r[0], o: [r[1], r[2], r[3], r[4], NONE], e: r[5], m: r[6], c: 0, fx: 1 });
+  });
 })();
 var BYID = {}; BANK.forEach(function (b) { BYID[b.id] = b; });
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -1259,36 +1642,39 @@ var S = { view: "home", tab: "ko", open: {}, grid: false, showM: false };
 var timerId = null;
 
 function draw(mode) {
-  var by = {}, t; BANK.forEach(function (b) { (by[b.th] = by[b.th] || []).push(b); });
-  var themes = Object.keys(by).map(Number), extra = shuffle(themes).slice(0, TOTAL - 8 * themes.length), pick = [];
+  var M = MODES[mode], n = M.n, by = {}; BANK.forEach(function (b) { (by[b.th] = by[b.th] || []).push(b); });
+  var themes = Object.keys(by).map(Number), base = Math.floor(n / themes.length), extra = shuffle(themes).slice(0, n - base * themes.length), pick = [];
   themes.forEach(function (th) {
-    var n = 8 + (extra.indexOf(th) > -1 ? 1 : 0);
+    var c = base + (extra.indexOf(th) > -1 ? 1 : 0);
     var pool = shuffle(by[th]).sort(function (a, b) { return (DB.seen[a.id] || 0) - (DB.seen[b.id] || 0); });
-    pick = pick.concat(pool.slice(0, n));
+    pick = pick.concat(pool.slice(0, c));
   });
   pick = shuffle(pick);
-  DB.sess = { mode: mode, ids: pick.map(function (b) { return b.id; }), perm: pick.map(function () { return shuffle([0, 1, 2, 3, 4]); }),
+  DB.sess = { mode: mode, n: n, dur: M.dur, ids: pick.map(function (b) { return b.id; }),
+    perm: pick.map(function (b) { return b.fx ? shuffle([0, 1, 2, 3]).concat([4]) : shuffle([0, 1, 2, 3, 4]); }),
     ans: pick.map(function () { return -1; }), fl: pick.map(function () { return 0; }), cur: 0, t0: Date.now(), done: false, end: 0 };
   pick.forEach(function (b) { DB.seen[b.id] = (DB.seen[b.id] || 0) + 1; });
   save(); S.view = "run"; S.showM = false; S.grid = false; render();
 }
 function elapsed() { var s = DB.sess; return Math.floor(((s.done ? s.end : Date.now()) - s.t0) / 1000); }
-function left() { return DUR - elapsed(); }
+function left() { return (DB.sess.dur || 7200) - elapsed(); }
+function cd() { return DB.sess && DB.sess.dur > 0; }
+function pct(x) { return Math.round(100 * x.s / (x.n || 100)); }
 function fmt(sec) { sec = Math.max(0, sec); var m = Math.floor(sec / 60), s = sec % 60; return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s; }
-function item(i) { var s = DB.sess, b = BYID[s.ids[i]], p = s.perm[i]; return { b: b, opts: p.map(function (k) { return { t: b.o[k], ok: k === 0 }; }) }; }
-function correctIdx(i) { var p = DB.sess.perm[i]; return p.indexOf(0); }
+function item(i) { var s = DB.sess, b = BYID[s.ids[i]], p = s.perm[i]; return { b: b, opts: p.map(function (k) { return { t: b.o[k], ok: k === b.c }; }) }; }
+function correctIdx(i) { var p = DB.sess.perm[i]; return p.indexOf(BYID[DB.sess.ids[i]].c); }
 function finish() {
   var s = DB.sess; if (!s || s.done) return;
   s.done = true; s.end = Date.now();
   var sc = 0, by = {}; s.ids.forEach(function (id, i) { var th = BYID[id].th; by[th] = by[th] || { n: 0, c: 0 }; by[th].n++; if (s.ans[i] === correctIdx(i)) { sc++; by[th].c++; } });
   s.score = sc; s.by = by;
-  DB.hist.push({ d: new Date().toISOString().slice(0, 10), s: sc, m: s.mode, t: Math.min(elapsed(), DUR) }); DB.hist = DB.hist.slice(-20);
+  DB.hist.push({ d: new Date().toISOString().slice(0, 10), s: sc, n: s.ids.length, m: s.mode, t: s.dur ? Math.min(elapsed(), s.dur) : elapsed() }); DB.hist = DB.hist.slice(-20);
   save(); S.view = "res"; S.tab = "ko"; S.open = {}; render();
 }
 function tick() {
   var s = DB.sess; if (!s || s.done || S.view !== "run") return;
-  if (s.mode === "exam" && left() <= 0) { finish(); return; }
-  var el = document.getElementById("tm"); if (el) { var l = s.mode === "exam" ? left() : elapsed(); el.textContent = fmt(l); el.className = "timer" + (s.mode === "exam" && l < 600 ? " low" : ""); }
+  if (cd() && left() <= 0) { finish(); return; }
+  var el = document.getElementById("tm"); if (el) { var l = cd() ? left() : elapsed(); el.textContent = fmt(l); el.className = "timer" + (cd() && l < Math.min(600, s.dur / 6) ? " low" : ""); }
   var rh = document.getElementById("rh"); if (rh) setRhythm(rh);
 }
 function setRhythm(rh) {
@@ -1298,11 +1684,11 @@ function setRhythm(rh) {
 }
 var GESTES = [
  ["Lire la consigne d’abord", "Entoure SAUF, FAUX, NE… PAS, le plus, le moins. Une question sur trois est perdue par une négation mal lue."],
- ["Prédire avant de regarder A à E", "Formule ta réponse dans ta tête. Les distracteurs sont écrits pour séduire celui qui lit les choix sans idée préalable."],
+ ["Prédire avant de regarder A à E", "Formule ta réponse dans ta tête. Si elle n’est dans aucune option de A à D, pense à E (« aucune de ces réponses »), mais seulement après avoir vérifié chaque option une par une. Les distracteurs sont écrits pour séduire celui qui lit les choix sans idée préalable."],
  ["Identifier le cadre", "Quelle notion, quel auteur, quel modèle ? Knowles, Biggs, Sweller, Kolb, Schön… Nomme le cadre, la réponse en découle."],
  ["Éliminer par familles", "Raye les absolus (toujours, jamais, uniquement), les options punitives ou passives, le hors-sujet et les doublons. Il reste souvent deux choix."],
  ["Départager les deux derniers", "Choisis celui qui est centré sur l’apprenant actif, aligné objectif-activité-évaluation, sûr et éthique, et qui répond exactement au verbe de la question."],
- ["Gérer les 120 minutes", "72 secondes par question. Au-delà de 90 secondes, marque et passe. Reviens sur les marquées en fin de parcours. Ne laisse aucune case vide."]
+ ["Gérer le temps", "72 secondes par question (24 minutes pour 20, 120 pour 100). Au-delà de 90 secondes, marque et passe. Reviens sur les marquées en fin de parcours. Ne laisse aucune case vide."]
 ];
 var PIEGES = ["La négation : lire « laquelle est exacte » alors que la question demande l’intrus.", "La réponse vraie mais hors-sujet : elle est correcte en général, pas pour cette question.", "Les mots absolus (toujours, jamais, seulement) : presque toujours faux en pédagogie.", "Les notions voisines : intégration/inclusion, critère/indicateur, contrôle/évaluation, équité/égalité.", "La réponse « gentille » mais pédagogiquement fausse (féliciter, laisser faire, tout simplifier).", "La sécurité et l’éthique : elles l’emportent sur tout autre argument."];
 function gestesHtml() {
@@ -1310,23 +1696,23 @@ function gestesHtml() {
 }
 function viewHome() {
   var s = DB.sess, resume = s && !s.done, h = "";
-  var best = DB.hist.length ? Math.max.apply(null, DB.hist.map(function (x) { return x.s; })) : null;
-  var last = DB.hist.slice(-12), mx = 100;
+  var best = DB.hist.length ? Math.max.apply(null, DB.hist.map(pct)) : null;
+  var last = DB.hist.slice(-12), nE = BANK.filter(function (b) { return b.c === 4; }).length;
   h += '<div class="stack"><header class="hero"><p class="eyebrow">OFPPT · Promotion interne · Corps formateur</p><h1 id="h" tabindex="-1">Concours 100</h1>' +
-    '<p>100 questions difficiles à 5 choix (A à E), tirées au sort parmi ' + BANK.length + ' à chaque lancement, en 120 minutes. Chaque question vient avec sa méthode pour trouver la bonne réponse.</p>' +
-    '<div class="acts"><button class="btn" data-act="exam">Examen blanc · 120 min</button><button class="btn alt" data-act="train">Entraînement avec méthode</button></div>' +
-    (resume ? '<p>Une série est en cours (' + (s.ans.filter(function (a) { return a > -1; }).length) + ' / 100 répondues). <button class="btn alt sm" data-act="resume">Reprendre</button></p>' : '') + '</header>';
+    '<p>Questions difficiles à 5 choix (A à E), tirées au sort parmi ' + BANK.length + ' à chaque lancement. La dernière option peut être « Aucune de ces réponses n’est juste » (c’est la bonne dans ' + nE + ' questions). Chaque question vient avec son explication et sa méthode.</p>' +
+    '<div class="acts"><button class="btn" data-act="serie">Série de 20 · 24 min</button><button class="btn alt" data-act="exam">Examen blanc · 100 · 120 min</button><button class="btn alt" data-act="train">Entraînement · 20 avec méthode</button></div>' +
+    (resume ? '<p>' + MODES[s.mode].lab + ' en cours (' + (s.ans.filter(function (a) { return a > -1; }).length) + ' / ' + s.ids.length + ' répondues). <button class="btn alt sm" data-act="resume">Reprendre</button></p>' : '') + '</header>';
   h += '<div class="card"><h3>La méthode en 6 gestes</h3>' + gestesHtml() + '</div>';
   h += '<div class="card"><h3>Les 6 pièges classiques</h3><ul class="trap">' + PIEGES.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>';
-  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, x.s) + '%" title="' + x.s + ' / 100"></i>'; }).join("") + '</div><p class="muted small">Meilleur score : ' + best + ' / 100 · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
-  h += '<p class="muted small">Entraînement : correction et méthode après chaque réponse, sans limite de temps. Examen blanc : pas de correction avant la fin, 120 minutes. Le format réel (100 questions, 5 choix) est celui que tu m’as indiqué ; vérifie-le dans la convocation officielle. <a href="index.html">← Prépa QCM complète</a></p></div>';
+  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + x.s + ' / ' + (x.n || 100) + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat : ' + best + ' % · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
+  h += '<p class="muted small">Série de 20 : chronomètre de 24 minutes (72 s par question), correction à la fin. Entraînement : 20 questions, correction et méthode après chaque réponse, sans limite. Examen blanc : 100 questions, 120 minutes. Les questions viennent de la banque intégrée ; pour l’agrandir, demande-moi un nouveau lot. Le format réel (100 questions, 5 choix) est celui que tu m’as indiqué ; vérifie-le dans la convocation officielle. <a href="index.html">← Prépa QCM complète</a></p></div>';
   return h;
 }
 function viewRun() {
-  var s = DB.sess, i = s.cur, it = item(i), b = it.b, a = s.ans[i], train = s.mode === "train", shown = train && a > -1;
+  var s = DB.sess, N = s.ids.length, i = s.cur, it = item(i), b = it.b, a = s.ans[i], train = s.mode === "train", shown = train && a > -1;
   var answered = s.ans.filter(function (x) { return x > -1; }).length, ci = correctIdx(i);
-  var h = '<div class="stack"><div class="top"><div class="cnt">Question ' + (i + 1) + ' / 100 · ' + answered + ' répondues</div><div class="timer" id="tm">' + fmt(s.mode === "exam" ? left() : elapsed()) + '</div>' +
-    '<div class="bar"><i style="width:' + Math.round(answered) + '%"></i></div>' + (s.mode === "exam" ? '<div class="rhythm" id="rh"></div>' : '') + '</div>';
+  var h = '<div class="stack"><div class="top"><div class="cnt">' + MODES[s.mode].lab + ' · question ' + (i + 1) + ' / ' + N + ' · ' + answered + ' répondues</div><div class="timer" id="tm">' + fmt(cd() ? left() : elapsed()) + '</div>' +
+    '<div class="bar"><i style="width:' + Math.round(100 * answered / N) + '%"></i></div>' + (cd() ? '<div class="rhythm" id="rh"></div>' : '') + '</div>';
   h += '<div><span class="badge" style="--c:' + tcol(b.th) + '">Thème ' + (b.th < 10 ? "0" : "") + b.th + ' · ' + TH[b.th] + '</span></div>';
   h += '<h2 class="q" id="h" tabindex="-1">' + esc(b.q) + '</h2><div class="opts" role="group" aria-label="Réponses">';
   it.opts.forEach(function (o, k) {
@@ -1340,23 +1726,23 @@ function viewRun() {
   if (train && (shown || S.showM)) h += '<div class="panel me"><b class="t">Méthode pour trouver la réponse</b><p>' + esc(b.m) + '</p></div>';
   h += '<div class="mini">' + (train && !shown ? '<button class="btn alt sm" data-act="meth">' + (S.showM ? "Masquer la méthode" : "Voir la méthode") + '</button>' : '') +
     '<button class="btn alt sm" data-act="flag">' + (s.fl[i] ? "Marquée ✓" : "Marquer pour revoir") + '</button></div>';
-  h += '<div class="nav"><button class="btn alt" data-act="prev"' + (i === 0 ? " disabled" : "") + '>Précédente</button><button class="btn" data-act="next">' + (i === 99 ? "Terminer" : "Suivante") + '</button></div>';
-  h += '<details' + (S.grid ? " open" : "") + ' data-grid><summary>Grille des 100 questions</summary><div class="grid">' + s.ans.map(function (x, k) {
+  h += '<div class="nav"><button class="btn alt" data-act="prev"' + (i === 0 ? " disabled" : "") + '>Précédente</button><button class="btn" data-act="next">' + (i === N - 1 ? "Terminer" : "Suivante") + '</button></div>';
+  h += '<details' + (S.grid ? " open" : "") + ' data-grid><summary>Grille des ' + N + ' questions</summary><div class="grid">' + s.ans.map(function (x, k) {
     return '<button data-act="go" data-i="' + k + '" class="' + (x > -1 ? "done " : "") + (k === i ? "cur " : "") + (s.fl[k] ? "fl" : "") + '">' + (k + 1) + '</button>'; }).join("") + '</div></details>';
   h += '<div class="mini"><button class="btn sm" data-act="end">Terminer et corriger</button><button class="ghost" data-act="quit">Quitter (la série reste sauvegardée)</button></div></div>';
   return h;
 }
 function viewRes() {
-  var s = DB.sess, sc = s.score, note = (sc / 5).toFixed(1).replace(".", ","), h = "";
+  var s = DB.sess, sc = s.score, note = (sc / s.ids.length * 20).toFixed(1).replace(".", ","), h = "";
   var skip = s.ans.filter(function (a) { return a < 0; }).length;
-  h += '<div class="stack"><div><button class="ghost" data-act="home">← Accueil</button></div><div><p class="eyebrow">' + (s.mode === "exam" ? "Examen blanc" : "Entraînement") + ' · résultat</p><div class="score" id="h" tabindex="-1">' + sc + ' / 100</div>' +
-    '<p class="muted">Équivalent ' + note + ' / 20 · temps ' + fmt(Math.min(elapsed(), DUR)) + ' · sans réponse : ' + skip + '</p></div>';
+  h += '<div class="stack"><div><button class="ghost" data-act="home">← Accueil</button></div><div><p class="eyebrow">' + MODES[s.mode].lab + ' · résultat</p><div class="score" id="h" tabindex="-1">' + sc + ' / ' + s.ids.length + '</div>' +
+    '<p class="muted">Équivalent ' + note + ' / 20 · temps ' + fmt(s.dur ? Math.min(elapsed(), s.dur) : elapsed()) + ' · sans réponse : ' + skip + '</p></div>';
   h += '<div class="card"><h3>Par thème</h3>' + Object.keys(s.by).map(Number).sort(function (a, b) { return a - b; }).map(function (t) {
     var x = s.by[t], p = Math.round(100 * x.c / x.n);
     return '<div class="th"><span>' + TH[t] + '</span><span class="tr"><i style="width:' + p + '%;background:' + (p >= 75 ? "var(--p4)" : p >= 50 ? "var(--p3)" : p >= 25 ? "var(--p2)" : "var(--p1)") + '"></i></span><b>' + x.c + '/' + x.n + '</b></div>'; }).join("") + '</div>';
   var weak = Object.keys(s.by).map(Number).sort(function (a, b) { return s.by[a].c / s.by[a].n - s.by[b].c / s.by[b].n; })[0];
   h += '<p><b>À retravailler en priorité :</b> ' + TH[weak] + ' (' + s.by[weak].c + ' / ' + s.by[weak].n + '). Relis les méthodes des questions ratées ci-dessous.</p>';
-  h += '<div class="acts"><button class="btn" data-act="exam">Nouvelle série de 100</button><button class="btn alt" data-act="train">Entraînement</button></div>';
+  h += '<div class="acts"><button class="btn" data-act="' + s.mode + '">Série suivante · ' + MODES[s.mode].lab + '</button>' + (s.mode !== "serie" ? '<button class="btn alt" data-act="serie">Série de 20 · 24 min</button>' : '') + (s.mode !== "train" ? '<button class="btn alt" data-act="train">Entraînement</button>' : '') + '</div>';
   h += '<div class="tabs" role="tablist">' + [["ko", "Erreurs"], ["fl", "Marquées"], ["no", "Sans réponse"], ["all", "Toutes"]].map(function (t) { return '<button role="tab" data-act="tab" data-t="' + t[0] + '" class="' + (S.tab === t[0] ? "on" : "") + '">' + t[1] + '</button>'; }).join("") + '</div>';
   var n = 0;
   s.ids.forEach(function (id, i) {
@@ -1384,17 +1770,17 @@ function render() {
 document.addEventListener("click", function (ev) {
   var b = ev.target.closest ? ev.target.closest("[data-act]") : null; if (!b) return;
   var act = b.getAttribute("data-act"), s = DB.sess;
-  if (act === "exam" || act === "train") { draw(act); return; }
-  if (act === "resume") { S.view = "run"; if (s.mode === "exam" && left() <= 0) { finish(); return; } render(); return; }
+  if (act === "exam" || act === "train" || act === "serie") { draw(act); return; }
+  if (act === "resume") { S.view = "run"; if (cd() && left() <= 0) { finish(); return; } render(); return; }
   if (act === "home" || act === "quit") { S.view = "home"; render(); return; }
   if (act === "tab") { S.tab = b.getAttribute("data-t"); render(); return; }
   if (!s) return;
   var i = s.cur;
-  if (act === "pick") { var k = +b.getAttribute("data-i"); if (s.mode === "exam" && s.ans[i] === k) s.ans[i] = -1; else if (s.mode === "train" && s.ans[i] > -1) return; else s.ans[i] = k; save(); S.showM = false; render(); }
+  if (act === "pick") { var k = +b.getAttribute("data-i"); if (cd() && s.ans[i] === k) s.ans[i] = -1; else if (s.mode === "train" && s.ans[i] > -1) return; else s.ans[i] = k; save(); S.showM = false; render(); }
   else if (act === "meth") { S.showM = !S.showM; render(); }
   else if (act === "flag") { s.fl[i] = s.fl[i] ? 0 : 1; save(); render(); }
   else if (act === "prev") { if (i > 0) { s.cur--; S.showM = false; save(); render(); } }
-  else if (act === "next") { if (i < 99) { s.cur++; S.showM = false; save(); render(); } else { askEnd(); } }
+  else if (act === "next") { if (i < s.ids.length - 1) { s.cur++; S.showM = false; save(); render(); } else { askEnd(); } }
   else if (act === "go") { s.cur = +b.getAttribute("data-i"); S.showM = false; S.grid = false; save(); render(); }
   else if (act === "end") { askEnd(); }
   else if (act === "yes") { finish(); }
@@ -1411,6 +1797,6 @@ document.addEventListener("toggle", function (ev) {
   if (d.hasAttribute("data-grid")) S.grid = d.open;
   var q = d.getAttribute("data-q"); if (q !== null) S.open[q] = d.open;
 }, true);
-if (DB.sess && !DB.sess.done && DB.sess.mode === "exam" && left() <= 0) finish();
+if (DB.sess && !DB.sess.done && cd() && left() <= 0) finish();
 render();
 </script></body></html>
