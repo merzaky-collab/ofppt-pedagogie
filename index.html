@@ -1420,7 +1420,7 @@ function todayTheme() {
 }
 function countdownHtml() {
   var t = todayTheme();
-  return '<p class="stats">Examens : session 2024 le 22 nov. 2026 (' + jLabel(daysTo(2026, 11, 22)) + ') · session 2025 le 27 déc. 2026 (' + jLabel(daysTo(2026, 12, 27)) + ') · dates à confirmer avec la note officielle</p>' +
+  return '<p class="stats">Examen : session 2025 le 27 déc. 2026 (' + jLabel(daysTo(2026, 12, 27)) + ') · dates à confirmer avec la note officielle</p>' +
     '<a class="ghost" href="concours.html" style="display:inline-flex;align-items:center;font-weight:700">Concours 100 : 100 QCM difficiles à 5 choix, avec méthode →</a><button class="ghost" data-act="dash">Ma préparation : plan du jour, progrès, sauvegarde →</button>';
 }
 
@@ -1966,7 +1966,7 @@ function planTasks() {
     { ok: has(L.quiz, t.id), label: "Faire le QCM du thème " + pad(t.id), act: "start", id: t.id },
     nErr ? { ok: !!L.err, label: "Revoir mes erreurs · " + nErr, act: "errors" } : { ok: !!L.cards, label: "Cartes de révision du glossaire", act: "cards" }
   ];
-  var left = daysTo(2026, 11, 22) >= 0 ? daysTo(2026, 11, 22) : daysTo(2026, 12, 27);
+  var left = daysTo(2026, 12, 27);
   if (left <= 14 && Math.floor(Date.now() / 864e5) % 3 === 0) a.push({ ok: !!L.sim, label: "Simulation d’examen · 120 min", act: "sim" });
   return a;
 }
@@ -1989,7 +1989,7 @@ function viewDash() {
   var st = streak();
   return '<div class="stack"><div><button class="ghost" data-act="home">← Thématiques</button></div>' +
     '<div class="block"><p class="eyebrow">Ma préparation</p><h2 id="h" tabindex="-1">Plan du jour · ' + done + ' / ' + tasks.length + '</h2></div>' +
-    '<p class="stats">' + (st ? "Série : " + st + " jour" + (st > 1 ? "s" : "") + " d’étude · " : "") + 'Examens : ' + jLabel(daysTo(2026, 11, 22)) + ' (session 2024) · ' + jLabel(daysTo(2026, 12, 27)) + ' (session 2025)</p>' +
+    '<p class="stats">' + (st ? "Série : " + st + " jour" + (st > 1 ? "s" : "") + " d’étude · " : "") + 'Examen : ' + jLabel(daysTo(2026, 12, 27)) + ' (session 2025)</p>' +
     '<nav class="list" aria-label="Plan du jour">' + tk + '</nav>' +
     '<button class="btn" data-act="weak">Quiz ciblé · 20 questions sur mes points faibles</button>' +
     '<div class="block"><h3>Maîtrise par thème · du plus faible au plus fort</h3><nav class="list">' + mast + '</nav></div>' +
@@ -2143,7 +2143,7 @@ function viewDash() {
   return '<div class="stack"><div><button class="ghost" data-act="home">← Thématiques</button></div>' +
     '<div class="block"><p class="eyebrow">Ma préparation</p><h2 id="h" tabindex="-1">Tableau de bord</h2></div>' +
     '<div class="kpis"><div class="kpi"><b>' + overall + ' %</b><span>Avancement</span></div><div class="kpi"><b>' + mast + '<small> / ' + tot + '</small></b><span>Questions maîtrisées</span></div><div class="kpi"><b>' + (acc === null ? "–" : acc + " %") + '</b><span>Précision</span></div></div>' +
-    '<p class="stats">' + (s ? "Série : " + s + " jour" + (s > 1 ? "s" : "") + " d’étude · " : "") + 'Examens : ' + jLabel(daysTo(2026, 11, 22)) + ' (session 2024) · ' + jLabel(daysTo(2026, 12, 27)) + ' (session 2025)</p>' +
+    '<p class="stats">' + (s ? "Série : " + s + " jour" + (s > 1 ? "s" : "") + " d’étude · " : "") + 'Examen : ' + jLabel(daysTo(2026, 12, 27)) + ' (session 2025)</p>' +
     '<div class="block"><h3>Plan du jour · ' + done + ' / ' + tasks.length + '</h3><nav class="list" aria-label="Plan du jour">' + tk + '</nav></div>' +
     '<button class="btn" data-act="weak">Quiz ciblé · 20 questions sur mes points faibles</button>' +
     chartHtml() +
@@ -2222,8 +2222,7 @@ function activityChart(pace) {
 function coachInfo(st) {
   var tot = 0, mast = 0, errs = 0;
   st.forEach(function (x) { tot += x.total; mast += x.mastered; errs += x.errs; });
-  var left = tot - mast, dd = daysTo(2026, 11, 22), lab = "session 2024";
-  if (dd < 0) { dd = daysTo(2026, 12, 27); lab = "session 2025"; }
+  var left = tot - mast, dd = daysTo(2026, 12, 27), lab = "session 2025";
   var pace = dd > 0 && left > 0 ? Math.ceil(left / dd) : 0;
   return { tot: tot, mast: mast, errs: errs, left: left, dd: dd, lab: lab, pace: pace };
 }
