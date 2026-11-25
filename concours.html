@@ -63,6 +63,8 @@ details > summary::after { content: "＋"; margin-left: auto; color: var(--accen
 .opt.sel { border-color: var(--p0); background: color-mix(in srgb, var(--p0) 13%, var(--surface)); }
 .opt.ok { border-color: var(--ok); background: var(--ok-soft); } .opt.bad { border-color: var(--bad); background: var(--bad-soft); }
 .opt.struck { opacity: .5; text-decoration: line-through; }
+.qbar { height: 6px; } .qbar i { background: linear-gradient(90deg, var(--p2), var(--p1)); transition: width 1s linear; }
+.panel.tip p { margin: 0; }
 .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .mini { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .panel { border-radius: 14px; padding: 14px 16px; border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 10%, var(--surface)); display: flex; flex-direction: column; gap: 6px; }
@@ -87,6 +89,19 @@ details > summary::after { content: "＋"; margin-left: auto; color: var(--accen
 </head>
 <body>
 <main id="app"></main>
+<script>var BT = {};</script>
+<script src="questions-themes/theme01.js"></script>
+<script src="questions-themes/theme02.js"></script>
+<script src="questions-themes/theme03.js"></script>
+<script src="questions-themes/theme04.js"></script>
+<script src="questions-themes/theme05.js"></script>
+<script src="questions-themes/theme06.js"></script>
+<script src="questions-themes/theme07.js"></script>
+<script src="questions-themes/theme08.js"></script>
+<script src="questions-themes/theme09.js"></script>
+<script src="questions-themes/theme10.js"></script>
+<script src="questions-themes/theme11.js"></script>
+<script src="questions-themes/theme12.js"></script>
 <script>
 /* Banque A : thèmes 1 à 4. Format : [question, BONNE, piège1, piège2, piège3, piège4, explication, méthode] */
 var BA = {
@@ -1666,13 +1681,23 @@ var TH = {1:"Métacognition",2:"Andragogie",3:"APC et alignement",4:"Charge cogn
 var TC = ["","var(--p0)","var(--p1)","var(--p2)","var(--p3)","var(--p4)","var(--p5)"];
 function tcol(t) { return TC[((t - 1) % 6) + 1]; }
 var BANK = [], LET = ["A","B","C","D","E"], KEY = "concours100-v1", PER = 72, NONE = "Aucune de ces réponses n’est juste";
-var MODES = { exam: { n: 100, dur: 7200, lab: "Examen blanc" }, serie: { n: 20, dur: 1440, lab: "Série de 20" }, train: { n: 20, dur: 0, lab: "Entraînement" } };
+var MODES = { exam: { n: 100, dur: 7200, lab: "Examen blanc" }, serie: { n: 20, dur: 1440, lab: "Série de 20" }, train: { n: 20, dur: 0, lab: "Entraînement" }, theme: { n: 50, dur: 0, lab: "Par thème" } };
+var QSEC = 60; /* mode Par thème : 1 minute par question, passage automatique */
+function isTheme() { return DB.sess && DB.sess.mode === "theme"; }
+function qLeft() { return QSEC - Math.floor((Date.now() - (DB.sess.qt0 || Date.now())) / 1000); }
+function nTheme(th) { return BANK.filter(function (b) { return b.bt && b.th === th; }).length; }
 (function () {
   var all = {}, k; for (k in BA) all[k] = BA[k]; for (k in BB) all[k] = BB[k]; for (k in BC) all[k] = BC[k];
   for (k in all) all[k].forEach(function (r, i) { BANK.push({ id: k + "-" + i, th: +k, q: r[0], o: r.slice(1, 6), e: r[6], m: r[7], c: 0, fx: 0 }); });
   for (k in BD) BD[k].forEach(function (r, i) {
     if (r[0] === "N") BANK.push({ id: "d" + k + "-" + i, th: +k, q: r[1], o: [r[2], r[3], r[4], r[5], NONE], e: r[6], m: r[7], c: 4, fx: 1 });
     else BANK.push({ id: "d" + k + "-" + i, th: +k, q: r[0], o: [r[1], r[2], r[3], r[4], NONE], e: r[5], m: r[6], c: 0, fx: 1 });
+  });
+  /* Banque T (questions-themes/*.js) : 50 questions par thème. [question, BONNE, piège1, piège2, piège3, explication, astuce]
+     ou ["N", question, piège1..4, explication, astuce] quand la bonne réponse est E « Aucune de ces réponses ». */
+  for (k in BT) BT[k].forEach(function (r, i) {
+    var n = r[0] === "N", o = n ? 1 : 0;
+    BANK.push({ id: "t" + k + "-" + i, th: +k, q: r[o], o: [r[o + 1], r[o + 2], r[o + 3], r[o + 4], NONE], e: r[o + 5], m: r[o + 6], c: n ? 4 : 0, fx: 1, bt: 1 });
   });
 })();
 var BYID = {}; BANK.forEach(function (b) { BYID[b.id] = b; });
@@ -1684,7 +1709,15 @@ function save() { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (
 var S = { atest: false, areveal: {}, view: "home", tab: "ko", open: {}, grid: false, showM: false };
 var timerId = null;
 
-function draw(mode) {
+function draw(mode, th) {
+  if (mode === "theme") {
+    var tp = shuffle(BANK.filter(function (b) { return b.bt && b.th === th; }));
+    if (!tp.length) return;
+    DB.sess = { mode: mode, th: th, n: tp.length, dur: 0, ids: tp.map(function (b) { return b.id; }),
+      perm: tp.map(function () { return shuffle([0, 1, 2, 3]).concat([4]); }),
+      ans: tp.map(function () { return -1; }), fl: tp.map(function () { return 0; }), cur: 0, t0: Date.now(), qt0: Date.now(), done: false, end: 0 };
+    save(); S.view = "run"; S.grid = false; render(); return;
+  }
   var M = MODES[mode], n = M.n, by = {}; BANK.forEach(function (b) { (by[b.th] = by[b.th] || []).push(b); });
   var themes = Object.keys(by).map(Number), base = Math.floor(n / themes.length), extra = shuffle(themes).slice(0, n - base * themes.length), pick = [];
   themes.forEach(function (th) {
@@ -1717,6 +1750,13 @@ function finish() {
 function tick() {
   var s = DB.sess; if (!s || s.done || S.view !== "run") return;
   if (cd() && left() <= 0) { finish(); return; }
+  if (s.mode === "theme") {
+    var ql = qLeft();
+    if (ql <= 0) { if (s.cur < s.ids.length - 1) { s.cur++; s.qt0 = Date.now(); save(); render(); } else finish(); return; }
+    var qe = document.getElementById("tm"); if (qe) { qe.textContent = fmt(ql); qe.className = "timer" + (ql <= 15 ? " low" : ""); }
+    var qb = document.getElementById("qb"); if (qb) qb.style.width = Math.round(100 * ql / QSEC) + "%";
+    return;
+  }
   var el = document.getElementById("tm"); if (el) { var l = cd() ? left() : elapsed(); el.textContent = fmt(l); el.className = "timer" + (cd() && l < Math.min(600, s.dur / 6) ? " low" : ""); }
   var rh = document.getElementById("rh"); if (rh) setRhythm(rh);
 }
@@ -1744,7 +1784,9 @@ function viewHome() {
   h += '<div class="stack"><header class="hero"><p class="eyebrow">OFPPT · Promotion interne · Corps formateur</p><h1 id="h" tabindex="-1">Concours 100</h1>' +
     '<p>Questions difficiles à 5 choix (A à E), tirées au sort parmi ' + BANK.length + ' à chaque lancement. La dernière option peut être « Aucune de ces réponses n’est juste » (c’est la bonne dans ' + nE + ' questions). Chaque question vient avec son explication et sa méthode.</p>' +
     '<div class="acts"><button class="btn" data-act="serie">Série de 20 · 24 min</button><button class="btn alt" data-act="exam">Examen blanc · 100 · 120 min</button><button class="btn alt" data-act="train">Entraînement · 20 avec méthode</button></div>' +
-    (resume ? '<p>' + MODES[s.mode].lab + ' en cours (' + (s.ans.filter(function (a) { return a > -1; }).length) + ' / ' + s.ids.length + ' répondues). <button class="btn alt sm" data-act="resume">Reprendre</button></p>' : '') + '</header>';
+    (resume ? '<p>' + MODES[s.mode].lab + (s.mode === "theme" ? " · " + TH[s.th] : "") + ' en cours (' + (s.ans.filter(function (a) { return a > -1; }).length) + ' / ' + s.ids.length + ' répondues). <button class="btn alt sm" data-act="resume">Reprendre</button></p>' : '') + '</header>';
+  h += '<div class="card"><h3>Par thème · 50 questions · 1 min chacune</h3><p class="muted">50 questions difficiles d’un seul thème, 5 choix (E = « Aucune de ces réponses n’est juste »). Une astuce s’affiche avant chaque question pour t’aider à trouver la bonne réponse. Chrono de 60 secondes par question : à zéro, on passe automatiquement à la suivante. Correction complète à la fin.</p><div class="acts">' +
+    Object.keys(TH).map(Number).map(function (t) { var nb = nTheme(t); return nb ? '<button class="btn alt sm" data-act="theme" data-t="' + t + '" style="border-color:' + tcol(t) + '">' + (t < 10 ? "0" : "") + t + ' · ' + TH[t] + ' (' + nb + ')</button>' : ''; }).join("") + '</div></div>';
   h += '<div class="card"><h3>Concepts et auteurs</h3><p class="muted">Le tableau des auteurs par concept, avec une méthode pour retenir les noms.</p><button class="btn alt sm" data-act="auth">Ouvrir le tableau</button></div><div class="card"><h3>La méthode en 6 gestes</h3>' + gestesHtml() + '</div>';
   h += '<div class="card"><h3>Les 6 pièges classiques</h3><ul class="trap">' + PIEGES.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>';
   if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + x.s + ' / ' + (x.n || 100) + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat : ' + best + ' % · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
@@ -1754,9 +1796,12 @@ function viewHome() {
 function viewRun() {
   var s = DB.sess, N = s.ids.length, i = s.cur, it = item(i), b = it.b, a = s.ans[i], train = s.mode === "train", shown = train && a > -1;
   var answered = s.ans.filter(function (x) { return x > -1; }).length, ci = correctIdx(i);
-  var h = '<div class="stack"><div class="top"><div class="cnt">' + MODES[s.mode].lab + ' · question ' + (i + 1) + ' / ' + N + ' · ' + answered + ' répondues</div><div class="timer" id="tm">' + fmt(cd() ? left() : elapsed()) + '</div>' +
-    '<div class="bar"><i style="width:' + Math.round(100 * answered / N) + '%"></i></div>' + (cd() ? '<div class="rhythm" id="rh"></div>' : '') + '</div>';
+  var th = s.mode === "theme", ql = th ? qLeft() : 0;
+  var h = '<div class="stack"><div class="top"><div class="cnt">' + MODES[s.mode].lab + ' · question ' + (i + 1) + ' / ' + N + ' · ' + answered + ' répondues</div><div class="timer' + (th && ql <= 15 ? " low" : "") + '" id="tm"' + (th ? ' title="Temps restant pour cette question"' : '') + '>' + fmt(th ? ql : cd() ? left() : elapsed()) + '</div>' +
+    '<div class="bar"><i style="width:' + Math.round(100 * answered / N) + '%"></i></div>' + (cd() ? '<div class="rhythm" id="rh"></div>' : '') +
+    (th ? '<div class="bar qbar" aria-hidden="true"><i id="qb" style="width:' + Math.round(100 * Math.max(0, ql) / QSEC) + '%"></i></div><div class="rhythm">1 minute par question · passage automatique à zéro</div>' : '') + '</div>';
   h += '<div><span class="badge" style="--c:' + tcol(b.th) + '">Thème ' + (b.th < 10 ? "0" : "") + b.th + ' · ' + TH[b.th] + '</span></div>';
+  if (th && !S.hideTip) h += '<div class="panel me tip"><b class="t">Astuce</b><p>' + esc(b.m) + '</p></div>';
   h += '<h2 class="q" id="h" tabindex="-1">' + esc(b.q) + '</h2><div class="opts" role="group" aria-label="Réponses">';
   it.opts.forEach(function (o, k) {
     var cls = "opt"; if (shown) { if (k === ci) cls += " ok"; else if (k === a) cls += " bad"; } else if (k === a) cls += " sel";
@@ -1768,9 +1813,10 @@ function viewRun() {
   }
   if (train && (shown || S.showM)) h += '<div class="panel me"><b class="t">Méthode pour trouver la réponse</b><p>' + esc(b.m) + '</p></div>';
   h += '<div class="mini">' + (train && !shown ? '<button class="btn alt sm" data-act="meth">' + (S.showM ? "Masquer la méthode" : "Voir la méthode") + '</button>' : '') +
+    (th ? '<button class="btn alt sm" data-act="tip">' + (S.hideTip ? "Afficher les astuces" : "Masquer les astuces") + '</button>' : '') +
     '<button class="btn alt sm" data-act="flag">' + (s.fl[i] ? "Marquée ✓" : "Marquer pour revoir") + '</button></div>';
-  h += '<div class="nav"><button class="btn alt" data-act="prev"' + (i === 0 ? " disabled" : "") + '>Précédente</button><button class="btn" data-act="next">' + (i === N - 1 ? "Terminer" : "Suivante") + '</button></div>';
-  h += '<details' + (S.grid ? " open" : "") + ' data-grid><summary>Grille des ' + N + ' questions</summary><div class="grid">' + s.ans.map(function (x, k) {
+  h += '<div class="nav"><button class="btn alt" data-act="prev"' + (i === 0 || th ? " disabled" : "") + '>Précédente</button><button class="btn" data-act="next">' + (i === N - 1 ? "Terminer" : "Suivante") + '</button></div>';
+  if (!th) h += '<details' + (S.grid ? " open" : "") + ' data-grid><summary>Grille des ' + N + ' questions</summary><div class="grid">' + s.ans.map(function (x, k) {
     return '<button data-act="go" data-i="' + k + '" class="' + (x > -1 ? "done " : "") + (k === i ? "cur " : "") + (s.fl[k] ? "fl" : "") + '">' + (k + 1) + '</button>'; }).join("") + '</div></details>';
   h += '<div class="mini"><button class="btn sm" data-act="end">Terminer et corriger</button><button class="ghost" data-act="quit">Quitter (la série reste sauvegardée)</button></div></div>';
   return h;
@@ -1785,7 +1831,7 @@ function viewRes() {
     return '<div class="th"><span>' + TH[t] + '</span><span class="tr"><i style="width:' + p + '%;background:' + (p >= 75 ? "var(--p4)" : p >= 50 ? "var(--p3)" : p >= 25 ? "var(--p2)" : "var(--p1)") + '"></i></span><b>' + x.c + '/' + x.n + '</b></div>'; }).join("") + '</div>';
   var weak = Object.keys(s.by).map(Number).sort(function (a, b) { return s.by[a].c / s.by[a].n - s.by[b].c / s.by[b].n; })[0];
   h += '<p><b>À retravailler en priorité :</b> ' + TH[weak] + ' (' + s.by[weak].c + ' / ' + s.by[weak].n + '). Relis les méthodes des questions ratées ci-dessous.</p>';
-  h += '<div class="acts"><button class="btn" data-act="' + s.mode + '">Série suivante · ' + MODES[s.mode].lab + '</button>' + (s.mode !== "serie" ? '<button class="btn alt" data-act="serie">Série de 20 · 24 min</button>' : '') + (s.mode !== "train" ? '<button class="btn alt" data-act="train">Entraînement</button>' : '') + '</div>';
+  h += '<div class="acts">' + (s.mode === "theme" ? '<button class="btn" data-act="theme" data-t="' + s.th + '">Recommencer · ' + TH[s.th] + '</button>' : '<button class="btn" data-act="' + s.mode + '">Série suivante · ' + MODES[s.mode].lab + '</button>') + (s.mode !== "serie" ? '<button class="btn alt" data-act="serie">Série de 20 · 24 min</button>' : '') + (s.mode !== "train" ? '<button class="btn alt" data-act="train">Entraînement</button>' : '') + '</div>';
   h += '<div class="tabs" role="tablist">' + [["ko", "Erreurs"], ["fl", "Marquées"], ["no", "Sans réponse"], ["all", "Toutes"]].map(function (t) { return '<button role="tab" data-act="tab" data-t="' + t[0] + '" class="' + (S.tab === t[0] ? "on" : "") + '">' + t[1] + '</button>'; }).join("") + '</div>';
   var n = 0;
   s.ids.forEach(function (id, i) {
@@ -1796,7 +1842,7 @@ function viewRes() {
     h += '<details class="rv ' + (ok ? "okq" : no ? "nq" : "koq") + '"' + (S.open[i] ? " open" : "") + ' data-q="' + i + '"><summary>' + (i + 1) + '. ' + esc(it.b.q.length > 90 ? it.b.q.slice(0, 90) + "…" : it.b.q) + '</summary><div class="in"><p><b>' + esc(it.b.q) + '</b></p>' +
       it.opts.map(function (o, k) { return '<div class="opt' + (k === ci ? " ok" : k === s.ans[i] ? " bad" : "") + '"><span class="l">' + LET[k] + '</span><span>' + esc(o.t) + '</span></div>'; }).join("") +
       '<p class="muted small">Ta réponse : ' + (no ? "aucune" : LET[s.ans[i]]) + ' · Bonne réponse : ' + LET[ci] + '</p>' +
-      '<div class="panel ex"><b class="t">Explication</b><p>' + esc(it.b.e) + '</p></div><div class="panel me"><b class="t">Méthode</b><p>' + esc(it.b.m) + '</p></div></div></details>';
+      '<div class="panel ex"><b class="t">Explication</b><p>' + esc(it.b.e) + '</p></div><div class="panel me"><b class="t">' + (it.b.bt ? "Astuce" : "Méthode") + '</b><p>' + esc(it.b.m) + '</p></div></div></details>';
   });
   if (!n) h += '<p class="muted">Rien dans cette catégorie.</p>';
   return h + '</div>';
@@ -1814,7 +1860,9 @@ document.addEventListener("click", function (ev) {
   var b = ev.target.closest ? ev.target.closest("[data-act]") : null; if (!b) return;
   var act = b.getAttribute("data-act"), s = DB.sess;
   if (act === "exam" || act === "train" || act === "serie") { draw(act); return; }
-  if (act === "resume") { S.view = "run"; if (cd() && left() <= 0) { finish(); return; } render(); return; }
+  if (act === "theme") { draw("theme", +b.getAttribute("data-t")); return; }
+  if (act === "tip") { S.hideTip = !S.hideTip; render(); return; }
+  if (act === "resume") { S.view = "run"; if (cd() && left() <= 0) { finish(); return; } if (s && s.mode === "theme") { s.qt0 = Date.now(); save(); } render(); return; }
   if (act === "home" || act === "quit") { S.view = "home"; render(); return; }
   if (act === "auth") { S.view = "auth"; render(); return; }
   if (act === "atest") { S.atest = !S.atest; S.areveal = {}; render(); return; }
@@ -1825,9 +1873,9 @@ document.addEventListener("click", function (ev) {
   if (act === "pick") { var k = +b.getAttribute("data-i"); if (cd() && s.ans[i] === k) s.ans[i] = -1; else if (s.mode === "train" && s.ans[i] > -1) return; else s.ans[i] = k; save(); S.showM = false; render(); }
   else if (act === "meth") { S.showM = !S.showM; render(); }
   else if (act === "flag") { s.fl[i] = s.fl[i] ? 0 : 1; save(); render(); }
-  else if (act === "prev") { if (i > 0) { s.cur--; S.showM = false; save(); render(); } }
-  else if (act === "next") { if (i < s.ids.length - 1) { s.cur++; S.showM = false; save(); render(); } else { askEnd(); } }
-  else if (act === "go") { s.cur = +b.getAttribute("data-i"); S.showM = false; S.grid = false; save(); render(); }
+  else if (act === "prev") { if (i > 0 && s.mode !== "theme") { s.cur--; S.showM = false; save(); render(); } }
+  else if (act === "next") { if (i < s.ids.length - 1) { s.cur++; s.qt0 = Date.now(); S.showM = false; save(); render(); } else { askEnd(); } }
+  else if (act === "go") { if (s.mode === "theme") return; s.cur = +b.getAttribute("data-i"); S.showM = false; S.grid = false; save(); render(); }
   else if (act === "end") { askEnd(); }
   else if (act === "yes") { finish(); }
   else if (act === "no") { render(); }
