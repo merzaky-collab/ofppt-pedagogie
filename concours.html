@@ -1892,5 +1892,8 @@ document.addEventListener("toggle", function (ev) {
   var q = d.getAttribute("data-q"); if (q !== null) S.open[q] = d.open;
 }, true);
 if (DB.sess && !DB.sess.done && cd() && left() <= 0) finish();
-render();
+/* Lien direct : concours.html#theme=3 lance les 50 questions du thème 3 */
+var mh = typeof location !== "undefined" ? /theme=(\d+)/.exec(location.hash || "") : null;
+if (mh && nTheme(+mh[1])) { try { history.replaceState(null, "", location.pathname); } catch (e) {} draw("theme", +mh[1]); }
+else render();
 </script></body></html>

@@ -2136,7 +2136,7 @@ function viewDash() {
       '<li>Meilleur QCM : <strong>' + (x.tries ? x.best + " %" : "aucun") + '</strong>' + (x.tries ? ' · ' + x.tries + ' tentative' + (x.tries > 1 ? 's' : '') : '') + '</li>' +
       '<li>Erreurs à revoir : <strong>' + x.errs + '</strong></li>' +
       '<li>Vidéos vues : <strong>' + x.vw + ' / ' + x.vn + '</strong></li></ul>' +
-      '<div class="actions"><button class="btn alt" data-act="theme" data-id="' + t.id + '">Fiche</button><button class="btn" data-act="start" data-id="' + t.id + '">QCM</button>' + (x.errs ? '<button class="btn alt" data-act="terr" data-id="' + t.id + '">Erreurs · ' + x.errs + '</button>' : '') + '</div></div></details>';
+      '<div class="actions"><button class="btn alt" data-act="theme" data-id="' + t.id + '">Fiche</button><button class="btn" data-act="start" data-id="' + t.id + '">QCM</button>' + (t.id <= 12 ? '<a class="btn alt" href="concours.html#theme=' + t.id + '">50 questions · 1 min</a>' : '') + (x.errs ? '<button class="btn alt" data-act="terr" data-id="' + t.id + '">Erreurs · ' + x.errs + '</button>' : '') + '</div></div></details>';
   }).join("");
   var hist = (prog.simHist || []).slice().reverse().map(function (h) { return "<li><strong>" + fmtNote(h.n) + " / 20</strong> · " + h.d + "</li>"; }).join("");
   var s = streak();
@@ -2622,7 +2622,7 @@ function viewTheme() {
     '<div class="block"><h3>Mots-clés</h3><div class="kws">' + t.kw.map(function (k) { return "<span>" + k + "</span>"; }).join("") + '</div></div>' +
     '<div class="reseau"><b>Exemple en réseaux</b>' + t.ex + '</div>' +
     extrasHtml(t) + vidHtml(t) + casHtml(t) +
-    '<button class="btn" data-act="start" data-id="' + t.id + '">Lancer le QCM · ' + t.q.length + ' questions</button></div>';
+    '<button class="btn" data-act="start" data-id="' + t.id + '">Lancer le QCM · ' + t.q.length + ' questions</button>' + (t.id <= 12 ? '<a class="btn alt" href="concours.html#theme=' + t.id + '">50 questions difficiles · 1 min chacune · avec astuces</a>' : '') + '</div>';
 }
 
 function viewQuiz() {
