@@ -1736,16 +1736,16 @@ function draw(mode, th) {
 function elapsed() { var s = DB.sess; return Math.floor(((s.done ? s.end : Date.now()) - s.t0) / 1000); }
 function left() { return (DB.sess.dur || 7200) - elapsed(); }
 function cd() { return DB.sess && DB.sess.dur > 0; }
-function pct(x) { return Math.round(100 * x.s / (x.n || 100)); }
+function pct(x) { return Math.round(100 * Math.max(0, typeof x.p === "number" ? x.p : x.s) / (x.n || 100)); }
 function fmt(sec) { sec = Math.max(0, sec); var m = Math.floor(sec / 60), s = sec % 60; return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s; }
 function item(i) { var s = DB.sess, b = BYID[s.ids[i]], p = s.perm[i]; return { b: b, opts: p.map(function (k) { return { t: b.o[k], ok: k === b.c }; }) }; }
 function correctIdx(i) { var p = DB.sess.perm[i]; return p.indexOf(BYID[DB.sess.ids[i]].c); }
 function finish() {
   var s = DB.sess; if (!s || s.done) return;
   s.done = true; s.end = Date.now();
-  var sc = 0, by = {}; s.ids.forEach(function (id, i) { var th = BYID[id].th; by[th] = by[th] || { n: 0, c: 0 }; by[th].n++; if (s.ans[i] === correctIdx(i)) { sc++; by[th].c++; } });
-  s.score = sc; s.by = by;
-  DB.hist.push({ d: new Date().toISOString().slice(0, 10), s: sc, n: s.ids.length, m: s.mode, t: s.dur ? Math.min(elapsed(), s.dur) : elapsed() }); DB.hist = DB.hist.slice(-20);
+  var sc = 0, ko = 0, by = {}; s.ids.forEach(function (id, i) { var th = BYID[id].th; by[th] = by[th] || { n: 0, c: 0, k: 0 }; by[th].n++; if (s.ans[i] === correctIdx(i)) { sc++; by[th].c++; } else if (s.ans[i] > -1) { ko++; by[th].k++; } });
+  s.score = sc; s.ko = ko; s.blank = s.ids.length - sc - ko; s.pts = cdnPts(sc, ko); s.by = by;
+  DB.hist.push({ d: new Date().toISOString().slice(0, 10), s: sc, p: s.pts, n: s.ids.length, m: s.mode, t: s.dur ? Math.min(elapsed(), s.dur) : elapsed() }); DB.hist = DB.hist.slice(-20);
   save(); S.view = "res"; S.tab = "ko"; S.open = {}; render();
 }
 function tick() {
@@ -1772,7 +1772,8 @@ var GESTES = [
  ["Identifier le cadre", "Quelle notion, quel auteur, quel modèle ? Knowles, Biggs, Sweller, Kolb, Schön… Nomme le cadre, la réponse en découle."],
  ["Éliminer par familles", "Raye les absolus (toujours, jamais, uniquement), les options punitives ou passives, le hors-sujet et les doublons. Il reste souvent deux choix."],
  ["Départager les deux derniers", "Choisis celui qui est centré sur l’apprenant actif, aligné objectif-activité-évaluation, sûr et éthique, et qui répond exactement au verbe de la question."],
- ["Gérer le temps", "72 secondes par question (24 minutes pour 20, 120 pour 100). Au-delà de 90 secondes, marque et passe. Reviens sur les marquées en fin de parcours. Ne laisse aucune case vide."]
+ ["Gérer le temps", "72 secondes par question (24 minutes pour 20, 120 pour 100). Au-delà de 90 secondes, marque et passe. Reviens sur les marquées en fin de parcours."],
+ ["Notation canadienne", "+1 par réponse juste, 0 sans réponse, −1 par réponse fausse. Répondre au hasard entre 5 choix fait perdre en moyenne 0,6 point : réponds si tu es sûr ou si tu hésites seulement entre 2 options, sinon laisse vide."]
 ];
 var PIEGES = ["La négation : lire « laquelle est exacte » alors que la question demande l’intrus.", "La réponse vraie mais hors-sujet : elle est correcte en général, pas pour cette question.", "Les mots absolus (toujours, jamais, seulement) : presque toujours faux en pédagogie.", "Les notions voisines : intégration/inclusion, critère/indicateur, contrôle/évaluation, équité/égalité.", "La réponse « gentille » mais pédagogiquement fausse (féliciter, laisser faire, tout simplifier).", "La sécurité et l’éthique : elles l’emportent sur tout autre argument."];
 function gestesHtml() {
@@ -1783,14 +1784,14 @@ function viewHome() {
   var best = DB.hist.length ? Math.max.apply(null, DB.hist.map(pct)) : null;
   var last = DB.hist.slice(-12), nE = BANK.filter(function (b) { return b.c === 4; }).length;
   h += '<div class="stack"><header class="hero"><p class="eyebrow">OFPPT · Promotion interne · Corps formateur</p><h1 id="h" tabindex="-1">Concours 100</h1>' +
-    '<p>Questions difficiles à 5 choix (A à E), tirées au sort parmi ' + BANK.length + ' à chaque lancement. La dernière option peut être « Aucune de ces réponses n’est juste » (c’est la bonne dans ' + nE + ' questions). Chaque question vient avec son explication et sa méthode.</p>' +
+    '<p>Questions difficiles à 5 choix (A à E), tirées au sort parmi ' + BANK.length + ' à chaque lancement. La dernière option peut être « Aucune de ces réponses n’est juste » (c’est la bonne dans ' + nE + ' questions). Chaque question vient avec son explication et sa méthode. Notation canadienne : +1 par réponse juste, 0 sans réponse, −1 par réponse fausse.</p>' +
     '<div class="acts"><button class="btn" data-act="serie">Série de 20 · 24 min</button><button class="btn alt" data-act="exam">Examen blanc · 100 · 120 min</button><button class="btn alt" data-act="train">Entraînement · 20 avec méthode</button></div>' +
     (resume ? '<p>' + MODES[s.mode].lab + (s.mode === "theme" ? " · " + TH[s.th] : "") + ' en cours (' + (s.ans.filter(function (a) { return a > -1; }).length) + ' / ' + s.ids.length + ' répondues). <button class="btn alt sm" data-act="resume">Reprendre</button></p>' : '') + '</header>';
   h += '<div class="card"><h3>Par thème · 50 questions · 1 min chacune</h3><p class="muted">50 questions difficiles d’un seul thème, 5 choix (E = « Aucune de ces réponses n’est juste »). Une astuce s’affiche avant chaque question pour t’aider à trouver la bonne réponse. Chrono de 60 secondes par question : à zéro, on passe automatiquement à la suivante. Correction complète à la fin.</p><div class="acts">' +
     Object.keys(TH).map(Number).map(function (t) { var nb = nTheme(t); return nb ? '<button class="btn alt sm" data-act="theme" data-t="' + t + '" style="border-color:' + tcol(t) + '">' + (t < 10 ? "0" : "") + t + ' · ' + TH[t] + ' (' + nb + ')</button>' : ''; }).join("") + '</div></div>';
-  h += '<div class="card"><h3>Concepts et auteurs</h3><p class="muted">Le tableau des auteurs par concept, avec une méthode pour retenir les noms.</p><button class="btn alt sm" data-act="auth">Ouvrir le tableau</button></div><div class="card"><h3>La méthode en 6 gestes</h3>' + gestesHtml() + '</div>';
+  h += '<div class="card"><h3>Concepts et auteurs</h3><p class="muted">Le tableau des auteurs par concept, avec une méthode pour retenir les noms.</p><button class="btn alt sm" data-act="auth">Ouvrir le tableau</button></div><div class="card"><h3>La méthode en 7 gestes</h3>' + gestesHtml() + '</div>';
   h += '<div class="card"><h3>Les 6 pièges classiques</h3><ul class="trap">' + PIEGES.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>';
-  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + x.s + ' / ' + (x.n || 100) + ' · ' + cdnGrade(pct(x)).l + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat : ' + best + ' % ' + cdnLetter(best) + ' · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
+  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + (typeof x.p === "number" ? cdnNum(x.p) + ' pts' : x.s) + ' / ' + (x.n || 100) + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat (notation canadienne) : ' + best + ' % · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
   h += '<p class="muted small">Série de 20 : chronomètre de 24 minutes (72 s par question), correction à la fin. Entraînement : 20 questions, correction et méthode après chaque réponse, sans limite. Examen blanc : 100 questions, 120 minutes. Les questions viennent de la banque intégrée ; pour l’agrandir, demande-moi un nouveau lot. Le format réel (100 questions, 5 choix) est celui que tu m’as indiqué ; vérifie-le dans la convocation officielle. <a href="index.html">← Prépa QCM complète</a></p></div>';
   return h;
 }
@@ -1809,6 +1810,7 @@ function viewRun() {
     h += '<button class="' + cls + '" data-act="pick" data-i="' + k + '"' + (shown ? " disabled" : "") + '><span class="l">' + LET[k] + '</span><span>' + esc(o.t) + '</span></button>';
   });
   h += '</div>';
+  if (!train) h += '<p class="muted small">Notation canadienne : +1 si juste, 0 sans réponse, −1 si fausse. ' + (a > -1 ? 'Clique à nouveau sur ta réponse pour la retirer.' : 'Pas sûr ? Tu peux laisser la question sans réponse.') + '</p>';
   if (shown) {
     h += '<div class="panel ' + (a === ci ? "ok" : "bad") + '"><b class="t">' + (a === ci ? "Bonne réponse" : "Mauvaise réponse · la bonne est " + LET[ci]) + '</b><p>' + esc(b.e) + '</p></div>';
   }
@@ -1823,14 +1825,14 @@ function viewRun() {
   return h;
 }
 function viewRes() {
-  var s = DB.sess, sc = s.score, note = (sc / s.ids.length * 20).toFixed(1).replace(".", ","), h = "";
-  var skip = s.ans.filter(function (a) { return a < 0; }).length;
-  h += '<div class="stack"><div><button class="ghost" data-act="home">← Accueil</button></div><div><p class="eyebrow">' + MODES[s.mode].lab + ' · résultat</p><div class="score" id="h" tabindex="-1">' + sc + ' / ' + s.ids.length + '</div>' +
-    cdnBadge(100 * sc / s.ids.length) + '<p class="muted">Équivalent ' + note + ' / 20 · temps ' + fmt(s.dur ? Math.min(elapsed(), s.dur) : elapsed()) + ' · sans réponse : ' + skip + '</p></div>';
-  h += cdnTable(100 * sc / s.ids.length);
-  h += '<div class="card"><h3>Par thème</h3>' + Object.keys(s.by).map(Number).sort(function (a, b) { return a - b; }).map(function (t) {
-    var x = s.by[t], p = Math.round(100 * x.c / x.n);
-    return '<div class="th"><span>' + TH[t] + '</span><span class="tr"><i style="width:' + p + '%;background:' + (p >= 75 ? "var(--p4)" : p >= 50 ? "var(--p3)" : p >= 25 ? "var(--p2)" : "var(--p1)") + '"></i></span><b>' + x.c + '/' + x.n + ' ' + cdnLetter(p) + '</b></div>'; }).join("") + '</div>';
+  var s = DB.sess, sc = s.score, h = "";
+  var skip = s.ans.filter(function (a) { return a < 0; }).length, ko = s.ids.length - sc - skip, pts = cdnPts(sc, ko);
+  h += '<div class="stack"><div><button class="ghost" data-act="home">← Accueil</button></div><div><p class="eyebrow">' + MODES[s.mode].lab + ' · résultat</p><div class="score" id="h" tabindex="-1">' + cdnNum(pts) + ' / ' + s.ids.length + '</div>' +
+    cdnBadge(sc, ko, skip) + '<p class="muted">Temps ' + fmt(s.dur ? Math.min(elapsed(), s.dur) : elapsed()) + ' · sans réponse : ' + skip + '</p></div>';
+  h += cdnRules();
+  h += '<div class="card"><h3>Par thème · notation canadienne</h3>' + Object.keys(s.by).map(Number).sort(function (a, b) { return a - b; }).map(function (t) {
+    var x = s.by[t], xp = cdnPts(x.c, x.k || 0), p = Math.round(100 * Math.max(0, xp) / x.n);
+    return '<div class="th"><span>' + TH[t] + '</span><span class="tr"><i style="width:' + p + '%;background:' + (p >= 75 ? "var(--p4)" : p >= 50 ? "var(--p3)" : p >= 25 ? "var(--p2)" : "var(--p1)") + '"></i></span><b title="' + x.c + ' justes · ' + (x.k || 0) + ' fausses · ' + (x.n - x.c - (x.k || 0)) + ' sans réponse">' + cdnNum(xp) + ' / ' + x.n + '</b></div>'; }).join("") + '</div>';
   var weak = Object.keys(s.by).map(Number).sort(function (a, b) { return s.by[a].c / s.by[a].n - s.by[b].c / s.by[b].n; })[0];
   h += '<p><b>À retravailler en priorité :</b> ' + TH[weak] + ' (' + s.by[weak].c + ' / ' + s.by[weak].n + '). Relis les méthodes des questions ratées ci-dessous.</p>';
   h += '<div class="acts">' + (s.mode === "theme" ? '<button class="btn" data-act="theme" data-t="' + s.th + '">Recommencer · ' + TH[s.th] + '</button>' : '<button class="btn" data-act="' + s.mode + '">Série suivante · ' + MODES[s.mode].lab + '</button>') + (s.mode !== "serie" ? '<button class="btn alt" data-act="serie">Série de 20 · 24 min</button>' : '') + (s.mode !== "train" ? '<button class="btn alt" data-act="train">Entraînement</button>' : '') + '</div>';
@@ -1872,7 +1874,7 @@ document.addEventListener("click", function (ev) {
   if (act === "tab") { S.tab = b.getAttribute("data-t"); render(); return; }
   if (!s) return;
   var i = s.cur;
-  if (act === "pick") { var k = +b.getAttribute("data-i"); if (cd() && s.ans[i] === k) s.ans[i] = -1; else if (s.mode === "train" && s.ans[i] > -1) return; else s.ans[i] = k; save(); S.showM = false; render(); }
+  if (act === "pick") { var k = +b.getAttribute("data-i"); if (s.mode !== "train" && s.ans[i] === k) s.ans[i] = -1; else if (s.mode === "train" && s.ans[i] > -1) return; else s.ans[i] = k; save(); S.showM = false; render(); }
   else if (act === "meth") { S.showM = !S.showM; render(); }
   else if (act === "flag") { s.fl[i] = s.fl[i] ? 0 : 1; save(); render(); }
   else if (act === "prev") { if (i > 0 && s.mode !== "theme") { s.cur--; S.showM = false; save(); render(); } }
@@ -1885,7 +1887,7 @@ document.addEventListener("click", function (ev) {
 function askEnd() {
   var s = DB.sess, miss = s.ans.filter(function (a) { return a < 0; }).length, fl = s.fl.filter(Boolean).length;
   var app = document.getElementById("app");
-  app.innerHTML = '<div class="stack"><div class="panel me"><b class="t">Terminer la série ?</b><p id="h" tabindex="-1">' + (miss ? miss + " question" + (miss > 1 ? "s" : "") + " sans réponse. Une case vide ne rapporte aucun point : réponds au mieux. " : "Toutes les questions ont une réponse. ") + (fl ? fl + " marquée" + (fl > 1 ? "s" : "") + " à revoir." : "") + '</p></div><div class="nav"><button class="btn alt" data-act="no">Continuer</button><button class="btn" data-act="yes">Terminer et corriger</button></div></div>';
+  app.innerHTML = '<div class="stack"><div class="panel me"><b class="t">Terminer la série ?</b><p id="h" tabindex="-1">' + (miss ? miss + " question" + (miss > 1 ? "s" : "") + " sans réponse. Notation canadienne : une question sans réponse vaut 0, une réponse fausse −1. Ne réponds que si tu as éliminé au moins 3 options. " : "Toutes les questions ont une réponse. ") + (fl ? fl + " marquée" + (fl > 1 ? "s" : "") + " à revoir." : "") + '</p></div><div class="nav"><button class="btn alt" data-act="no">Continuer</button><button class="btn" data-act="yes">Terminer et corriger</button></div></div>';
   var h = document.getElementById("h"); if (h) h.focus();
 }
 document.addEventListener("toggle", function (ev) {
