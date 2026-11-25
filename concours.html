@@ -74,7 +74,7 @@ details > summary::after { content: "＋"; margin-left: auto; color: var(--accen
 .grid button { min-height: 42px; border: 2px solid var(--line); border-radius: 9px; background: var(--surface); font: 700 13px var(--f-m); }
 .grid .done { background: color-mix(in srgb, var(--p4) 25%, var(--surface)); border-color: var(--p4); } .grid .cur { box-shadow: 0 0 0 3px var(--accent); } .grid .fl { border-color: var(--p2); border-style: dashed; }
 .score { font: 700 clamp(3rem, 14vw, 4.6rem)/1 var(--f-d); background: linear-gradient(135deg, var(--p0), var(--p1)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.th { display: grid; grid-template-columns: 7rem minmax(0,1fr) 3.2rem; gap: 8px; align-items: center; font-size: .9rem; }
+.th { display: grid; grid-template-columns: 7rem minmax(0,1fr) 6rem; gap: 8px; align-items: center; font-size: .9rem; }
 .th .tr { height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; } .th .tr i { display: block; height: 100%; }
 .th b { text-align: right; font-family: var(--f-m); }
 .rv { border: 2px solid var(--line); border-left: 7px solid var(--c); border-radius: 14px; background: var(--surface); padding: 0 14px; }
@@ -89,6 +89,7 @@ details > summary::after { content: "＋"; margin-left: auto; color: var(--accen
 </head>
 <body>
 <main id="app"></main>
+<script src="notation-canadienne.js"></script>
 <script>var BT = {};</script>
 <script src="questions-themes/theme01.js"></script>
 <script src="questions-themes/theme02.js"></script>
@@ -1789,7 +1790,7 @@ function viewHome() {
     Object.keys(TH).map(Number).map(function (t) { var nb = nTheme(t); return nb ? '<button class="btn alt sm" data-act="theme" data-t="' + t + '" style="border-color:' + tcol(t) + '">' + (t < 10 ? "0" : "") + t + ' · ' + TH[t] + ' (' + nb + ')</button>' : ''; }).join("") + '</div></div>';
   h += '<div class="card"><h3>Concepts et auteurs</h3><p class="muted">Le tableau des auteurs par concept, avec une méthode pour retenir les noms.</p><button class="btn alt sm" data-act="auth">Ouvrir le tableau</button></div><div class="card"><h3>La méthode en 6 gestes</h3>' + gestesHtml() + '</div>';
   h += '<div class="card"><h3>Les 6 pièges classiques</h3><ul class="trap">' + PIEGES.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>';
-  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + x.s + ' / ' + (x.n || 100) + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat : ' + best + ' % · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
+  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + x.s + ' / ' + (x.n || 100) + ' · ' + cdnGrade(pct(x)).l + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat : ' + best + ' % ' + cdnLetter(best) + ' · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
   h += '<p class="muted small">Série de 20 : chronomètre de 24 minutes (72 s par question), correction à la fin. Entraînement : 20 questions, correction et méthode après chaque réponse, sans limite. Examen blanc : 100 questions, 120 minutes. Les questions viennent de la banque intégrée ; pour l’agrandir, demande-moi un nouveau lot. Le format réel (100 questions, 5 choix) est celui que tu m’as indiqué ; vérifie-le dans la convocation officielle. <a href="index.html">← Prépa QCM complète</a></p></div>';
   return h;
 }
@@ -1825,10 +1826,11 @@ function viewRes() {
   var s = DB.sess, sc = s.score, note = (sc / s.ids.length * 20).toFixed(1).replace(".", ","), h = "";
   var skip = s.ans.filter(function (a) { return a < 0; }).length;
   h += '<div class="stack"><div><button class="ghost" data-act="home">← Accueil</button></div><div><p class="eyebrow">' + MODES[s.mode].lab + ' · résultat</p><div class="score" id="h" tabindex="-1">' + sc + ' / ' + s.ids.length + '</div>' +
-    '<p class="muted">Équivalent ' + note + ' / 20 · temps ' + fmt(s.dur ? Math.min(elapsed(), s.dur) : elapsed()) + ' · sans réponse : ' + skip + '</p></div>';
+    cdnBadge(100 * sc / s.ids.length) + '<p class="muted">Équivalent ' + note + ' / 20 · temps ' + fmt(s.dur ? Math.min(elapsed(), s.dur) : elapsed()) + ' · sans réponse : ' + skip + '</p></div>';
+  h += cdnTable(100 * sc / s.ids.length);
   h += '<div class="card"><h3>Par thème</h3>' + Object.keys(s.by).map(Number).sort(function (a, b) { return a - b; }).map(function (t) {
     var x = s.by[t], p = Math.round(100 * x.c / x.n);
-    return '<div class="th"><span>' + TH[t] + '</span><span class="tr"><i style="width:' + p + '%;background:' + (p >= 75 ? "var(--p4)" : p >= 50 ? "var(--p3)" : p >= 25 ? "var(--p2)" : "var(--p1)") + '"></i></span><b>' + x.c + '/' + x.n + '</b></div>'; }).join("") + '</div>';
+    return '<div class="th"><span>' + TH[t] + '</span><span class="tr"><i style="width:' + p + '%;background:' + (p >= 75 ? "var(--p4)" : p >= 50 ? "var(--p3)" : p >= 25 ? "var(--p2)" : "var(--p1)") + '"></i></span><b>' + x.c + '/' + x.n + ' ' + cdnLetter(p) + '</b></div>'; }).join("") + '</div>';
   var weak = Object.keys(s.by).map(Number).sort(function (a, b) { return s.by[a].c / s.by[a].n - s.by[b].c / s.by[b].n; })[0];
   h += '<p><b>À retravailler en priorité :</b> ' + TH[weak] + ' (' + s.by[weak].c + ' / ' + s.by[weak].n + '). Relis les méthodes des questions ratées ci-dessous.</p>';
   h += '<div class="acts">' + (s.mode === "theme" ? '<button class="btn" data-act="theme" data-t="' + s.th + '">Recommencer · ' + TH[s.th] + '</button>' : '<button class="btn" data-act="' + s.mode + '">Série suivante · ' + MODES[s.mode].lab + '</button>') + (s.mode !== "serie" ? '<button class="btn alt" data-act="serie">Série de 20 · 24 min</button>' : '') + (s.mode !== "train" ? '<button class="btn alt" data-act="train">Entraînement</button>' : '') + '</div>';

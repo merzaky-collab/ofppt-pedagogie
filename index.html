@@ -382,6 +382,7 @@ details.gls summary { color: var(--p0); font-weight: 700; }
 
 <main id="app"></main>
 
+<script src="notation-canadienne.js"></script>
 <script>
 /* Banque de questions. Dans chaque question, la 1re option est la bonne : l'ordre est mélangé à chaque tirage. */
 var THEMES = [
@@ -2418,7 +2419,7 @@ function viewSimRes() {
     return '<div class="rv"><p class="eyebrow">Thème ' + pad(Q.th.id) + '</p><strong>' + Q.q.q + '</strong><p>Votre réponse : ' + (w.a < 0 ? "sans réponse" : Q.q.o[w.a]) + '</p><p class="good">Bonne réponse : ' + good + '</p><p>' + Q.q.e + '</p></div>';
   }).join("");
   return '<div class="stack"><p class="eyebrow">Simulation · ' + (r.expired ? "temps écoulé" : "temps utilisé " + fmtT(r.used)) + '</p>' +
-    '<h1 class="score" id="h" tabindex="-1">' + fmtNote(note) + '<small> / 20</small></h1><p>' + verdict + '</p>' +
+    '<h1 class="score" id="h" tabindex="-1">' + fmtNote(note) + '<small> / 20</small></h1>' + cdnBadge(note * 5) + '<p>' + verdict + '</p>' + cdnTable(note * 5) +
     '<p class="stats">QCM ' + r.score + ' / ' + r.n + ' (' + fmtNote(Math.round(r.score / r.n * 140) / 10) + ' / 14) · sans réponse ' + r.blank + ' · rédaction ' + fmtNote(Math.round(r.ticks.length / 5 * 60) / 10) + ' / 6 (auto-évaluation) · barème indicatif</p>' +
     '<div class="actions"><button class="btn" data-act="simnew">Nouvelle simulation</button>' + ((prog.w || []).length ? '<button class="btn alt" data-act="errors">Revoir mes erreurs · ' + prog.w.length + '</button>' : '') + '<button class="btn alt" data-act="home">Accueil</button></div>' +
     '<div class="block"><h3>Résultat par thème · du plus faible au plus fort</h3><nav class="list">' + rows + '</nav></div>' +
@@ -2601,7 +2602,7 @@ function viewHome() {
   var stats = ids.length + " / " + THEMES.length + " thèmes travaillés" + (avg !== null ? " · meilleure moyenne " + avg + " %" : "") + (prog.exam ? " · quiz rapide " + prog.exam.best + " %" : "") + (prog.simBest ? " · simulation " + fmtNote(prog.simBest) + " / 20" : "");
   var rows = THEMES.map(function (t) {
     var p = prog.t[t.id];
-    return (t.id === 13 ? '<p class="eyebrow sec">Enrichissement · fondamentaux</p>' : '') + '<button class="row" data-act="theme" data-id="' + t.id + '"><span class="n">' + pad(t.id) + '</span><span><strong>' + t.t + '</strong><small>' + t.short + '</small></span>' + (p ? '<span class="chip ' + (p.best >= 80 ? "ok" : "") + '">' + p.best + ' %</span>' : '<span></span>') + '</button>';
+    return (t.id === 13 ? '<p class="eyebrow sec">Enrichissement · fondamentaux</p>' : '') + '<button class="row" data-act="theme" data-id="' + t.id + '"><span class="n">' + pad(t.id) + '</span><span><strong>' + t.t + '</strong><small>' + t.short + '</small></span>' + (p ? '<span class="chip ' + (p.best >= 80 ? "ok" : "") + '">' + p.best + ' % · ' + cdnGrade(p.best).l + '</span>' : '<span></span>') + '</button>';
   }).join("");
   return '<div class="stack"><header class="hero"><p class="eyebrow">OFPPT · Promotion interne 2024 &amp; 2025 · Corps formateur</p>' +
     '<h1 id="h" tabindex="-1">Prépa QCM Pédagogie</h1>' +
@@ -2657,7 +2658,7 @@ function viewResult() {
     ? '<button class="btn" data-act="start" data-id="' + S.themeId + '">Refaire ce thème</button><button class="btn alt" data-act="theme" data-id="' + S.themeId + '">Relire la fiche</button>'
     : S.mode === "errors" || S.mode === "weak" ? '' : '<button class="btn" data-act="exam">Nouvel examen blanc</button>';
   return '<div class="stack"><p class="eyebrow">' + (S.mode === "exam" ? "Examen blanc" : S.mode === "errors" ? "Révision des erreurs" : S.mode === "weak" ? "Quiz ciblé" : "Thème " + pad(S.themeId)) + '</p>' +
-    '<h1 class="score" id="h" tabindex="-1">' + S.score + '<small> / ' + n + '</small></h1><p>' + msg + '</p>' +
+    '<h1 class="score" id="h" tabindex="-1">' + S.score + '<small> / ' + n + '</small></h1>' + cdnBadge(S.pct) + '<p>' + msg + '</p>' + cdnTable(S.pct) +
     '<div class="actions">' + again + '<button class="btn alt" data-act="home">Toutes les thématiques</button></div>' +
     (S.wrong.length ? '<div class="review"><h3 class="eyebrow">À revoir · ' + S.wrong.length + ' question' + (S.wrong.length > 1 ? "s" : "") + '</h3>' + rv + '</div>' : '<p class="eyebrow">Aucune erreur. Beau parcours.</p>') + '</div>';
 }
