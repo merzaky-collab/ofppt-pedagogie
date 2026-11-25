@@ -65,6 +65,7 @@ details > summary::after { content: "＋"; margin-left: auto; color: var(--accen
 .opt.struck { opacity: .5; text-decoration: line-through; }
 .qbar { height: 6px; } .qbar i { background: linear-gradient(90deg, var(--p2), var(--p1)); transition: width 1s linear; }
 .panel.tip p { margin: 0; }
+.hcdn th { width: auto; white-space: nowrap; } .hcdn td { white-space: nowrap; } .hcdn td:nth-child(4) { white-space: normal; min-width: 12rem; }
 .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .mini { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .panel { border-radius: 14px; padding: 14px 16px; border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 10%, var(--surface)); display: flex; flex-direction: column; gap: 6px; }
@@ -1745,7 +1746,7 @@ function finish() {
   s.done = true; s.end = Date.now();
   var sc = 0, ko = 0, by = {}; s.ids.forEach(function (id, i) { var th = BYID[id].th; by[th] = by[th] || { n: 0, c: 0, k: 0 }; by[th].n++; if (s.ans[i] === correctIdx(i)) { sc++; by[th].c++; } else if (s.ans[i] > -1) { ko++; by[th].k++; } });
   s.score = sc; s.ko = ko; s.blank = s.ids.length - sc - ko; s.pts = cdnPts(sc, ko); s.by = by;
-  DB.hist.push({ d: new Date().toISOString().slice(0, 10), s: sc, p: s.pts, n: s.ids.length, m: s.mode, t: s.dur ? Math.min(elapsed(), s.dur) : elapsed() }); DB.hist = DB.hist.slice(-20);
+  DB.hist.push({ d: new Date().toISOString().slice(0, 10), s: sc, p: s.pts, k: ko, b: s.blank, th: s.th || 0, n: s.ids.length, m: s.mode, t: s.dur ? Math.min(elapsed(), s.dur) : elapsed() }); DB.hist = DB.hist.slice(-30);
   save(); S.view = "res"; S.tab = "ko"; S.open = {}; render();
 }
 function tick() {
@@ -1776,6 +1777,16 @@ var GESTES = [
  ["Notation canadienne", "+1 par réponse juste, 0 sans réponse, −1 par réponse fausse. Répondre au hasard entre 5 choix fait perdre en moyenne 0,6 point : réponds si tu es sûr ou si tu hésites seulement entre 2 options, sinon laisse vide."]
 ];
 var PIEGES = ["La négation : lire « laquelle est exacte » alors que la question demande l’intrus.", "La réponse vraie mais hors-sujet : elle est correcte en général, pas pour cette question.", "Les mots absolus (toujours, jamais, seulement) : presque toujours faux en pédagogie.", "Les notions voisines : intégration/inclusion, critère/indicateur, contrôle/évaluation, équité/égalité.", "La réponse « gentille » mais pédagogiquement fausse (féliciter, laisser faire, tout simplifier).", "La sécurité et l’éthique : elles l’emportent sur tout autre argument."];
+function histHtml() {
+  var rows = DB.hist.slice().reverse().map(function (x) {
+    var n = x.n || 100, lab = (MODES[x.m] ? MODES[x.m].lab : "Série") + (x.m === "theme" && x.th ? " · " + TH[x.th] : "");
+    var d = x.d ? x.d.split("-").reverse().join("/") : "";
+    if (typeof x.p !== "number") return '<tr><td>' + d + '</td><td>' + lab + '</td><td class="muted">—</td><td>' + x.s + ' justes / ' + n + ' (avant la notation canadienne)</td><td class="muted">—</td></tr>';
+    var k = typeof x.k === "number" ? x.k : null, b = typeof x.b === "number" ? x.b : null;
+    return '<tr><td>' + d + '</td><td>' + lab + '</td><td><b>' + cdnNum(x.p) + ' / ' + n + '</b></td><td>' + x.s + ' justes' + (k !== null ? ' · ' + k + ' fausses · ' + b + ' sans réponse' : '') + '</td><td>' + cdn20(x.p, n) + '</td></tr>';
+  }).join("");
+  return '<div style="overflow-x:auto"><table class="at hcdn"><thead><tr><th>Date</th><th>Série</th><th>Note canadienne</th><th>Détail</th><th>/ 20</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
 function gestesHtml() {
   return '<ul class="m6">' + GESTES.map(function (g) { return "<li><b>" + g[0] + "</b><br><span class=\"muted\">" + g[1] + "</span></li>"; }).join("") + "</ul>";
 }
@@ -1791,7 +1802,7 @@ function viewHome() {
     Object.keys(TH).map(Number).map(function (t) { var nb = nTheme(t); return nb ? '<button class="btn alt sm" data-act="theme" data-t="' + t + '" style="border-color:' + tcol(t) + '">' + (t < 10 ? "0" : "") + t + ' · ' + TH[t] + ' (' + nb + ')</button>' : ''; }).join("") + '</div></div>';
   h += '<div class="card"><h3>Concepts et auteurs</h3><p class="muted">Le tableau des auteurs par concept, avec une méthode pour retenir les noms.</p><button class="btn alt sm" data-act="auth">Ouvrir le tableau</button></div><div class="card"><h3>La méthode en 7 gestes</h3>' + gestesHtml() + '</div>';
   h += '<div class="card"><h3>Les 6 pièges classiques</h3><ul class="trap">' + PIEGES.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>';
-  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + (typeof x.p === "number" ? cdnNum(x.p) + ' pts' : x.s) + ' / ' + (x.n || 100) + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat (notation canadienne) : ' + best + ' % · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p></div>';
+  if (last.length) h += '<div class="card"><h3>Mes dernières séries</h3><div class="hist" role="img" aria-label="Scores des dernières séries">' + last.map(function (x) { return '<i style="height:' + Math.max(4, pct(x)) + '%" title="' + (typeof x.p === "number" ? cdnNum(x.p) + ' pts' : x.s) + ' / ' + (x.n || 100) + '"></i>'; }).join("") + '</div><p class="muted small">Meilleur résultat (notation canadienne) : ' + best + ' % · ' + DB.hist.length + ' série' + (DB.hist.length > 1 ? "s" : "") + '</p>' + histHtml() + '</div>';
   h += '<p class="muted small">Série de 20 : chronomètre de 24 minutes (72 s par question), correction à la fin. Entraînement : 20 questions, correction et méthode après chaque réponse, sans limite. Examen blanc : 100 questions, 120 minutes. Les questions viennent de la banque intégrée ; pour l’agrandir, demande-moi un nouveau lot. Le format réel (100 questions, 5 choix) est celui que tu m’as indiqué ; vérifie-le dans la convocation officielle. <a href="index.html">← Prépa QCM complète</a></p></div>';
   return h;
 }
